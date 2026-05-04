@@ -81,3 +81,15 @@
 - [x] "Lihat Semua" as subtle secondary link at bottom
 - [x] Smooth opacity + translateY transition (150–200ms)
 - [x] Mobile: accordion menu instead of hover dropdown
+
+## New Catalog Pages + Navigation Fix
+
+- [x] Fix dropdown: category names changed from <button> to <Link> so they are real clickable links
+- [x] Fix dropdown: Sepeda Listrik → /sepeda-listrik (was /catalog/sepeda-listrik)
+- [x] Fix dropdown: Batre → /batre (was /catalog/batre)
+- [x] Fix dropdown: Sparepart → /sparepart (was /catalog/sparepart)
+- [x] Fix mobile accordion: category names are now real links with separate expand chevron
+- [x] Create /batre page — exact Sepeda Listrik layout, 9 products, filter chips (Greenlife/TNE/Chilwee/Lithium)
+- [x] Create /sparepart page — exact Sepeda Listrik layout, 11 products, filter chips (Motor/Controller/Charger/Rem/Ban)
+- [x] Wire /sepeda-listrik, /batre, /sparepart routes in App.tsx
+- [x] Keep /catalog/:category legacy routes for backward compatibility

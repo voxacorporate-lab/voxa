@@ -6,6 +6,8 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
+import Batre from "./pages/Batre";
+import Sparepart from "./pages/Sparepart";
 import ProductDetail from "./pages/ProductDetail";
 import Compare from "./pages/Compare";
 import Bisnis from "./pages/Bisnis";
@@ -17,11 +19,24 @@ import Guide from "./pages/Guide";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
+// Wrapper so /sepeda-listrik renders the Catalog page with the correct category
+function SepedaListrikCatalog() {
+  return <Catalog />;
+}
+
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+
+      {/* Clean top-level catalog routes (used by navbar dropdown) */}
+      <Route path="/sepeda-listrik" component={SepedaListrikCatalog} />
+      <Route path="/batre" component={Batre} />
+      <Route path="/sparepart" component={Sparepart} />
+
+      {/* Legacy /catalog/:category routes (keep for backward compat) */}
       <Route path="/catalog/:category" component={Catalog} />
+
       <Route path="/products/:id" component={ProductDetail} />
       <Route path="/compare" component={Compare} />
       <Route path="/bisnis" component={Bisnis} />

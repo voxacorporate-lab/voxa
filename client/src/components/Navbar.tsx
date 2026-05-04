@@ -13,7 +13,7 @@ type Category = { name: string; href: string; subItems: SubItem[] };
 const produkKamiCategories: Category[] = [
   {
     name: 'Sepeda Listrik',
-    href: '/catalog/sepeda-listrik',
+    href: '/sepeda-listrik',
     subItems: [
       { name: 'Elite Fantasi', href: '/products/elite-fantasi' },
       { name: 'Elite Rider', href: '/products/elite-rider' },
@@ -33,7 +33,7 @@ const produkKamiCategories: Category[] = [
   },
   {
     name: 'Batre',
-    href: '/catalog/batre',
+    href: '/batre',
     subItems: [
       { name: 'Greenlife 3kg', href: '/products/greenlife-3kg' },
       { name: 'Greenlife 3.45kg', href: '/products/greenlife-345kg' },
@@ -48,7 +48,7 @@ const produkKamiCategories: Category[] = [
   },
   {
     name: 'Sparepart',
-    href: '/catalog/sparepart',
+    href: '/sparepart',
     subItems: [
       { name: 'Motor Listrik', href: '/catalog/sparepart?cat=motor' },
       { name: 'Controller', href: '/catalog/sparepart?cat=controller' },
@@ -166,10 +166,11 @@ export default function Navbar() {
                     {/* LEFT PANEL: Category list */}
                     <div className="w-52 border-r border-gray-100 py-6">
                       {produkKamiCategories.map((cat, idx) => (
-                        <button
+                        <Link
                           key={cat.name}
+                          href={cat.href}
                           onMouseEnter={() => setActiveCategory(idx)}
-                          className={`flex items-center justify-between w-full px-6 py-3 text-left transition-colors ${
+                          className={`flex items-center justify-between w-full px-6 py-3 cursor-pointer transition-colors ${
                             activeCategory === idx
                               ? 'text-gray-900'
                               : 'text-gray-500 hover:text-gray-900'
@@ -187,7 +188,7 @@ export default function Navbar() {
                             strokeWidth={1.5}
                             className={`transition-opacity ${activeCategory === idx ? 'opacity-100' : 'opacity-30'}`}
                           />
-                        </button>
+                        </Link>
                       ))}
 
                       {/* See All link */}
@@ -348,13 +349,21 @@ function MobileAccordion({
         <div className="pl-3 space-y-1 mt-1">
           {categories.map((cat, idx) => (
             <div key={cat.name}>
-              <button
-                onClick={() => setActiveCat(activeCat === idx ? null : idx)}
-                className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded"
-              >
-                <span>{cat.name}</span>
-                <ChevronDown size={12} className={`transition-transform ${activeCat === idx ? 'rotate-180' : ''}`} />
-              </button>
+              <div className="flex items-center">
+                <Link
+                  href={cat.href}
+                  className="flex-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-[#00B4D8] cursor-pointer"
+                >
+                  {cat.name}
+                </Link>
+                <button
+                  onClick={() => setActiveCat(activeCat === idx ? null : idx)}
+                  className="px-2 py-2 text-gray-500 hover:bg-gray-50 rounded"
+                  aria-label="Expand"
+                >
+                  <ChevronDown size={12} className={`transition-transform ${activeCat === idx ? 'rotate-180' : ''}`} />
+                </button>
+              </div>
               {activeCat === idx && (
                 <div className="pl-4 pb-2 space-y-1 mt-1">
                   {cat.subItems.map((item) => (
