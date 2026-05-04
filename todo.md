@@ -48,3 +48,14 @@
 - [x] Remove any slider/carousel from hero, replace with single static image
 - [x] Set hero height to 60–70vh (not full-screen)
 - [x] Keep bottom-left text, dark gradient overlay, underlined CTA links
+
+## Gymshark 10-Section Homepage Rebuild
+
+- [x] Section 3: Hero 85-90vh, full-width, dark gradient bottom, bottom-left text + 2 underlined CTAs
+- [x] Section 4: Product row "PRODUK UNGGULAN" — title left + View All right, horizontal scroll, 4 cards, wishlist icon
+- [x] Section 5: Featured campaign banner — full-width 3-image mosaic, bottom-left headline + subtext + 1 CTA
+- [x] Section 6: Product row "SEPEDA LISTRIK TERBARU" — same structure as Section 4
+- [x] Section 7: "POPULER SEKARANG" grid — HARIAN/BISNIS tabs, 4-column image grid with overlay text
+- [x] Section 8: "VOXA UNTUK SIAPA?" lifestyle tiles
+- [x] Section 9: Lifestyle/community collage section
+- [x] Section 10: Footer — 4-column, newsletter, social icons, payment icons

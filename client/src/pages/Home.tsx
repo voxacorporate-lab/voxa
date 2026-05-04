@@ -1,100 +1,258 @@
+import { useState, useRef } from 'react';
 import { Link } from 'wouter';
-import { ArrowRight, Zap, Leaf, Wrench, MapPin, Shield, ChevronRight, Star, MessageCircle } from 'lucide-react';
+import { Heart, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { sepedaListrik, batre } from '@/data/products';
 
-const HERO_BG = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=85';
-const DAILY_IMG = 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=600&q=80';
-const KURIR_IMG = 'https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?w=600&q=80';
-const LIFESTYLE_IMG = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80';
-const FLEET_IMG = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80';
-const PRODUCTION_IMG = 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&q=80';
+// ─── Image constants ──────────────────────────────────────────────────────────
+const HERO_BG = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=90';
 
-const featuredBikes = sepedaListrik.slice(0, 8);
-const featuredBatre = batre.slice(0, 4);
+// Campaign banner images (3-panel mosaic)
+const BANNER1 = 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&q=80';
+const BANNER2 = 'https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?w=800&q=80';
+const BANNER3 = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80';
 
-const testimonials = [
-  { name: 'Budi Santoso', city: 'Jakarta', text: 'Sudah 1 tahun pakai VOXA Liberty, hemat bensin banget! Sekarang cuma bayar listrik aja.', rating: 5 },
-  { name: 'Siti Rahayu', city: 'Surabaya', text: 'Sparepart mudah dicari, servis cepat. VOXA memang pilihan terbaik untuk harian.', rating: 5 },
-  { name: 'Ahmad Fauzi', city: 'Bandung', text: 'Pakai Voxa Kurir untuk bisnis pengiriman, sudah 8 bulan tidak ada masalah. Recommended!', rating: 5 },
-  { name: 'Dewi Lestari', city: 'Medan', text: 'Elite Rider S luar biasa! Desainnya keren, performanya top. Bangga pakai produk lokal.', rating: 5 },
+// Campaign banner 2 images
+const BANNER2A = 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80';
+const BANNER2B = 'https://images.unsplash.com/photo-1620714223084-8fcacc2dbe4d?w=800&q=80';
+const BANNER2C = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80';
+
+// Popular / lifestyle images
+const POP_IMG_1 = 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=600&q=80';
+const POP_IMG_2 = 'https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?w=600&q=80';
+const POP_IMG_3 = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80';
+const POP_IMG_4 = 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&q=80';
+
+// Lifestyle collage images
+const LIFE1 = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80';
+const LIFE2 = 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=600&q=80';
+const LIFE3 = 'https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?w=600&q=80';
+const LIFE4 = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80';
+const LIFE5 = 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&q=80';
+const LIFE6 = 'https://images.unsplash.com/photo-1620714223084-8fcacc2dbe4d?w=600&q=80';
+
+// ─── Product Card ─────────────────────────────────────────────────────────────
+function ProductCard({ product }: { product: (typeof sepedaListrik)[0] }) {
+  const [wishlisted, setWishlisted] = useState(false);
+  return (
+    <div className="group flex-shrink-0 w-[calc(25%-12px)] min-w-[200px] relative">
+      <Link href={`/product/${product.id}`}>
+        <div className="relative overflow-hidden bg-gray-100 aspect-[3/4] mb-3">
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          />
+          {product.badge && (
+            <span className="absolute bottom-3 left-3 bg-black text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1">
+              {product.badge}
+            </span>
+          )}
+        </div>
+        <div>
+          <p className="text-xs text-gray-500 mb-0.5">{product.series}</p>
+          <h3 className="text-sm font-semibold text-gray-900 leading-tight mb-1">{product.name}</h3>
+          <p className="text-sm font-bold text-gray-900">{product.price}</p>
+        </div>
+      </Link>
+      <button
+        onClick={() => setWishlisted(w => !w)}
+        className="absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
+        aria-label="Tambah ke wishlist"
+      >
+        <Heart size={14} className={wishlisted ? 'fill-[#00B4D8] text-[#00B4D8]' : 'text-gray-600'} />
+      </button>
+    </div>
+  );
+}
+
+// ─── Horizontal Product Row ───────────────────────────────────────────────────
+function ProductRow({ title, viewAllHref, products }: { title: string; viewAllHref: string; products: (typeof sepedaListrik) }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (dir: 'left' | 'right') => {
+    if (!scrollRef.current) return;
+    const amount = scrollRef.current.offsetWidth * 0.75;
+    scrollRef.current.scrollBy({ left: dir === 'right' ? amount : -amount, behavior: 'smooth' });
+  };
+
+  return (
+    <section className="py-16 bg-white">
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 2rem' }}>
+        {/* Row header */}
+        <div className="flex items-center justify-between mb-8">
+          <h2 className="font-display text-2xl md:text-3xl text-gray-900 tracking-wide">{title}</h2>
+          <div className="flex items-center gap-4">
+            <Link href={viewAllHref} className="text-sm font-semibold text-gray-900 underline underline-offset-4 hover:text-[#00B4D8] transition-colors">
+              Lihat Semua
+            </Link>
+            <div className="flex gap-2">
+              <button
+                onClick={() => scroll('left')}
+                className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-900 transition-colors"
+                aria-label="Scroll kiri"
+              >
+                <ChevronLeft size={16} />
+              </button>
+              <button
+                onClick={() => scroll('right')}
+                className="w-9 h-9 rounded-full bg-gray-900 text-white flex items-center justify-center hover:bg-[#00B4D8] transition-colors"
+                aria-label="Scroll kanan"
+              >
+                <ChevronRight size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Scrollable cards */}
+        <div
+          ref={scrollRef}
+          className="flex gap-4 overflow-x-auto scrollbar-hide"
+          style={{ scrollSnapType: 'x mandatory' }}
+        >
+          {products.map(p => (
+            <div key={p.id} style={{ scrollSnapAlign: 'start' }}>
+              <ProductCard product={p} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Campaign Banner (3-panel mosaic) ─────────────────────────────────────────
+function CampaignBanner({
+  img1, img2, img3,
+  headline, subtext, ctaLabel, ctaHref,
+}: {
+  img1: string; img2: string; img3: string;
+  headline: string; subtext: string; ctaLabel: string; ctaHref: string;
+}) {
+  return (
+    <section className="w-full overflow-hidden" style={{ height: 'clamp(320px, 55vh, 620px)' }}>
+      <div className="flex h-full">
+        {/* Panel 1 — text overlay */}
+        <div className="relative flex-1 overflow-hidden">
+          <img src={img1} alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 70%, transparent 100%)' }} />
+          <div className="absolute bottom-0 left-0 p-8 md:p-12">
+            <h2 className="font-display text-white text-2xl md:text-4xl tracking-wide leading-tight mb-2">{headline}</h2>
+            <p className="text-gray-200 text-sm mb-4 max-w-xs leading-relaxed">{subtext}</p>
+            <Link
+              href={ctaHref}
+              className="text-white text-sm font-semibold underline underline-offset-4 decoration-white hover:decoration-[#00B4D8] hover:text-[#00B4D8] transition-colors"
+            >
+              {ctaLabel}
+            </Link>
+          </div>
+        </div>
+        {/* Panel 2 */}
+        <div className="relative flex-1 overflow-hidden border-l border-white/10">
+          <img src={img2} alt="" className="w-full h-full object-cover object-center" />
+        </div>
+        {/* Panel 3 */}
+        <div className="relative flex-1 overflow-hidden border-l border-white/10">
+          <img src={img3} alt="" className="w-full h-full object-cover object-center" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Popular Grid ─────────────────────────────────────────────────────────────
+const popularItemsByTab: Record<'HARIAN' | 'BISNIS', typeof useTiles> = {
+  HARIAN: [
+    { label: 'LIBERTY SERIES', img: POP_IMG_1, href: '/catalog/sepeda-listrik' },
+    { label: 'EIFFEL SERIES', img: POP_IMG_2, href: '/catalog/sepeda-listrik' },
+    { label: 'ELITE SERIES', img: POP_IMG_3, href: '/catalog/sepeda-listrik' },
+    { label: 'VOXA G3', img: POP_IMG_4, href: '/catalog/sepeda-listrik' },
+  ],
+  BISNIS: [
+    { label: 'VOXA KURIR', img: POP_IMG_2, href: '/bisnis' },
+    { label: 'FLEET SOLUTION', img: POP_IMG_3, href: '/pemerintah' },
+    { label: 'BATRE GREENLIFE', img: POP_IMG_4, href: '/catalog/batre' },
+    { label: 'SPAREPART', img: POP_IMG_1, href: '/catalog/sparepart' },
+  ],
+};
+
+// ─── Lifestyle use tiles ──────────────────────────────────────────────────────
+const useTiles = [
+  { label: 'HARIAN', img: POP_IMG_1, href: '/catalog/sepeda-listrik?use=harian' },
+  { label: 'KURIR', img: POP_IMG_2, href: '/bisnis' },
+  { label: 'LIFESTYLE', img: POP_IMG_3, href: '/catalog/sepeda-listrik?use=lifestyle' },
+  { label: 'FLEET', img: POP_IMG_4, href: '/pemerintah' },
 ];
 
-const showrooms = [
-  { city: 'Jakarta', address: 'Jl. Sudirman No. 123, Jakarta Pusat' },
-  { city: 'Surabaya', address: 'Jl. Pemuda No. 45, Surabaya' },
-  { city: 'Bandung', address: 'Jl. Asia Afrika No. 78, Bandung' },
-  { city: 'Medan', address: 'Jl. Gatot Subroto No. 56, Medan' },
-  { city: 'Semarang', address: 'Jl. Pandanaran No. 90, Semarang' },
-  { city: 'Yogyakarta', address: 'Jl. Malioboro No. 12, Yogyakarta' },
-];
+const useTilesByTab: Record<'HARIAN' | 'BISNIS', typeof useTiles> = {
+  HARIAN: [
+    { label: 'HARIAN', img: POP_IMG_1, href: '/catalog/sepeda-listrik?use=harian' },
+    { label: 'LIFESTYLE', img: POP_IMG_2, href: '/catalog/sepeda-listrik?use=lifestyle' },
+    { label: 'COMMUTER', img: POP_IMG_3, href: '/catalog/sepeda-listrik' },
+    { label: 'PELAJAR', img: POP_IMG_4, href: '/catalog/sepeda-listrik' },
+  ],
+  BISNIS: [
+    { label: 'KURIR', img: POP_IMG_2, href: '/bisnis' },
+    { label: 'FLEET', img: POP_IMG_3, href: '/pemerintah' },
+    { label: 'LOGISTIK', img: POP_IMG_4, href: '/bisnis' },
+    { label: 'PEMERINTAH', img: POP_IMG_1, href: '/pemerintah' },
+  ],
+};
 
-const guideArticles = [
-  { title: 'Berapa Hemat Pakai Kendaraan Listrik?', excerpt: 'Hitung penghematan nyata beralih dari motor bensin ke sepeda listrik VOXA.', img: 'https://images.unsplash.com/photo-1620714223084-8fcacc2dbe4d?w=400&q=80', tag: 'Keuangan' },
-  { title: 'Cara Memilih Sepeda Listrik yang Tepat', excerpt: 'Panduan lengkap memilih sepeda listrik sesuai kebutuhan dan budget Anda.', img: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&q=80', tag: 'Panduan' },
-  { title: 'Tips Merawat Baterai Sepeda Listrik', excerpt: 'Cara merawat baterai agar tahan lama dan performa tetap optimal.', img: 'https://images.unsplash.com/photo-1620714223084-8fcacc2dbe4d?w=400&q=80', tag: 'Perawatan' },
-];
-
+// ─── Main Component ───────────────────────────────────────────────────────────
 export default function Home() {
+  const [popularTab, setPopularTab] = useState<'HARIAN' | 'BISNIS'>('HARIAN');
+  const [useTab, setUseTab] = useState<'HARIAN' | 'BISNIS'>('HARIAN');
+
   return (
     <div className="min-h-screen bg-white">
-      {/* ===== HERO SECTION — Gymshark proportions: ~85–90vh ===== */}
+
+      {/* ═══════════════════════════════════════════════════════════════
+          SECTION 3: HERO — 85–90vh, full-width, bottom-left text
+      ═══════════════════════════════════════════════════════════════ */}
       <section
         className="relative w-full overflow-hidden bg-black"
-        style={{
-          /* Mobile: 70vh | Tablet: 82vh | Desktop: 88vh — matches Gymshark reference */
-          height: 'clamp(480px, 70vh, 700px)',
-        }}
+        style={{ height: 'clamp(520px, 88vh, 980px)' }}
       >
-        {/* Responsive height overrides */}
-        <style>{`
-          @media (min-width: 768px)  { .voxa-hero { height: clamp(560px, 82vh, 860px) !important; } }
-          @media (min-width: 1024px) { .voxa-hero { height: clamp(620px, 88vh, 960px) !important; } }
-        `}</style>
-
-        {/* Static background image */}
         <img
           src={HERO_BG}
           alt="VOXA — Kendaraan Listrik untuk Jalanan Indonesia"
-          className="voxa-hero absolute inset-0 w-full h-full object-cover object-center"
-          style={{ opacity: 0.85 }}
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          style={{ opacity: 0.82 }}
+        />
+        {/* Bottom gradient for text legibility */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.25) 35%, transparent 65%)' }}
+        />
+        {/* Left gradient */}
+        <div
+          className="absolute inset-0"
+          style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.45) 0%, transparent 55%)' }}
         />
 
-        {/* Gradient: left-heavy for text legibility, fades right */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.30) 45%, rgba(0,0,0,0.05) 100%)' }} />
-        {/* Bottom fade for text anchor */}
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.70) 0%, rgba(0,0,0,0.10) 40%, transparent 100%)' }} />
-
-        {/* Bottom-left text block — 6–8% left padding, 8–10% bottom padding */}
-        <div
-          className="absolute bottom-0 left-0"
-          style={{ paddingLeft: 'clamp(1.5rem, 7vw, 5rem)', paddingBottom: 'clamp(1.5rem, 9%, 4rem)' }}
-        >
-          {/* Headline: controlled size, no excessive wrapping */}
-          <h1
-            className="font-display text-white leading-none tracking-wide mb-1.5"
-            style={{ fontSize: 'clamp(1.6rem, 3.8vw, 3rem)' }}
-          >
+        {/* Bottom-left text block */}
+        <div className="absolute bottom-0 left-0" style={{ padding: 'clamp(1.5rem, 5vw, 4rem) clamp(1.5rem, 6vw, 5rem)' }}>
+          <h1 className="font-display text-white leading-none tracking-wide mb-2" style={{ fontSize: 'clamp(1.8rem, 4vw, 3.5rem)' }}>
             KENDARAAN LISTRIK{' '}
             <span className="text-[#00B4D8]">UNTUK JALANAN</span>{' '}
             INDONESIA.
           </h1>
-          {/* Subtext: compact, close to headline */}
-          <p className="text-gray-200 leading-snug mb-3" style={{ fontSize: 'clamp(0.75rem, 1.1vw, 0.9rem)', maxWidth: '28rem' }}>
+          <p className="text-gray-200 mb-4 leading-snug" style={{ fontSize: 'clamp(0.8rem, 1.1vw, 1rem)', maxWidth: '30rem' }}>
             Desain modern, performa tangguh, dan hemat energi untuk jalanan Indonesia.
           </p>
-          {/* CTAs: tight gap, underlined Gymshark style */}
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-6">
             <Link
               href="/catalog/sepeda-listrik"
               className="text-white font-semibold underline underline-offset-4 decoration-white hover:decoration-[#00B4D8] hover:text-[#00B4D8] transition-colors"
-              style={{ fontSize: 'clamp(0.75rem, 1vw, 0.875rem)' }}
+              style={{ fontSize: 'clamp(0.8rem, 1vw, 0.9rem)' }}
             >
               Temukan Produk
             </Link>
             <Link
               href="/compare"
               className="text-white font-semibold underline underline-offset-4 decoration-white hover:decoration-[#00B4D8] hover:text-[#00B4D8] transition-colors"
-              style={{ fontSize: 'clamp(0.75rem, 1vw, 0.875rem)' }}
+              style={{ fontSize: 'clamp(0.8rem, 1vw, 0.9rem)' }}
             >
               Bandingkan Model
             </Link>
@@ -102,30 +260,74 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== CATEGORY BLOCK ===== */}
-      <section className="pt-12 pb-16 bg-gray-50">
-        <div className="container">
-          <div className="text-center mb-10">
-            <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide mb-3">VOXA UNTUK SIAPA?</h2>
-            <p className="text-gray-500 text-lg">Temukan model yang paling sesuai dengan kebutuhan Anda</p>
+      {/* ═══════════════════════════════════════════════════════════════
+          SECTION 4: PRODUCT ROW — PRODUK UNGGULAN (horizontal scroll)
+      ═══════════════════════════════════════════════════════════════ */}
+      <ProductRow
+        title="PRODUK UNGGULAN"
+        viewAllHref="/catalog/sepeda-listrik"
+        products={sepedaListrik.slice(0, 8)}
+      />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          SECTION 5: CAMPAIGN BANNER — 3-panel mosaic
+      ═══════════════════════════════════════════════════════════════ */}
+      <CampaignBanner
+        img1={BANNER1}
+        img2={BANNER2}
+        img3={BANNER3}
+        headline="SEPEDA LISTRIK UNTUK BISNIS ANDA"
+        subtext="Armada kendaraan listrik yang handal untuk kurir dan operasional bisnis sehari-hari."
+        ctaLabel="Lihat Solusi Bisnis"
+        ctaHref="/bisnis"
+      />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          SECTION 6: PRODUCT ROW — SEPEDA LISTRIK TERBARU
+      ═══════════════════════════════════════════════════════════════ */}
+      <ProductRow
+        title="SEPEDA LISTRIK TERBARU"
+        viewAllHref="/catalog/sepeda-listrik"
+        products={sepedaListrik.slice(8, 15)}
+      />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          SECTION 7: POPULER SEKARANG — tabbed 4-column grid
+      ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 2rem' }}>
+          <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center gap-6">
+              <h2 className="font-display text-2xl md:text-3xl text-gray-900 tracking-wide">POPULER SEKARANG</h2>
+              <div className="flex gap-1 border-b border-gray-200">
+                {(['HARIAN', 'BISNIS'] as const).map(tab => (
+                  <button
+                    key={tab}
+                    onClick={() => setPopularTab(tab)}
+                    className={`px-4 py-2 text-xs font-bold tracking-wider transition-colors border-b-2 -mb-px ${
+                      popularTab === tab
+                        ? 'border-gray-900 text-gray-900'
+                        : 'border-transparent text-gray-400 hover:text-gray-600'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {[
-              { title: 'Untuk Harian', desc: 'Ringan, efisien, dan nyaman untuk aktivitas sehari-hari', img: DAILY_IMG, href: '/catalog/sepeda-listrik?use=harian', color: '#00B4D8' },
-              { title: 'Untuk Kurir / Bisnis', desc: 'Kapasitas angkut besar, tahan lama untuk operasional bisnis', img: KURIR_IMG, href: '/bisnis', color: '#0096b8' },
-              { title: 'Untuk Lifestyle', desc: 'Desain modern dan stylish untuk gaya hidup urban', img: LIFESTYLE_IMG, href: '/catalog/sepeda-listrik?use=lifestyle', color: '#007a96' },
-              { title: 'Untuk Fleet / Pemerintah', desc: 'Solusi armada kendaraan listrik untuk instansi', img: FLEET_IMG, href: '/pemerintah', color: '#005f74' },
-            ].map((cat) => (
-              <Link key={cat.title} href={cat.href}>
-                <div className="group relative overflow-hidden rounded-2xl aspect-[3/4] cursor-pointer">
-                  <img src={cat.img} alt={cat.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="font-display text-xl text-white tracking-wide mb-1">{cat.title}</h3>
-                    <p className="text-gray-300 text-xs leading-relaxed mb-3">{cat.desc}</p>
-                    <span className="inline-flex items-center gap-1 text-[#00B4D8] text-xs font-bold group-hover:gap-2 transition-all">
-                      Lihat Selengkapnya <ArrowRight size={12} />
-                    </span>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {popularItemsByTab[popularTab].map(item => (
+              <Link key={item.label} href={item.href}>
+                <div className="group relative overflow-hidden aspect-[3/4] bg-gray-100">
+                  <img
+                    src={item.img}
+                    alt={item.label}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 p-4 md:p-5">
+                    <h3 className="font-display text-white text-sm md:text-base tracking-wide leading-tight mb-1">{item.label}</h3>
                   </div>
                 </div>
               </Link>
@@ -134,379 +336,104 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ===== PRODUK UNGGULAN - SEPEDA LISTRIK ===== */}
-      <section className="py-20 bg-white">
-        <div className="container">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-2">KOLEKSI TERBARU</p>
-              <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide">SEPEDA LISTRIK</h2>
-            </div>
-            <Link href="/catalog/sepeda-listrik" className="hidden md:flex items-center gap-2 text-[#00B4D8] font-bold text-sm hover:gap-3 transition-all">
-              Lihat Semua <ArrowRight size={16} />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {featuredBikes.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-          <div className="mt-8 text-center md:hidden">
-            <Link href="/catalog/sepeda-listrik" className="inline-flex items-center gap-2 border-2 border-[#00B4D8] text-[#00B4D8] font-bold px-8 py-3 rounded-full hover:bg-[#00B4D8] hover:text-white transition-all">
-              Lihat Semua Sepeda Listrik <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== KENAPA VOXA ===== */}
-      <section className="py-20 bg-gray-950 text-white overflow-hidden">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-4">KEUNGGULAN KAMI</p>
-              <h2 className="font-display text-4xl md:text-6xl tracking-wide mb-8 leading-none">
-                KENAPA<br /><span className="text-[#00B4D8]">VOXA?</span>
-              </h2>
-              <div className="space-y-5">
-                {[
-                  { icon: <Zap size={20} />, title: 'Hemat Biaya Bensin', desc: 'Hemat hingga 80% biaya bahan bakar dibanding kendaraan konvensional.' },
-                  { icon: <Leaf size={20} />, title: 'Ramah Lingkungan', desc: 'Zero emisi, berkontribusi pada udara bersih untuk Indonesia.' },
-                  { icon: <Wrench size={20} />, title: 'Sparepart Mudah Didapat', desc: 'Jaringan distribusi sparepart tersebar di seluruh Indonesia.' },
-                  { icon: <MapPin size={20} />, title: 'Produksi Lokal Indonesia', desc: 'Dirancang dan diproduksi di Indonesia untuk jalanan Indonesia.' },
-                  { icon: <Shield size={20} />, title: 'Cocok untuk Jalanan Indonesia', desc: 'Diuji dan dioptimalkan untuk kondisi jalan dan iklim Indonesia.' },
-                ].map((item) => (
-                  <div key={item.title} className="flex items-start gap-4 group">
-                    <div className="w-10 h-10 bg-[#00B4D8]/20 border border-[#00B4D8]/30 rounded-xl flex items-center justify-center text-[#00B4D8] shrink-0 group-hover:bg-[#00B4D8] group-hover:text-white transition-all">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-white mb-1">{item.title}</h4>
-                      <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="relative">
-              <div className="aspect-square rounded-3xl overflow-hidden">
-                <img src={LIFESTYLE_IMG} alt="Kenapa VOXA" className="w-full h-full object-cover" />
-              </div>
-              <div className="absolute -bottom-6 -left-6 bg-[#00B4D8] text-white rounded-2xl p-6 shadow-2xl">
-                <p className="font-display text-4xl tracking-wide">80%</p>
-                <p className="text-sm font-medium mt-1">Hemat Biaya BBM</p>
-              </div>
-              <div className="absolute -top-6 -right-6 bg-white text-gray-900 rounded-2xl p-6 shadow-2xl">
-                <p className="font-display text-4xl tracking-wide text-[#00B4D8]">15+</p>
-                <p className="text-sm font-medium mt-1">Model Tersedia</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== BATRE SECTION ===== */}
-      <section className="py-20 bg-white">
-        <div className="container">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-2">PILIHAN TERLENGKAP</p>
-              <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide">BATERAI</h2>
-            </div>
-            <Link href="/catalog/batre" className="hidden md:flex items-center gap-2 text-[#00B4D8] font-bold text-sm hover:gap-3 transition-all">
-              Lihat Semua <ArrowRight size={16} />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {featuredBatre.map(product => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== COMPARE PREVIEW ===== */}
-      <section className="py-20 bg-gray-50">
-        <div className="container">
-          <div className="text-center mb-12">
-            <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-2">PERBANDINGAN PRODUK</p>
-            <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide mb-3">BANDINGKAN MODEL</h2>
-            <p className="text-gray-500 text-lg max-w-xl mx-auto">Temukan model yang paling sesuai dengan kebutuhan Anda</p>
-          </div>
-          <div className="overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
-            <table className="w-full min-w-[640px]">
-              <thead>
-                <tr className="bg-[#00B4D8] text-white">
-                  <th className="text-left px-6 py-4 font-display tracking-wider text-sm">MODEL</th>
-                  <th className="text-center px-4 py-4 font-display tracking-wider text-sm">JARAK TEMPUH</th>
-                  <th className="text-center px-4 py-4 font-display tracking-wider text-sm">BATERAI</th>
-                  <th className="text-center px-4 py-4 font-display tracking-wider text-sm">KECEPATAN</th>
-                  <th className="text-center px-4 py-4 font-display tracking-wider text-sm">KEGUNAAN</th>
-                  <th className="text-center px-4 py-4 font-display tracking-wider text-sm">HARGA</th>
-                </tr>
-              </thead>
-              <tbody>
-                {sepedaListrik.slice(0, 5).map((p, i) => (
-                  <tr key={p.id} className={`border-b border-gray-100 hover:bg-[#00B4D8]/5 transition-colors ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}>
-                    <td className="px-6 py-4">
-                      <Link href={`/products/${p.id}`} className="font-bold text-gray-900 hover:text-[#00B4D8] transition-colors">{p.name}</Link>
-                      <p className="text-xs text-gray-400 mt-0.5">{p.series}</p>
-                    </td>
-                    <td className="text-center px-4 py-4 text-sm text-gray-700">{p.specs.jarakTempuh}</td>
-                    <td className="text-center px-4 py-4 text-sm text-gray-700">{p.specs.baterai}</td>
-                    <td className="text-center px-4 py-4 text-sm text-gray-700">{p.specs.kecepatan}</td>
-                    <td className="text-center px-4 py-4 text-sm text-gray-700">{p.specs.kegunaan}</td>
-                    <td className="text-center px-4 py-4 text-sm font-bold text-[#00B4D8]">{p.price}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="text-center mt-8">
-            <Link href="/compare" className="inline-flex items-center gap-2 bg-gray-900 text-white font-bold px-8 py-4 rounded-full hover:bg-[#00B4D8] transition-all">
-              Lihat Perbandingan Lengkap <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== VOXA GUIDE ===== */}
-      <section className="py-20 bg-white">
-        <div className="container">
-          <div className="flex items-end justify-between mb-10">
-            <div>
-              <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-2">EDUKASI & TIPS</p>
-              <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide">VOXA GUIDE</h2>
-            </div>
-            <Link href="/guide" className="hidden md:flex items-center gap-2 text-[#00B4D8] font-bold text-sm hover:gap-3 transition-all">
-              Semua Artikel <ArrowRight size={16} />
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {guideArticles.map((article) => (
-              <Link key={article.title} href="/guide">
-                <div className="group rounded-2xl overflow-hidden border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
-                  <div className="aspect-video overflow-hidden">
-                    <img src={article.img} alt={article.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                  </div>
-                  <div className="p-6">
-                    <span className="inline-block bg-[#00B4D8]/10 text-[#00B4D8] text-xs font-bold px-3 py-1 rounded-full mb-3">{article.tag}</span>
-                    <h3 className="font-bold text-gray-900 mb-2 group-hover:text-[#00B4D8] transition-colors leading-snug">{article.title}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{article.excerpt}</p>
-                    <div className="flex items-center gap-1 mt-4 text-[#00B4D8] text-sm font-bold">
-                      Baca Selengkapnya <ChevronRight size={14} />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== B2B SECTION ===== */}
-      <section className="py-20 bg-gray-950 text-white">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-4">SOLUSI BISNIS</p>
-              <h2 className="font-display text-4xl md:text-5xl tracking-wide mb-6 leading-none">
-                BANGUN BISNIS<br />KENDARAAN LISTRIK<br /><span className="text-[#00B4D8]">BERSAMA VOXA</span>
-              </h2>
-              <p className="text-gray-400 text-lg leading-relaxed mb-8">
-                Jadilah bagian dari ekosistem kendaraan listrik Indonesia. VOXA menyediakan solusi armada, kemitraan bisnis, dan dukungan penuh untuk perusahaan Anda.
-              </p>
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {['Harga Armada Khusus', 'Dukungan Teknis 24/7', 'Pelatihan Tim', 'Garansi Extended'].map(f => (
-                  <div key={f} className="flex items-center gap-2 text-sm text-gray-300">
-                    <div className="w-5 h-5 bg-[#00B4D8] rounded-full flex items-center justify-center shrink-0">
-                      <span className="text-white text-xs">✓</span>
-                    </div>
-                    {f}
-                  </div>
-                ))}
-              </div>
-              <Link href="/bisnis" className="inline-flex items-center gap-2 bg-[#00B4D8] text-white font-bold px-8 py-4 rounded-full hover:bg-[#0096b8] transition-all">
-                Pelajari Solusi Bisnis <ArrowRight size={18} />
-              </Link>
-            </div>
-            <div className="relative">
-              <img src={KURIR_IMG} alt="VOXA Bisnis" className="rounded-3xl w-full aspect-[4/3] object-cover" />
-              <div className="absolute -bottom-4 -right-4 bg-[#00B4D8] text-white rounded-2xl p-5 shadow-2xl">
-                <p className="font-display text-3xl tracking-wide">500+</p>
-                <p className="text-sm font-medium">Mitra Bisnis Aktif</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== B2G SECTION ===== */}
-      <section className="py-20 bg-[#00B4D8]">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative order-2 lg:order-1">
-              <img src={FLEET_IMG} alt="VOXA Pemerintah" className="rounded-3xl w-full aspect-[4/3] object-cover" />
-            </div>
-            <div className="order-1 lg:order-2">
-              <p className="text-white/70 text-sm font-bold tracking-widest mb-4">SOLUSI PEMERINTAH</p>
-              <h2 className="font-display text-4xl md:text-5xl text-white tracking-wide mb-6 leading-none">
-                SOLUSI KENDARAAN<br />LISTRIK UNTUK<br />INSTANSI
-              </h2>
-              <p className="text-white/80 text-lg leading-relaxed mb-8">
-                Dukung program kendaraan listrik nasional dengan armada VOXA. Hemat anggaran operasional dan wujudkan komitmen lingkungan instansi Anda.
-              </p>
-              <Link href="/pemerintah" className="inline-flex items-center gap-2 bg-white text-[#00B4D8] font-bold px-8 py-4 rounded-full hover:bg-gray-100 transition-all">
-                Konsultasi Sekarang <ArrowRight size={18} />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== TRUST SECTION ===== */}
-      <section className="py-20 bg-white">
-        <div className="container">
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
-            {[
-              { num: '10.000+', label: 'Pengguna Aktif' },
-              { num: '50+', label: 'Kota di Indonesia' },
-              { num: '15+', label: 'Model Tersedia' },
-              { num: '2 Tahun', label: 'Garansi Resmi' },
-            ].map(stat => (
-              <div key={stat.label} className="text-center p-6 rounded-2xl bg-gray-50 border border-gray-100">
-                <p className="font-display text-4xl md:text-5xl text-[#00B4D8] tracking-wide mb-2">{stat.num}</p>
-                <p className="text-gray-500 text-sm font-medium">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Testimonials */}
-          <div className="mb-16">
-            <div className="text-center mb-10">
-              <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-2">KATA MEREKA</p>
-              <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide">TESTIMONI PENGGUNA</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-              {testimonials.map((t) => (
-                <div key={t.name} className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: t.rating }).map((_, i) => (
-                      <Star key={i} size={14} className="fill-[#00B4D8] text-[#00B4D8]" />
-                    ))}
-                  </div>
-                  <p className="text-gray-700 text-sm leading-relaxed mb-4 italic">"{t.text}"</p>
-                  <div>
-                    <p className="font-bold text-gray-900 text-sm">{t.name}</p>
-                    <p className="text-gray-400 text-xs">{t.city}</p>
-                  </div>
-                </div>
+      {/* ═══════════════════════════════════════════════════════════════
+          SECTION 8: VOXA UNTUK SIAPA? — activity tiles with tabs
+      ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-16 bg-gray-50 border-t border-gray-100">
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 2rem' }}>
+          <div className="flex items-center gap-6 mb-8">
+            <h2 className="font-display text-2xl md:text-3xl text-gray-900 tracking-wide">VOXA UNTUK SIAPA?</h2>
+            <div className="flex gap-1 border-b border-gray-200">
+              {(['HARIAN', 'BISNIS'] as const).map(tab => (
+                <button
+                  key={tab}
+                  onClick={() => setUseTab(tab)}
+                  className={`px-4 py-2 text-xs font-bold tracking-wider transition-colors border-b-2 -mb-px ${
+                    useTab === tab
+                      ? 'border-gray-900 text-gray-900'
+                      : 'border-transparent text-gray-400 hover:text-gray-600'
+                  }`}
+                >
+                  {tab}
+                </button>
               ))}
             </div>
           </div>
-
-          {/* Showroom */}
-          <div className="mb-16">
-            <div className="text-center mb-10">
-              <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-2">TEMUKAN KAMI</p>
-              <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide">SHOWROOM VOXA</h2>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {showrooms.map((s) => (
-                <div key={s.city} className="flex items-start gap-4 p-5 rounded-xl border border-gray-100 hover:border-[#00B4D8]/30 hover:bg-[#00B4D8]/5 transition-all group">
-                  <div className="w-10 h-10 bg-[#00B4D8]/10 rounded-xl flex items-center justify-center shrink-0 group-hover:bg-[#00B4D8] transition-colors">
-                    <MapPin size={18} className="text-[#00B4D8] group-hover:text-white transition-colors" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-gray-900 mb-1">{s.city}</p>
-                    <p className="text-gray-500 text-sm">{s.address}</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {useTilesByTab[useTab].map(tile => (
+              <Link key={tile.label} href={tile.href}>
+                <div className="group relative overflow-hidden aspect-square bg-gray-100">
+                  <img
+                    src={tile.img}
+                    alt={tile.label}
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+                  <div className="absolute inset-0 flex items-end p-4">
+                    <span className="font-display text-white text-sm md:text-base tracking-widest">{tile.label}</span>
                   </div>
                 </div>
-              ))}
-            </div>
-            <div className="text-center mt-6">
-              <Link href="/showroom" className="inline-flex items-center gap-2 text-[#00B4D8] font-bold hover:gap-3 transition-all">
-                Lihat Semua Showroom <ArrowRight size={16} />
               </Link>
-            </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* Warranty & Production */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gray-950 text-white rounded-3xl p-8">
-              <Shield size={32} className="text-[#00B4D8] mb-4" />
-              <h3 className="font-display text-2xl tracking-wide mb-3">GARANSI RESMI</h3>
-              <p className="text-gray-400 leading-relaxed mb-4">Setiap produk VOXA dilindungi garansi resmi 2 tahun. Kami berkomitmen pada kualitas dan kepuasan pelanggan.</p>
-              <Link href="/bantuan" className="inline-flex items-center gap-2 text-[#00B4D8] font-bold text-sm hover:gap-3 transition-all">
-                Pelajari Garansi <ChevronRight size={14} />
-              </Link>
+      {/* ═══════════════════════════════════════════════════════════════
+          SECTION 5B: SECOND CAMPAIGN BANNER — B2G / Pemerintah
+      ═══════════════════════════════════════════════════════════════ */}
+      <CampaignBanner
+        img1={BANNER2A}
+        img2={BANNER2B}
+        img3={BANNER2C}
+        headline="SOLUSI ARMADA PEMERINTAH"
+        subtext="Kendaraan listrik ramah lingkungan untuk instansi dan program pemerintah daerah."
+        ctaLabel="Pelajari Program B2G"
+        ctaHref="/pemerintah"
+      />
+
+      {/* ═══════════════════════════════════════════════════════════════
+          SECTION 9: LIFESTYLE / COMMUNITY COLLAGE
+      ═══════════════════════════════════════════════════════════════ */}
+      <section className="py-16 bg-white border-t border-gray-100">
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 2rem' }}>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="font-display text-2xl md:text-3xl text-gray-900 tracking-wide">KOMUNITAS VOXA</h2>
+            <Link href="/guide" className="text-sm font-semibold text-gray-900 underline underline-offset-4 hover:text-[#00B4D8] transition-colors flex items-center gap-1">
+              Lihat Semua <ArrowRight size={14} />
+            </Link>
+          </div>
+          {/* Asymmetric collage grid */}
+          <div className="grid grid-cols-3 grid-rows-2 gap-2" style={{ height: 'clamp(300px, 50vh, 560px)' }}>
+            {/* Large left tile */}
+            <div className="col-span-1 row-span-2 overflow-hidden bg-gray-100">
+              <img src={LIFE1} alt="VOXA Community" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
             </div>
-            <div className="relative rounded-3xl overflow-hidden">
-              <img src={PRODUCTION_IMG} alt="Produksi VOXA" className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <h3 className="font-display text-2xl text-white tracking-wide mb-2">PRODUKSI LOKAL</h3>
-                <p className="text-gray-300 text-sm leading-relaxed">Dirancang dan diproduksi di Indonesia, VOXA memahami kebutuhan jalanan dan pengguna lokal.</p>
+            {/* Top middle */}
+            <div className="col-span-1 row-span-1 overflow-hidden bg-gray-100">
+              <img src={LIFE2} alt="VOXA Lifestyle" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
+            </div>
+            {/* Top right */}
+            <div className="col-span-1 row-span-1 overflow-hidden bg-gray-100">
+              <img src={LIFE3} alt="VOXA Riders" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
+            </div>
+            {/* Bottom middle */}
+            <div className="col-span-1 row-span-1 overflow-hidden bg-gray-100">
+              <img src={LIFE4} alt="VOXA Urban" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
+            </div>
+            {/* Bottom right — split into 2 */}
+            <div className="col-span-1 row-span-1 grid grid-cols-2 gap-2">
+              <div className="overflow-hidden bg-gray-100">
+                <img src={LIFE5} alt="VOXA Daily" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
+              </div>
+              <div className="overflow-hidden bg-gray-100">
+                <img src={LIFE6} alt="VOXA Green" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== FINAL CTA ===== */}
-      <section className="py-24 bg-gray-950 text-white text-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00B4D8] rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#00B4D8] rounded-full blur-3xl" />
-        </div>
-        <div className="relative container">
-          <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-4">MULAI SEKARANG</p>
-          <h2 className="font-display text-5xl md:text-7xl tracking-wide mb-6 leading-none">
-            SIAP BERALIH KE<br /><span className="text-[#00B4D8]">KENDARAAN LISTRIK?</span>
-          </h2>
-          <p className="text-gray-400 text-xl max-w-xl mx-auto mb-10">
-            Bergabunglah dengan ribuan pengguna VOXA dan rasakan perbedaannya.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link href="/catalog/sepeda-listrik" className="inline-flex items-center gap-2 bg-[#00B4D8] text-white font-bold px-10 py-4 rounded-full hover:bg-[#0096b8] transition-all text-lg shadow-lg hover:shadow-[#00B4D8]/30 hover:shadow-xl">
-              Temukan Produk <ArrowRight size={20} />
-            </Link>
-            <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-green-500 text-white font-bold px-10 py-4 rounded-full hover:bg-green-600 transition-all text-lg">
-              <MessageCircle size={20} />
-              Chat WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
-  );
-}
-
-function ProductCard({ product }: { product: { id: string; name: string; price: string; image: string; shortDesc: string; badge?: string; series: string } }) {
-  return (
-    <Link href={`/products/${product.id}`}>
-      <div className="product-card group rounded-2xl overflow-hidden border border-gray-100 bg-white cursor-pointer">
-        <div className="relative aspect-square overflow-hidden bg-gray-50">
-          <img src={product.image} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-          {product.badge && (
-            <span className="absolute top-3 left-3 bg-[#00B4D8] text-white text-xs font-bold px-2.5 py-1 rounded-full">
-              {product.badge}
-            </span>
-          )}
-        </div>
-        <div className="p-4">
-          <p className="text-xs text-gray-400 mb-1">{product.series}</p>
-          <h3 className="font-bold text-gray-900 mb-1 group-hover:text-[#00B4D8] transition-colors">{product.name}</h3>
-          <p className="text-xs text-gray-500 mb-3 line-clamp-2">{product.shortDesc}</p>
-          <div className="flex items-center justify-between">
-            <span className="font-bold text-[#00B4D8] text-sm">{product.price}</span>
-            <span className="text-xs text-gray-400 group-hover:text-[#00B4D8] transition-colors flex items-center gap-1">
-              Detail <ChevronRight size={12} />
-            </span>
-          </div>
-        </div>
-      </div>
-    </Link>
   );
 }

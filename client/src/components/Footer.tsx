@@ -1,48 +1,44 @@
+import { useState } from 'react';
 import { Link } from 'wouter';
-import { MessageCircle, MapPin, Phone, Mail, Instagram, Youtube, Facebook } from 'lucide-react';
+import { Instagram, Youtube, Facebook, Twitter } from 'lucide-react';
 
 const LOGO_URL = '/manus-storage/voxa-logo_923e0d6b.png';
 
 export default function Footer() {
-  return (
-    <footer className="bg-gray-950 text-white">
-      {/* Main Footer */}
-      <div className="container py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Brand */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
-              <img src={LOGO_URL} alt="VOXA" className="h-12 w-12 object-contain" />
-              <span className="font-display text-3xl tracking-widest text-white">VOXA</span>
-            </div>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              Kendaraan listrik untuk jalanan Indonesia. Modern, tangguh, dan ramah lingkungan.
-            </p>
-            <div className="flex gap-3">
-              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-[#00B4D8] rounded-full flex items-center justify-center transition-colors">
-                <Instagram size={16} />
-              </a>
-              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-[#00B4D8] rounded-full flex items-center justify-center transition-colors">
-                <Youtube size={16} />
-              </a>
-              <a href="#" className="w-9 h-9 bg-gray-800 hover:bg-[#00B4D8] rounded-full flex items-center justify-center transition-colors">
-                <Facebook size={16} />
-              </a>
-            </div>
-          </div>
+  const [email, setEmail] = useState('');
+  const [newsletterStatus, setNewsletterStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-          {/* Produk */}
+  const handleNewsletter = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email || !email.includes('@')) {
+      setNewsletterStatus('error');
+      return;
+    }
+    // Simulate submission — replace with real API call when available
+    setNewsletterStatus('success');
+    setEmail('');
+  };
+
+  return (
+    <footer className="bg-white border-t border-gray-200">
+
+      {/* ── Main 4-column grid ─────────────────────────────────────── */}
+      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '4rem 2rem 3rem' }}>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-10">
+
+          {/* Column 1: BANTUAN */}
           <div>
-            <h4 className="font-display text-lg tracking-wider text-white mb-4">PRODUK</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-bold tracking-widest text-gray-900 mb-5 uppercase">Bantuan</h4>
+            <ul className="space-y-3">
               {[
-                { label: 'Sepeda Listrik', href: '/catalog/sepeda-listrik' },
-                { label: 'Batre', href: '/catalog/batre' },
-                { label: 'Sparepart', href: '/catalog/sparepart' },
-                { label: 'Bandingkan Produk', href: '/compare' },
+                { label: 'Pusat Bantuan', href: '/bantuan' },
+                { label: 'Cara Pemesanan', href: '/bantuan' },
+                { label: 'Garansi Produk', href: '/bantuan' },
+                { label: 'Sparepart & Servis', href: '/bantuan' },
+                { label: 'Hubungi Kami', href: '/bantuan' },
               ].map(item => (
-                <li key={item.href}>
-                  <Link href={item.href} className="text-gray-400 hover:text-[#00B4D8] text-sm transition-colors">
+                <li key={item.label}>
+                  <Link href={item.href} className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
                     {item.label}
                   </Link>
                 </li>
@@ -50,20 +46,39 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Perusahaan */}
+          {/* Column 2: PRODUK */}
           <div>
-            <h4 className="font-display text-lg tracking-wider text-white mb-4">PERUSAHAAN</h4>
-            <ul className="space-y-2">
+            <h4 className="text-xs font-bold tracking-widest text-gray-900 mb-5 uppercase">Produk</h4>
+            <ul className="space-y-3">
+              {[
+                { label: 'Sepeda Listrik', href: '/catalog/sepeda-listrik' },
+                { label: 'Baterai', href: '/catalog/batre' },
+                { label: 'Sparepart', href: '/catalog/sparepart' },
+                { label: 'Bandingkan Model', href: '/compare' },
+                { label: 'Produk Terbaru', href: '/catalog/sepeda-listrik' },
+              ].map(item => (
+                <li key={item.label}>
+                  <Link href={item.href} className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Column 3: PERUSAHAAN */}
+          <div>
+            <h4 className="text-xs font-bold tracking-widest text-gray-900 mb-5 uppercase">Perusahaan</h4>
+            <ul className="space-y-3">
               {[
                 { label: 'Tentang VOXA', href: '/tentang' },
                 { label: 'Untuk Bisnis', href: '/bisnis' },
                 { label: 'Untuk Pemerintah', href: '/pemerintah' },
                 { label: 'Showroom', href: '/showroom' },
                 { label: 'VOXA Guide', href: '/guide' },
-                { label: 'Bantuan', href: '/bantuan' },
               ].map(item => (
-                <li key={item.href}>
-                  <Link href={item.href} className="text-gray-400 hover:text-[#00B4D8] text-sm transition-colors">
+                <li key={item.label}>
+                  <Link href={item.href} className="text-sm text-gray-500 hover:text-gray-900 transition-colors">
                     {item.label}
                   </Link>
                 </li>
@@ -71,42 +86,118 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Kontak */}
+          {/* Column 4: MORE — newsletter + blog tiles */}
           <div>
-            <h4 className="font-display text-lg tracking-wider text-white mb-4">KONTAK</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3 text-sm text-gray-400">
-                <MapPin size={16} className="text-[#00B4D8] shrink-0 mt-0.5" />
-                <span>Indonesia — Tersedia di seluruh wilayah</span>
-              </li>
-              <li className="flex items-center gap-3 text-sm text-gray-400">
-                <Phone size={16} className="text-[#00B4D8] shrink-0" />
-                <a href="tel:+6281234567890" className="hover:text-[#00B4D8] transition-colors">+62 812 3456 7890</a>
-              </li>
-              <li className="flex items-center gap-3 text-sm text-gray-400">
-                <Mail size={16} className="text-[#00B4D8] shrink-0" />
-                <a href="mailto:info@voxa.co.id" className="hover:text-[#00B4D8] transition-colors">info@voxa.co.id</a>
-              </li>
-              <li className="flex items-center gap-3 text-sm text-gray-400">
-                <MessageCircle size={16} className="text-[#00B4D8] shrink-0" />
-                <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" className="hover:text-[#00B4D8] transition-colors">WhatsApp Support</a>
-              </li>
-            </ul>
+            <h4 className="text-xs font-bold tracking-widest text-gray-900 mb-5 uppercase">Lebih Banyak</h4>
+            <div className="space-y-3">
+              {/* Newsletter tile */}
+              <form onSubmit={handleNewsletter} className="bg-[#00B4D8] p-4">
+                <p className="text-white text-xs font-bold uppercase tracking-wider mb-1">Newsletter VOXA</p>
+                <p className="text-white/80 text-xs mb-3 leading-relaxed">Dapatkan info produk terbaru dan promo eksklusif.</p>
+                {newsletterStatus === 'success' ? (
+                  <p className="text-white text-xs font-semibold py-2">Terima kasih! Kamu sudah terdaftar.</p>
+                ) : (
+                  <>
+                    <div className="flex">
+                      <input
+                        type="email"
+                        value={email}
+                        onChange={e => { setEmail(e.target.value); setNewsletterStatus('idle'); }}
+                        placeholder="Email kamu"
+                        className="flex-1 text-xs px-3 py-2 bg-white text-gray-900 placeholder-gray-400 outline-none min-w-0"
+                        required
+                      />
+                      <button type="submit" className="bg-gray-900 text-white text-xs font-bold px-3 py-2 hover:bg-gray-700 transition-colors whitespace-nowrap">
+                        Daftar
+                      </button>
+                    </div>
+                    {newsletterStatus === 'error' && (
+                      <p className="text-white/80 text-[10px] mt-1">Masukkan email yang valid.</p>
+                    )}
+                  </>
+                )}
+              </form>
+              {/* Guide tile */}
+              <Link href="/guide">
+                <div className="border border-gray-200 p-4 hover:border-gray-400 transition-colors cursor-pointer">
+                  <p className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-1">VOXA Guide</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">Tips, panduan, dan artikel seputar kendaraan listrik.</p>
+                </div>
+              </Link>
+              {/* Showroom tile */}
+              <Link href="/showroom">
+                <div className="border border-gray-200 p-4 hover:border-gray-400 transition-colors cursor-pointer">
+                  <p className="text-xs font-bold text-gray-900 uppercase tracking-wider mb-1">Temukan Showroom</p>
+                  <p className="text-xs text-gray-500 leading-relaxed">Kunjungi showroom VOXA terdekat di kota Anda.</p>
+                </div>
+              </Link>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      {/* ── Social + Payment row ───────────────────────────────────── */}
+      <div className="border-t border-gray-100">
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '1.5rem 2rem' }}
+          className="flex flex-col md:flex-row items-center justify-between gap-4">
+
+          {/* Social icons */}
+          <div className="flex items-center gap-4">
+            {[
+              { icon: <Instagram size={18} />, href: '#', label: 'Instagram' },
+              { icon: <Facebook size={18} />, href: '#', label: 'Facebook' },
+              { icon: <Youtube size={18} />, href: '#', label: 'YouTube' },
+              { icon: <Twitter size={18} />, href: '#', label: 'Twitter/X' },
+            ].map(s => (
+              <a
+                key={s.label}
+                href={s.href}
+                aria-label={s.label}
+                className="text-gray-400 hover:text-gray-900 transition-colors"
+              >
+                {s.icon}
+              </a>
+            ))}
+          </div>
+
+          {/* Payment icons (text-based badges) */}
+          <div className="flex items-center gap-2 flex-wrap justify-center">
+            {['Visa', 'Mastercard', 'BCA', 'Mandiri', 'GoPay', 'OVO', 'Dana'].map(method => (
+              <span
+                key={method}
+                className="border border-gray-200 text-gray-500 text-[10px] font-bold px-2 py-1 rounded tracking-wider"
+              >
+                {method}
+              </span>
+            ))}
+          </div>
+
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <img src={LOGO_URL} alt="VOXA" className="h-7 w-7 object-contain opacity-70" />
+            <span className="font-display text-lg tracking-widest text-gray-400">VOXA</span>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-gray-800">
-        <div className="container py-5 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-gray-500 text-xs">© 2025 VOXA. Hak Cipta Dilindungi. Produksi Lokal Indonesia.</p>
+      {/* ── Bottom legal bar ──────────────────────────────────────── */}
+      <div className="border-t border-gray-100 bg-gray-50">
+        <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '1rem 2rem' }}
+          className="flex flex-col md:flex-row items-center justify-between gap-2">
+          <p className="text-[11px] text-gray-400">
+            © 2025 VOXA. Hak Cipta Dilindungi. Produk Lokal Indonesia.
+          </p>
           <div className="flex gap-4">
-            <a href="#" className="text-gray-500 hover:text-[#00B4D8] text-xs transition-colors">Kebijakan Privasi</a>
-            <a href="#" className="text-gray-500 hover:text-[#00B4D8] text-xs transition-colors">Syarat & Ketentuan</a>
-            <a href="#" className="text-gray-500 hover:text-[#00B4D8] text-xs transition-colors">Garansi</a>
+            {['Kebijakan Privasi', 'Syarat & Ketentuan', 'Garansi', 'Sitemap'].map(link => (
+              <a key={link} href="#" className="text-[11px] text-gray-400 hover:text-gray-700 transition-colors">
+                {link}
+              </a>
+            ))}
           </div>
         </div>
       </div>
+
     </footer>
   );
 }
