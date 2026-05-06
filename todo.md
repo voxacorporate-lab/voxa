@@ -101,3 +101,11 @@
 - [x] Same layout/grid/card as existing catalog pages
 - [x] Update "Temukan VOXA Anda" button in navbar to route to /katalog
 - [x] Wire /katalog route in App.tsx
+
+## Product Image Galleries
+
+- [x] Upload all gallery images (13 products × multiple images) to CDN
+- [x] Create productGalleries.ts data file mapping product IDs to ordered image arrays
+- [x] Implement interactive gallery on product detail page (main image + thumbnails)
+- [x] Active thumbnail highlight (border/opacity)
+- [x] Consistent aspect ratio and object-fit: cover

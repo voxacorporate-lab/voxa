@@ -2,19 +2,16 @@ import { useState } from 'react';
 import { Link, useParams } from 'wouter';
 import { ChevronRight, MessageCircle, Zap, Shield, Wrench, ChevronDown, ArrowRight, Star } from 'lucide-react';
 import { getProductById, sepedaListrik } from '@/data/products';
-
-const GALLERY_IMAGES = [
-  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=85',
-  'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&q=85',
-  'https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?w=800&q=85',
-  'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=85',
-];
+import { getProductGallery } from '@/data/productGalleries';
 
 export default function ProductDetail() {
   const params = useParams<{ id: string }>();
   const product = getProductById(params.id || '');
   const [activeImg, setActiveImg] = useState(0);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  // Per-product gallery images — falls back to product.image if no gallery defined
+  const galleryImages = product ? getProductGallery(product.id, product.image) : [];
 
   if (!product) {
     return (
@@ -61,22 +58,24 @@ export default function ProductDetail() {
           <div className="space-y-4">
             <div className="aspect-square rounded-3xl overflow-hidden bg-gray-50 border border-gray-100">
               <img
-                src={GALLERY_IMAGES[activeImg]}
+                src={galleryImages[activeImg]}
                 alt={product.name}
                 className="w-full h-full object-cover transition-all duration-300"
               />
             </div>
-            <div className="grid grid-cols-4 gap-3">
-              {GALLERY_IMAGES.map((img, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveImg(i)}
-                  className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${activeImg === i ? 'border-[#00B4D8]' : 'border-gray-100 hover:border-gray-300'}`}
-                >
-                  <img src={img} alt={`${product.name} ${i + 1}`} className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
+            {galleryImages.length > 1 && (
+              <div className="grid grid-cols-4 gap-3">
+                {galleryImages.map((img: string, i: number) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveImg(i)}
+                    className={`aspect-square rounded-xl overflow-hidden border-2 transition-all ${activeImg === i ? 'border-[#00B4D8] ring-2 ring-[#00B4D8]/30' : 'border-gray-100 hover:border-gray-300'}`}
+                  >
+                    <img src={img} alt={`${product.name} ${i + 1}`} className="w-full h-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Right: Info */}
