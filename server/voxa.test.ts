@@ -77,9 +77,9 @@ describe("VOXA Website - Auth", () => {
 });
 
 describe("VOXA Website - Product Data", () => {
-  it("should have exactly 15 sepeda listrik products", async () => {
+  it("should have exactly 13 sepeda listrik products", async () => {
     const { sepedaListrik } = await import("../client/src/data/products");
-    expect(sepedaListrik).toHaveLength(15);
+    expect(sepedaListrik).toHaveLength(13);
   });
 
   it("should have exactly 9 batre products", async () => {
