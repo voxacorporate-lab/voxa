@@ -129,3 +129,9 @@
 - [x] Navbar font size 13-15px, icon 18-22px, no wrapping on desktop
 - [x] Reduce global "zoomed in" feel: max-width 1200-1400px containers, balanced padding
 - [x] Fix hero heading: clamp(42px, 5vw, 72px) font size
+
+## Showroom Page Real Data Update
+
+- [x] Upload 5 real showroom images to CDN (PANDEGLANG, CIPONDOH, JATIBENING, PARUNG SERAB, MERUYA)
+- [x] Replace placeholder showroom data with 5 real VOXA locations
+- [x] Each card: real name, full address, WhatsApp link (wa.me/62...), Lihat di Maps link, CDN image
