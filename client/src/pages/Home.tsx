@@ -7,9 +7,9 @@ import { sepedaListrik, batre } from '@/data/products';
 const HERO_BG = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=90';
 
 // Campaign banner images (3-panel mosaic)
-const BANNER1 = 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&q=80';
-const BANNER2 = 'https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?w=800&q=80';
-const BANNER3 = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&q=80';
+const BANNER1 = '/manus-storage/campaign1_3919f523.png';
+const BANNER2 = '/manus-storage/campaign2_2430bf5c.png';
+const BANNER3 = '/manus-storage/campaign3_58add809.png';
 
 // Campaign banner 2 images
 const BANNER2A = 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=800&q=80';
