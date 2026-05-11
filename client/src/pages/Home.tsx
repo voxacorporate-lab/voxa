@@ -1,7 +1,21 @@
 import { useState, useRef } from 'react';
 import { Link } from 'wouter';
 import { Heart, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-import { sepedaListrik, batre } from '@/data/products';
+import { sepedaListrik, batre, products } from '@/data/products';
+
+// Curated Produk Unggulan: all 5 Elite + 1 Eiffel + 1 Liberty (no duplicates)
+const produkUnggulan = (() => {
+  const byId = (id: string) => products.find(p => p.id === id)!;
+  return [
+    byId('elite-rider-s'),
+    byId('elite-fantasy-s'),
+    byId('elite-rider'),
+    byId('elite-fantasi'),
+    byId('elite-city'),
+    byId('eiffel-rider'),
+    byId('liberty-ultimate'),
+  ].filter(Boolean);
+})();
 
 // ─── Image constants ──────────────────────────────────────────────────────────
 const HERO_BG = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1800&q=90';
@@ -30,16 +44,16 @@ const LIFE4 = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q
 const LIFE5 = 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&q=80';
 const LIFE6 = 'https://images.unsplash.com/photo-1620714223084-8fcacc2dbe4d?w=600&q=80';
 
-// ─── Product Card (Gymshark-style: large image, no box) ──────────────────────
+// ─── Product Card (Gymshark-style: aspect-ratio image, no box, no grey bars) ───
 function ProductCard({ product }: { product: (typeof sepedaListrik)[0] }) {
   const [wishlisted, setWishlisted] = useState(false);
   return (
-    <div className="group relative" style={{ width: 'clamp(220px, 24vw, 340px)', flexShrink: 0 }}>
-      {/* Image block — no border, no card box */}
+    <div className="group relative" style={{ width: 'clamp(200px, 22vw, 300px)', flexShrink: 0 }}>
       <Link href={`/product/${product.id}`}>
+        {/* Image block — aspect-ratio drives height, no fixed height = no grey bars */}
         <div
-          className="relative overflow-hidden bg-gray-50"
-          style={{ height: 'clamp(280px, 32vw, 480px)' }}
+          className="relative overflow-hidden bg-white"
+          style={{ aspectRatio: '1 / 1' }}
         >
           <img
             src={product.image}
@@ -47,25 +61,25 @@ function ProductCard({ product }: { product: (typeof sepedaListrik)[0] }) {
             className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
           />
           {product.badge && (
-            <span className="absolute bottom-3 left-3 bg-black text-white text-[10px] font-bold uppercase tracking-wider px-2 py-1">
+            <span className="absolute bottom-2 left-2 bg-black text-white text-[10px] font-bold uppercase tracking-wider px-2 py-0.5">
               {product.badge}
             </span>
           )}
         </div>
-        {/* Text block — directly under image, no card wrapper */}
-        <div className="pt-3 pb-1">
-          <p className="text-xs text-gray-400 uppercase tracking-wider mb-0.5">{product.series}</p>
-          <h3 className="text-sm font-semibold text-gray-900 leading-snug mb-1">{product.name}</h3>
+        {/* Text block — flush under image */}
+        <div className="pt-2 pb-1">
+          <p className="text-[10px] text-gray-400 uppercase tracking-widest mb-0.5">{product.series}</p>
+          <h3 className="text-sm font-semibold text-gray-900 leading-snug mb-0.5">{product.name}</h3>
           <p className="text-sm font-bold text-gray-900">{product.price}</p>
         </div>
       </Link>
-      {/* Wishlist icon — floating top-right on image */}
+      {/* Wishlist icon */}
       <button
         onClick={() => setWishlisted(w => !w)}
-        className="absolute top-2 right-2 w-8 h-8 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
+        className="absolute top-2 right-2 w-7 h-7 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
         aria-label="Tambah ke wishlist"
       >
-        <Heart size={14} className={wishlisted ? 'fill-[#00B4D8] text-[#00B4D8]' : 'text-gray-500'} />
+        <Heart size={13} className={wishlisted ? 'fill-[#00B4D8] text-[#00B4D8]' : 'text-gray-400'} />
       </button>
     </div>
   );
@@ -277,7 +291,7 @@ export default function Home() {
       <ProductRow
         title="PRODUK UNGGULAN"
         viewAllHref="/catalog/sepeda-listrik"
-        products={sepedaListrik.slice(0, 8)}
+        products={produkUnggulan}
       />
 
       {/* ═══════════════════════════════════════════════════════════════
