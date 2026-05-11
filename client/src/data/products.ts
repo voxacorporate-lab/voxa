@@ -52,11 +52,11 @@ const IMG_LIBERTY_ULTIMATE = '/manus-storage/libertyultimate_cb0b8bd1.jpg';
 const IMG_EIFFEL_7 = '/manus-storage/eiffel7_87fdb467.jpg';
 const IMG_EIFFEL_CITY = '/manus-storage/eiffelcity_f685b4ee.jpg';
 const IMG_EIFFEL_RIDER = '/manus-storage/eiffelrider_33889eb7.jpg';
-const IMG_ELITE_FANTASY = '/manus-storage/elitefantasy_cb6fb25c.jpg';
-const IMG_ELITE_CITY = '/manus-storage/elitecity_f3aa376b.jpg';
-const IMG_ELITE_FANTASY_S = '/manus-storage/elitefantasys_11c37ab3.jpg';
-const IMG_ELITE_RIDER = '/manus-storage/eliterider_aa94aab7.jpg';
-const IMG_ELITE_RIDER_S = '/manus-storage/eliteriders_bea5046b.jpg';
+const IMG_ELITE_FANTASY = '/manus-storage/EliteFantasy_5e108b8b.png';
+const IMG_ELITE_CITY = '/manus-storage/EliteCity_9756080d.png';
+const IMG_ELITE_FANTASY_S = '/manus-storage/EliteFantasyS_19412188.png';
+const IMG_ELITE_RIDER = '/manus-storage/EliteRider_06f0f0ee.png';
+const IMG_ELITE_RIDER_S = '/manus-storage/EliteRiderS_76ab996d.png';
 
 export const products: Product[] = [
 
@@ -903,6 +903,10 @@ export const products: Product[] = [
   },
 ];
 
-export const sepedaListrik = products.filter(p => p.category === 'sepeda-listrik');
+// Elite series first, then other series by original order
+export const sepedaListrik = [
+  ...products.filter(p => p.category === 'sepeda-listrik' && p.series === 'Elite Series'),
+  ...products.filter(p => p.category === 'sepeda-listrik' && p.series !== 'Elite Series'),
+];
 export const batre = products.filter(p => p.category === 'batre');
 export const getProductById = (id: string) => products.find(p => p.id === id);
