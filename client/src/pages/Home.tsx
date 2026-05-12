@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Link } from 'wouter';
 import { Heart, ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { sepedaListrik, batre, products } from '@/data/products';
@@ -104,9 +104,20 @@ function ProductCard({ product, cardWidth }: { product: (typeof sepedaListrik)[0
 // ─── Horizontal Product Row ───────────────────────────────────────────────────────
 function ProductRow({ title, viewAllHref, products }: { title: string; viewAllHref: string; products: (typeof sepedaListrik) }) {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const [mobilePage, setMobilePage] = useState(0);
 
-  const GAP = 16; // px gap between cards
+  const GAP = 16;
 
+  // Detect mobile breakpoint
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 640);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  // Desktop scroll
   const scroll = (dir: 'left' | 'right') => {
     if (!scrollRef.current) return;
     scrollRef.current.scrollBy({
@@ -115,72 +126,137 @@ function ProductRow({ title, viewAllHref, products }: { title: string; viewAllHr
     });
   };
 
+  // Mobile: group products into pages of 4 (2×2)
+  const MOBILE_PAGE_SIZE = 4;
+  const mobilePages = [];
+  for (let i = 0; i < products.length; i += MOBILE_PAGE_SIZE) {
+    mobilePages.push(products.slice(i, i + MOBILE_PAGE_SIZE));
+  }
+  const totalMobilePages = mobilePages.length;
+
+  const mobilePrev = () => setMobilePage(p => Math.max(0, p - 1));
+  const mobileNext = () => setMobilePage(p => Math.min(totalMobilePages - 1, p + 1));
+
   return (
-    <section className="py-16 bg-white">
-      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 2rem' }}>
+    <section className="py-10 md:py-16 bg-white">
+      <div style={{ maxWidth: '1440px', margin: '0 auto', padding: '0 1rem' }} className="md:[padding:0_2rem]">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="font-display text-2xl md:text-3xl text-gray-900 tracking-wide">{title}</h2>
-          <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between mb-6 md:mb-8">
+          <h2 className="font-display text-xl md:text-3xl text-gray-900 tracking-wide">{title}</h2>
+          <div className="flex items-center gap-3 md:gap-4">
             <Link
               href={viewAllHref}
-              className="text-sm font-semibold text-gray-900 underline underline-offset-4 hover:text-[#00B4D8] transition-colors"
+              className="text-xs md:text-sm font-semibold text-gray-900 underline underline-offset-4 hover:text-[#00B4D8] transition-colors"
             >
               Lihat Semua
             </Link>
             <div className="flex gap-2">
               <button
-                onClick={() => scroll('left')}
-                className="w-9 h-9 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-900 transition-colors"
+                onClick={isMobile ? mobilePrev : () => scroll('left')}
+                className="w-8 h-8 md:w-9 md:h-9 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-900 transition-colors disabled:opacity-30"
                 aria-label="Scroll kiri"
+                disabled={isMobile && mobilePage === 0}
               >
-                <ChevronLeft size={16} />
+                <ChevronLeft size={14} />
               </button>
               <button
-                onClick={() => scroll('right')}
-                className="w-9 h-9 rounded-full bg-gray-900 text-white flex items-center justify-center hover:bg-[#00B4D8] transition-colors"
+                onClick={isMobile ? mobileNext : () => scroll('right')}
+                className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gray-900 text-white flex items-center justify-center hover:bg-[#00B4D8] transition-colors disabled:opacity-30"
                 aria-label="Scroll kanan"
+                disabled={isMobile && mobilePage === totalMobilePages - 1}
               >
-                <ChevronRight size={16} />
+                <ChevronRight size={14} />
               </button>
             </div>
           </div>
         </div>
 
-        {/* Scrollable track
-             Card width strategy:
-             - Desktop (≥1024px): 4 cards → each = (viewport - 4rem padding - 3×16px gaps) / 4
-             - Tablet (640–1023px): 2 cards
-             - Mobile (<640px): 1 card (full width minus padding)
-             We use vw-based calc so the cards always fit the visible area exactly.
-        */}
-        <div
-          ref={scrollRef}
-          className="flex overflow-x-auto scrollbar-hide"
-          style={{
-            gap: `${GAP}px`,
-            scrollSnapType: 'x mandatory',
-            overflowY: 'hidden',
-          }}
-        >
-          {products.map(p => {
-            // Use vw units so the width is relative to the viewport, not the scroll container
-            // Desktop: 4 cards in ~1440px container with 64px padding + 3×16px gaps
-            //   card = (min(100vw, 1440px) - 64px - 48px) / 4
-            // Tablet: 2 cards
-            //   card = (100vw - 64px - 16px) / 2
-            // Mobile: 1 card
-            //   card = 100vw - 64px
-            const cardWidth = [
-              `min(calc((min(100vw, 1440px) - 4rem - ${GAP * 3}px) / 4), 340px)`,
-            ].join('');
-            return (
-              <ProductCard key={p.id} product={p} cardWidth={cardWidth} />
-            );
-          })}
-        </div>
+        {/* ── MOBILE: 2×2 grid pager ── */}
+        {isMobile ? (
+          <div>
+            <div
+              className="grid"
+              style={{ gridTemplateColumns: '1fr 1fr', gap: '10px' }}
+            >
+              {(mobilePages[mobilePage] ?? []).map(p => (
+                <MobileProductCard key={p.id} product={p} />
+              ))}
+            </div>
+            {/* Dot indicators */}
+            {totalMobilePages > 1 && (
+              <div className="flex justify-center gap-1.5 mt-4">
+                {mobilePages.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setMobilePage(i)}
+                    className={`w-1.5 h-1.5 rounded-full transition-colors ${
+                      i === mobilePage ? 'bg-gray-900' : 'bg-gray-300'
+                    }`}
+                    aria-label={`Halaman ${i + 1}`}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        ) : (
+          /* ── DESKTOP / TABLET: horizontal scroll row ── */
+          <div
+            ref={scrollRef}
+            className="flex overflow-x-auto scrollbar-hide"
+            style={{
+              gap: `${GAP}px`,
+              scrollSnapType: 'x mandatory',
+              overflowY: 'hidden',
+            }}
+          >
+            {products.map(p => {
+              const cardWidth = `min(calc((min(100vw, 1440px) - 4rem - ${GAP * 3}px) / 4), 340px)`;
+              return (
+                <ProductCard key={p.id} product={p} cardWidth={cardWidth} />
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
+  );
+}
+
+// ─── Mobile Product Card (2×2 grid item) ─────────────────────────────────────
+function MobileProductCard({ product }: { product: (typeof sepedaListrik)[0] }) {
+  const [wishlisted, setWishlisted] = useState(false);
+  return (
+    <div className="group relative">
+      <Link href={`/product/${product.id}`}>
+        {/* Square image area */}
+        <div className="relative overflow-hidden bg-white" style={{ aspectRatio: '1/1' }}>
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-contain object-center group-hover:scale-105 transition-transform duration-500"
+          />
+          {product.badge && (
+            <span className="absolute bottom-2 left-2 bg-black text-white text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5">
+              {product.badge}
+            </span>
+          )}
+        </div>
+        {/* Text */}
+        <div className="pt-2 pb-1">
+          <p className="text-[9px] text-gray-400 uppercase tracking-widest mb-0.5 truncate">{product.series}</p>
+          <h3 className="text-xs font-semibold text-gray-900 leading-snug mb-0.5 line-clamp-2">{product.name}</h3>
+          <p className="text-xs font-bold text-gray-900">{product.price}</p>
+        </div>
+      </Link>
+      {/* Wishlist */}
+      <button
+        onClick={() => setWishlisted(w => !w)}
+        className="absolute top-1.5 right-1.5 w-6 h-6 bg-white/90 rounded-full flex items-center justify-center shadow-sm"
+        aria-label="Tambah ke wishlist"
+      >
+        <Heart size={11} className={wishlisted ? 'fill-[#00B4D8] text-[#00B4D8]' : 'text-gray-400'} />
+      </button>
+    </div>
   );
 }
 
