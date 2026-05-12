@@ -260,7 +260,7 @@ function MobileProductCard({ product }: { product: (typeof sepedaListrik)[0] }) 
   );
 }
 
-// ─── Campaign Banner (3-panel mosaic) ─────────────────────────────────────────
+// ─── Campaign Banner (3-panel mosaic on desktop, swipe carousel on mobile) ──────────
 function CampaignBanner({
   img1, img2, img3,
   headline, subtext, ctaLabel, ctaHref,
@@ -268,13 +268,22 @@ function CampaignBanner({
   img1: string; img2: string; img3: string;
   headline: string; subtext: string; ctaLabel: string; ctaHref: string;
 }) {
+  const images = [img1, img2, img3];
+
   return (
-    <section className="w-full overflow-hidden" style={{ height: 'clamp(320px, 55vh, 620px)' }}>
-      <div className="flex h-full">
+    <section className="w-full overflow-hidden">
+      {/* ── DESKTOP / TABLET (≥768px): original 3-panel mosaic ── */}
+      <div
+        className="hidden md:flex"
+        style={{ height: 'clamp(320px, 55vh, 620px)' }}
+      >
         {/* Panel 1 — text overlay */}
         <div className="relative flex-1 overflow-hidden">
           <img src={img1} alt="" className="w-full h-full object-cover object-center" />
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 70%, transparent 100%)' }} />
+          <div
+            className="absolute inset-0"
+            style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 70%, transparent 100%)' }}
+          />
           <div className="absolute bottom-0 left-0 p-8 md:p-12">
             <h2 className="font-display text-white text-2xl md:text-4xl tracking-wide leading-tight mb-2">{headline}</h2>
             <p className="text-gray-200 text-sm mb-4 max-w-xs leading-relaxed">{subtext}</p>
@@ -293,6 +302,39 @@ function CampaignBanner({
         {/* Panel 3 */}
         <div className="relative flex-1 overflow-hidden border-l border-white/10">
           <img src={img3} alt="" className="w-full h-full object-cover object-center" />
+        </div>
+      </div>
+
+      {/* ── MOBILE (<768px): horizontal swipe carousel, no text overlays ── */}
+      <div className="md:hidden">
+        <div
+          className="flex overflow-x-auto"
+          style={{
+            scrollSnapType: 'x mandatory',
+            WebkitOverflowScrolling: 'touch',
+            gap: '12px',
+            padding: '0 16px 16px',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none',
+          }}
+        >
+          {images.map((src, i) => (
+            <div
+              key={i}
+              className="flex-shrink-0 overflow-hidden rounded-2xl"
+              style={{
+                width: '82vw',
+                aspectRatio: '4/3',
+                scrollSnapAlign: 'start',
+              }}
+            >
+              <img
+                src={src}
+                alt={`Campaign ${i + 1}`}
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>
