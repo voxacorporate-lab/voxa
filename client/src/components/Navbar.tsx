@@ -62,7 +62,7 @@ const produkKamiCategories: Category[] = [
 const navLinks = [
   { label: 'Bandingkan', href: '/compare' },
   { label: 'Untuk Bisnis', href: '/bisnis' },
-  { label: 'Untuk Pemerintah', href: '/pemerintah' },
+  { label: 'Distributor VOXA', href: '/pemerintah' },
   { label: 'Showroom', href: '/showroom' },
   { label: 'Tentang VOXA', href: '/tentang' },
   { label: 'Bantuan', href: '/bantuan' },

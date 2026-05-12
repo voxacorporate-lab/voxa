@@ -73,7 +73,7 @@ export default function Footer() {
               {[
                 { label: 'Tentang VOXA', href: '/tentang' },
                 { label: 'Untuk Bisnis', href: '/bisnis' },
-                { label: 'Untuk Pemerintah', href: '/pemerintah' },
+                { label: 'Distributor VOXA', href: '/pemerintah' },
                 { label: 'Showroom', href: '/showroom' },
                 { label: 'VOXA Guide', href: '/guide' },
               ].map(item => (

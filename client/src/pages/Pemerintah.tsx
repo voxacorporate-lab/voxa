@@ -1,17 +1,73 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
-import { ChevronRight, Building2, Leaf, TrendingDown, Award, MessageCircle, ArrowRight, CheckCircle, FileText } from 'lucide-react';
+import {
+  ChevronRight, TrendingUp, Star, Megaphone, Factory,
+  ShieldCheck, BarChart3, ArrowRight, CheckCircle, MessageCircle,
+} from 'lucide-react';
 
-const HERO_IMG = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1400&q=85';
+// ─── CDN image constants ──────────────────────────────────────────────────────
+const IMG_HERO       = '/manus-storage/P1014908_5a27f79b.webp'; // wide factory floor
+const IMG_FACTORY    = '/manus-storage/P1014960_f97fdf33.webp'; // assembly line
+const IMG_CTA_BG     = '/manus-storage/P1015177_e752378f.webp'; // warehouse/dark
 
-export default function Pemerintah() {
-  const [form, setForm] = useState({ nama: '', instansi: '', jabatan: '', email: '', telepon: '', jumlah: '', pesan: '' });
+// Gallery: all 13 images
+const GALLERY = [
+  '/manus-storage/P1015005_29a053b2.webp',
+  '/manus-storage/P1015061_7b0fdb62.webp',
+  '/manus-storage/P1015067_6aacd27c.webp',
+  '/manus-storage/P1015079_0389577d.webp',
+  '/manus-storage/P1015095_d9359bc1.webp',
+  '/manus-storage/P1014960_f97fdf33.webp',
+  '/manus-storage/P1014963_3bf46146.webp',
+  '/manus-storage/P1014999_94114b94.webp',
+  '/manus-storage/P1015033_108e19a9.webp',
+  '/manus-storage/P1015047_606cad4f.webp',
+  '/manus-storage/P1015177_e752378f.webp',
+  '/manus-storage/P1014908_5a27f79b.webp',
+  '/manus-storage/P1015105_831765ce.webp',
+];
+
+const BENEFITS = [
+  {
+    icon: <TrendingUp size={26} />,
+    title: 'Profit Menarik',
+    desc: 'VOXA memberikan peluang keuntungan kompetitif bagi distributor dengan pasar kendaraan listrik yang terus berkembang.',
+  },
+  {
+    icon: <Star size={26} />,
+    title: 'Produk Modern & Berkualitas',
+    desc: 'Desain stylish, nyaman digunakan, dan cocok untuk kebutuhan harian maupun operasional bisnis.',
+  },
+  {
+    icon: <Megaphone size={26} />,
+    title: 'Dukungan Promosi',
+    desc: 'Dukungan branding, promosi, dan materi pemasaran untuk membantu meningkatkan penjualan distributor.',
+  },
+  {
+    icon: <Factory size={26} />,
+    title: 'Produksi Lokal Indonesia',
+    desc: 'Pabrik perakitan di Balaraja, Tangerang dengan kapasitas produksi yang terus berkembang.',
+  },
+  {
+    icon: <ShieldCheck size={26} />,
+    title: 'Garansi & Sparepart',
+    desc: 'Didukung layanan after-sales dan ketersediaan suku cadang untuk kenyamanan pelanggan dan distributor.',
+  },
+  {
+    icon: <BarChart3 size={26} />,
+    title: 'Pasar Kendaraan Listrik Bertumbuh',
+    desc: 'Permintaan kendaraan listrik terus meningkat di Indonesia — momentum terbaik untuk bergabung.',
+  },
+];
+
+export default function Distributor() {
+  const [form, setForm] = useState({ nama: '', perusahaan: '', kota: '', email: '', telepon: '', pesan: '' });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const msg = encodeURIComponent(
-      `Halo VOXA, saya ${form.nama} (${form.jabatan}) dari ${form.instansi}.\n\nEmail: ${form.email}\nTelepon: ${form.telepon}\nJumlah Unit: ${form.jumlah}\n\nPesan: ${form.pesan}`
+      `Halo VOXA, saya ${form.nama} dari ${form.perusahaan} (${form.kota}).\n\nEmail: ${form.email}\nTelepon: ${form.telepon}\n\nPesan: ${form.pesan}`
     );
     window.open(`https://wa.me/6281234567890?text=${msg}`, '_blank');
     setSubmitted(true);
@@ -19,213 +75,311 @@ export default function Pemerintah() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
+
+      {/* ── Breadcrumb ── */}
       <div className="bg-gray-50 border-b border-gray-100">
         <div className="container py-3">
           <div className="flex items-center gap-2 text-sm text-gray-500">
             <Link href="/" className="hover:text-[#00B4D8]">Beranda</Link>
             <ChevronRight size={14} />
-            <span className="text-gray-900 font-medium">Untuk Pemerintah</span>
+            <span className="text-gray-900 font-medium">Distributor VOXA</span>
           </div>
         </div>
       </div>
 
-      {/* Hero */}
-      <section className="relative min-h-[70vh] flex items-center overflow-hidden">
+      {/* ══════════════════════════════════════════════════════════
+          1. HERO SECTION
+      ══════════════════════════════════════════════════════════ */}
+      <section className="relative min-h-[80vh] flex items-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src={HERO_IMG} alt="VOXA Pemerintah" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-transparent" />
+          <img src={IMG_HERO} alt="Pabrik VOXA" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/20" />
         </div>
-        <div className="relative container py-24">
+        <div className="relative container py-28">
           <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 bg-[#00B4D8]/20 border border-[#00B4D8]/40 text-[#00B4D8] text-xs font-bold px-4 py-2 rounded-full mb-6">
-              <Building2 size={12} />
-              SOLUSI PEMERINTAH & INSTANSI
+            <div className="inline-flex items-center gap-2 bg-[#00B4D8]/20 border border-[#00B4D8]/40 text-[#00B4D8] text-xs font-bold px-4 py-2 rounded-full mb-6 tracking-widest">
+              PROGRAM DISTRIBUTOR RESMI VOXA
             </div>
-            <h1 className="font-display text-5xl md:text-7xl text-white leading-none mb-6 tracking-wide">
-              KENDARAAN LISTRIK<br /><span className="text-[#00B4D8]">UNTUK INSTANSI</span><br />PEMERINTAH
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-white leading-none mb-6 tracking-wide">
+              BANGUN BISNIS<br />
+              <span className="text-[#00B4D8]">MASA DEPAN</span><br />
+              BERSAMA VOXA
             </h1>
-            <p className="text-gray-200 text-lg md:text-xl mb-10 leading-relaxed max-w-xl">
-              Dukung program kendaraan listrik nasional, hemat anggaran operasional, dan wujudkan komitmen lingkungan instansi Anda bersama VOXA.
+            <p className="text-gray-200 text-base md:text-lg mb-10 leading-relaxed max-w-xl">
+              Peluang distributor sepeda listrik modern dengan dukungan produksi lokal, produk berkualitas, dan pasar kendaraan listrik yang terus berkembang di Indonesia.
             </p>
-            <a
-              href="#kontak-pemerintah"
-              className="inline-flex items-center gap-2 bg-[#00B4D8] text-white font-bold px-8 py-4 rounded-full hover:bg-[#0096b8] transition-all text-base shadow-lg"
-            >
-              Ajukan Proposal <ArrowRight size={18} />
-            </a>
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#kontak-distributor"
+                className="inline-flex items-center gap-2 bg-[#00B4D8] text-white font-bold px-8 py-4 rounded-full hover:bg-[#0096b8] transition-all text-sm shadow-lg shadow-[#00B4D8]/30"
+              >
+                Menjadi Distributor <ArrowRight size={16} />
+              </a>
+              <a
+                href="#kontak-distributor"
+                className="inline-flex items-center gap-2 border border-white/40 text-white font-semibold px-8 py-4 rounded-full hover:border-white hover:bg-white/10 transition-all text-sm"
+              >
+                <MessageCircle size={16} /> Hubungi Kami
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Program Nasional Banner */}
-      <section className="py-10 bg-[#00B4D8]">
+      {/* ══════════════════════════════════════════════════════════
+          2. TRUST BAR
+      ══════════════════════════════════════════════════════════ */}
+      <section className="py-10 bg-gradient-to-r from-[#00B4D8] to-[#0096b8]">
         <div className="container">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-white">
-            <div className="flex items-center gap-4">
-              <Award size={32} className="shrink-0" />
-              <div>
-                <p className="font-bold text-lg">Mendukung Program Kendaraan Listrik Nasional</p>
-                <p className="text-white/80 text-sm">Sesuai Perpres No. 55 Tahun 2019 tentang Percepatan Program Kendaraan Bermotor Listrik</p>
-              </div>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 text-white">
+            <div className="text-center md:text-left">
+              <p className="font-bold text-lg md:text-xl mb-1">Mendukung Pertumbuhan Kendaraan Listrik Indonesia</p>
+              <p className="text-white/80 text-sm max-w-xl">
+                VOXA menghadirkan peluang bisnis kendaraan listrik dengan dukungan produksi lokal, after-sales, dan sistem distribusi yang terus berkembang.
+              </p>
             </div>
-            <a href="#kontak-pemerintah" className="shrink-0 bg-white text-[#00B4D8] font-bold px-6 py-2.5 rounded-full hover:bg-gray-100 transition-all text-sm">
+            <a
+              href="#kontak-distributor"
+              className="shrink-0 bg-white text-[#00B4D8] font-bold px-7 py-3 rounded-full hover:bg-gray-50 transition-all text-sm shadow-md"
+            >
               Pelajari Lebih Lanjut
             </a>
           </div>
         </div>
       </section>
 
-      {/* Value Propositions */}
-      <section className="py-20 bg-white">
+      {/* ══════════════════════════════════════════════════════════
+          3. BENEFITS SECTION
+      ══════════════════════════════════════════════════════════ */}
+      <section className="py-24 bg-white">
         <div className="container">
-          <div className="text-center mb-14">
-            <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-3">MENGAPA VOXA UNTUK INSTANSI?</p>
-            <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide">MANFAAT UNTUK INSTANSI</h2>
+          <div className="text-center mb-16">
+            <p className="text-[#00B4D8] text-xs font-bold tracking-widest mb-3 uppercase">Keunggulan Program</p>
+            <h2 className="font-display text-3xl md:text-5xl text-gray-900 tracking-wide mb-4">
+              Mengapa Menjadi Distributor VOXA?
+            </h2>
+            <p className="text-gray-500 text-base max-w-xl mx-auto leading-relaxed">
+              Peluang bisnis kendaraan listrik modern dengan dukungan penuh dari VOXA.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: <TrendingDown size={28} />, title: 'Efisiensi Anggaran', desc: 'Hemat anggaran operasional kendaraan dinas hingga 70% dengan beralih ke kendaraan listrik VOXA.' },
-              { icon: <Leaf size={28} />, title: 'Komitmen Lingkungan', desc: 'Wujudkan target emisi karbon dan tunjukkan komitmen nyata instansi terhadap lingkungan.' },
-              { icon: <FileText size={28} />, title: 'Kemudahan Pengadaan', desc: 'Proses pengadaan sesuai regulasi pemerintah dengan dokumentasi lengkap dan transparan.' },
-              { icon: <Award size={28} />, title: 'Produk Bersertifikat', desc: 'Semua produk VOXA telah bersertifikat dan memenuhi standar nasional Indonesia.' },
-            ].map(item => (
-              <div key={item.title} className="bg-gray-50 rounded-2xl p-7 border border-gray-100 hover:border-[#00B4D8]/30 hover:shadow-lg transition-all group">
-                <div className="w-14 h-14 bg-[#00B4D8]/10 rounded-2xl flex items-center justify-center text-[#00B4D8] mb-5 group-hover:bg-[#00B4D8] group-hover:text-white transition-all">
-                  {item.icon}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {BENEFITS.map(b => (
+              <div
+                key={b.title}
+                className="group bg-gray-50 rounded-2xl p-7 border border-gray-100 hover:border-[#00B4D8]/40 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="w-14 h-14 bg-[#00B4D8]/10 rounded-2xl flex items-center justify-center text-[#00B4D8] mb-5 group-hover:bg-[#00B4D8] group-hover:text-white transition-all duration-300">
+                  {b.icon}
                 </div>
-                <h3 className="font-bold text-gray-900 mb-3 text-lg">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="font-bold text-gray-900 mb-3 text-base">{b.title}</h3>
+                <p className="text-gray-500 text-sm leading-relaxed">{b.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Use Cases for Government */}
-      <section className="py-20 bg-gray-950 text-white">
-        <div className="container">
-          <div className="text-center mb-14">
-            <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-3">APLIKASI</p>
-            <h2 className="font-display text-4xl md:text-5xl tracking-wide">COCOK UNTUK INSTANSI</h2>
+      {/* ══════════════════════════════════════════════════════════
+          4. FACTORY SPLIT SECTION
+      ══════════════════════════════════════════════════════════ */}
+      <section className="py-0 bg-gray-950 overflow-hidden">
+        <div className="flex flex-col lg:flex-row min-h-[520px]">
+          {/* Left: image */}
+          <div className="relative lg:w-1/2 min-h-[320px] lg:min-h-0">
+            <img
+              src={IMG_FACTORY}
+              alt="Pabrik VOXA Balaraja"
+              className="w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gray-950/60 hidden lg:block" />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[
-              { title: 'Pemerintah Daerah', desc: 'Armada kendaraan dinas untuk operasional Pemda, kelurahan, dan kecamatan.' },
-              { title: 'Kepolisian & TNI', desc: 'Kendaraan patroli dan operasional internal yang hemat dan ramah lingkungan.' },
-              { title: 'Dinas Kesehatan', desc: 'Kendaraan untuk petugas kesehatan keliling dan operasional puskesmas.' },
-              { title: 'Dinas Pendidikan', desc: 'Armada untuk operasional sekolah, kampus, dan lembaga pendidikan negeri.' },
-              { title: 'BUMN & BUMD', desc: 'Solusi armada kendaraan listrik untuk perusahaan milik negara dan daerah.' },
-              { title: 'Kawasan Industri', desc: 'Kendaraan operasional internal kawasan industri dan pelabuhan.' },
-            ].map(item => (
-              <div key={item.title} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-[#00B4D8]/10 hover:border-[#00B4D8]/30 transition-all">
-                <div className="flex items-start gap-3">
-                  <CheckCircle size={20} className="text-[#00B4D8] shrink-0 mt-0.5" />
-                  <div>
-                    <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+          {/* Right: text */}
+          <div className="lg:w-1/2 flex items-center px-8 py-16 lg:px-16">
+            <div className="max-w-lg">
+              <p className="text-[#00B4D8] text-xs font-bold tracking-widest mb-4 uppercase">Produksi Lokal</p>
+              <h2 className="font-display text-3xl md:text-4xl text-white tracking-wide leading-tight mb-6">
+                Produksi Lokal untuk Masa Depan Mobilitas Indonesia
+              </h2>
+              <p className="text-gray-400 text-sm leading-relaxed mb-8">
+                VOXA memiliki fasilitas perakitan kendaraan listrik di Balaraja, Tangerang untuk memastikan kualitas produk, ketersediaan unit, dan dukungan jangka panjang bagi mitra distributor di seluruh Indonesia.
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                {['Produksi Lokal', 'Dukungan Distributor', 'After Sales', 'Kualitas Terjamin'].map(f => (
+                  <div key={f} className="flex items-center gap-2 text-sm text-gray-300">
+                    <CheckCircle size={16} className="text-[#00B4D8] shrink-0" />
+                    {f}
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Procurement Process */}
-      <section className="py-20 bg-white">
-        <div className="container max-w-4xl">
+      {/* ══════════════════════════════════════════════════════════
+          5. GALLERY SECTION
+      ══════════════════════════════════════════════════════════ */}
+      <section className="py-24 bg-white">
+        <div className="container">
           <div className="text-center mb-14">
-            <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-3">PROSES PENGADAAN</p>
-            <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide">ALUR PENGADAAN</h2>
+            <p className="text-[#00B4D8] text-xs font-bold tracking-widest mb-3 uppercase">Fasilitas & Proses</p>
+            <h2 className="font-display text-3xl md:text-5xl text-gray-900 tracking-wide mb-4">
+              Produksi & Kualitas VOXA
+            </h2>
+            <p className="text-gray-500 text-base max-w-xl mx-auto leading-relaxed">
+              Setiap unit dirakit dengan perhatian terhadap kualitas, performa, dan detail.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {[
-              { step: '01', title: 'Konsultasi', desc: 'Hubungi tim VOXA untuk konsultasi kebutuhan armada instansi Anda.' },
-              { step: '02', title: 'Proposal', desc: 'Tim kami menyiapkan proposal teknis dan komersial sesuai kebutuhan.' },
-              { step: '03', title: 'Pengadaan', desc: 'Proses pengadaan sesuai regulasi dengan dokumentasi lengkap.' },
-              { step: '04', title: 'Implementasi', desc: 'Pengiriman, pelatihan, dan dukungan teknis berkelanjutan.' },
-            ].map((step, i) => (
-              <div key={step.step} className="text-center relative">
-                {i < 3 && <div className="hidden md:block absolute top-8 left-3/4 w-1/2 h-0.5 bg-[#00B4D8]/30" />}
-                <div className="w-16 h-16 bg-[#00B4D8] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="font-display text-xl text-white tracking-wider">{step.step}</span>
-                </div>
-                <h3 className="font-bold text-gray-900 mb-2">{step.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{step.desc}</p>
+
+          {/* Masonry-style grid */}
+          <div
+            className="grid gap-3"
+            style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}
+          >
+            {GALLERY.map((src, i) => (
+              <div
+                key={i}
+                className={`overflow-hidden rounded-2xl group ${
+                  i === 0 || i === 6 ? 'md:col-span-2 md:row-span-2' : ''
+                }`}
+                style={{ aspectRatio: i === 0 || i === 6 ? '16/9' : '4/3' }}
+              >
+                <img
+                  src={src}
+                  alt={`VOXA produksi ${i + 1}`}
+                  className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                />
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Form */}
-      <section id="kontak-pemerintah" className="py-20 bg-gray-50">
+      {/* ══════════════════════════════════════════════════════════
+          6. CTA SECTION
+      ══════════════════════════════════════════════════════════ */}
+      <section className="relative py-28 overflow-hidden">
+        <div className="absolute inset-0">
+          <img src={IMG_CTA_BG} alt="" className="w-full h-full object-cover object-center" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
+        </div>
+        <div className="relative container text-center">
+          <p className="text-[#00B4D8] text-xs font-bold tracking-widest mb-4 uppercase">Bergabung Sekarang</p>
+          <h2 className="font-display text-4xl md:text-6xl text-white tracking-wide leading-tight mb-6">
+            VOXA Siap Tumbuh<br />Bersama Anda
+          </h2>
+          <p className="text-gray-300 text-base md:text-lg max-w-xl mx-auto leading-relaxed mb-10">
+            Kami percaya masa depan kendaraan listrik Indonesia dibangun melalui kolaborasi yang kuat bersama para mitra distributor.
+          </p>
+          <a
+            href="#kontak-distributor"
+            className="inline-flex items-center gap-2 bg-[#00B4D8] text-white font-bold px-10 py-4 rounded-full hover:bg-[#0096b8] transition-all text-base shadow-2xl shadow-[#00B4D8]/40"
+          >
+            Gabung Menjadi Distributor <ArrowRight size={18} />
+          </a>
+        </div>
+      </section>
+
+      {/* ══════════════════════════════════════════════════════════
+          CONTACT FORM
+      ══════════════════════════════════════════════════════════ */}
+      <section id="kontak-distributor" className="py-24 bg-gray-50">
         <div className="container max-w-2xl">
           <div className="text-center mb-12">
-            <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-3">AJUKAN SEKARANG</p>
-            <h2 className="font-display text-4xl md:text-5xl text-gray-900 tracking-wide mb-4">KONSULTASI INSTANSI</h2>
-            <p className="text-gray-500 text-lg">Isi form berikut dan tim khusus pemerintahan kami akan menghubungi Anda.</p>
+            <p className="text-[#00B4D8] text-xs font-bold tracking-widest mb-3 uppercase">Daftar Sekarang</p>
+            <h2 className="font-display text-3xl md:text-5xl text-gray-900 tracking-wide mb-4">Menjadi Distributor VOXA</h2>
+            <p className="text-gray-500 text-base leading-relaxed">
+              Isi form berikut dan tim kami akan menghubungi Anda dalam 1×24 jam.
+            </p>
           </div>
 
           {submitted ? (
             <div className="bg-green-50 border border-green-200 rounded-3xl p-10 text-center">
               <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
               <h3 className="font-bold text-gray-900 text-xl mb-2">Terima Kasih!</h3>
-              <p className="text-gray-500">Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda dalam 1x24 jam.</p>
+              <p className="text-gray-500">Pesan Anda telah dikirim. Tim kami akan segera menghubungi Anda.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100 space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap *</label>
-                  <input required value={form.nama} onChange={e => setForm({...form, nama: e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors" placeholder="Nama Anda" />
+                  <input
+                    required
+                    value={form.nama}
+                    onChange={e => setForm({ ...form, nama: e.target.value })}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors"
+                    placeholder="Nama Anda"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Jabatan *</label>
-                  <input required value={form.jabatan} onChange={e => setForm({...form, jabatan: e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors" placeholder="Jabatan / Posisi" />
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Nama Perusahaan *</label>
+                  <input
+                    required
+                    value={form.perusahaan}
+                    onChange={e => setForm({ ...form, perusahaan: e.target.value })}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors"
+                    placeholder="PT / CV / Toko Anda"
+                  />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Nama Instansi *</label>
-                <input required value={form.instansi} onChange={e => setForm({...form, instansi: e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors" placeholder="Nama instansi / lembaga" />
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Kota / Wilayah *</label>
+                <input
+                  required
+                  value={form.kota}
+                  onChange={e => setForm({ ...form, kota: e.target.value })}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors"
+                  placeholder="Kota / Kabupaten"
+                />
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email Resmi *</label>
-                  <input required type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors" placeholder="email@instansi.go.id" />
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Email *</label>
+                  <input
+                    required
+                    type="email"
+                    value={form.email}
+                    onChange={e => setForm({ ...form, email: e.target.value })}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors"
+                    placeholder="email@perusahaan.com"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Nomor Telepon *</label>
-                  <input required value={form.telepon} onChange={e => setForm({...form, telepon: e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors" placeholder="08xx-xxxx-xxxx" />
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Nomor WhatsApp *</label>
+                  <input
+                    required
+                    value={form.telepon}
+                    onChange={e => setForm({ ...form, telepon: e.target.value })}
+                    className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors"
+                    placeholder="08xx-xxxx-xxxx"
+                  />
                 </div>
               </div>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Estimasi Kebutuhan Unit</label>
-                <select value={form.jumlah} onChange={e => setForm({...form, jumlah: e.target.value})} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors">
-                  <option value="">Pilih jumlah unit</option>
-                  <option value="5-20">5–20 Unit</option>
-                  <option value="21-100">21–100 Unit</option>
-                  <option value="101-500">101–500 Unit</option>
-                  <option value="500+">Lebih dari 500 Unit</option>
-                </select>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Pesan / Pertanyaan</label>
+                <textarea
+                  rows={4}
+                  value={form.pesan}
+                  onChange={e => setForm({ ...form, pesan: e.target.value })}
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors resize-none"
+                  placeholder="Ceritakan sedikit tentang bisnis Anda dan area distribusi yang Anda minati..."
+                />
               </div>
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">Kebutuhan / Keterangan</label>
-                <textarea value={form.pesan} onChange={e => setForm({...form, pesan: e.target.value})} rows={4} className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#00B4D8] transition-colors resize-none" placeholder="Ceritakan kebutuhan kendaraan listrik instansi Anda..." />
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button type="submit" className="flex-1 flex items-center justify-center gap-2 bg-[#00B4D8] text-white font-bold py-4 rounded-full hover:bg-[#0096b8] transition-all">
-                  Kirim via WhatsApp <MessageCircle size={18} />
-                </button>
-                <a href="mailto:pemerintah@voxa.co.id" className="flex-1 flex items-center justify-center gap-2 border-2 border-gray-200 text-gray-700 font-bold py-4 rounded-full hover:border-[#00B4D8] hover:text-[#00B4D8] transition-all text-sm">
-                  Kirim via Email Resmi
-                </a>
-              </div>
+              <button
+                type="submit"
+                className="w-full bg-[#00B4D8] text-white font-bold py-4 rounded-xl hover:bg-[#0096b8] transition-all text-sm flex items-center justify-center gap-2 shadow-lg shadow-[#00B4D8]/20"
+              >
+                Kirim & Hubungi via WhatsApp <ArrowRight size={16} />
+              </button>
+              <p className="text-center text-xs text-gray-400">
+                Dengan mengirim form ini, Anda akan diarahkan ke WhatsApp VOXA.
+              </p>
             </form>
           )}
         </div>
       </section>
+
     </div>
   );
 }
