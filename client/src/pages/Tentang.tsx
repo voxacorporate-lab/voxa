@@ -2,9 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'wouter';
 import { ChevronRight, ChevronDown, ArrowRight, Zap, Leaf, Factory, Star, TrendingUp, Shield, Globe, Cpu } from 'lucide-react';
 
+// ─── Brand color ──────────────────────────────────────────────────────────────
+const CYAN = '#50B1D4';
+const CYAN_GLOW = 'rgba(80,177,212,';
+
 // ─── CDN images ───────────────────────────────────────────────────────────────
-const IMG_BANNER = '/manus-storage/banner_8f991ec1.png';   // Assembly & Warehouse collage
-const IMG_FACTORY = '/manus-storage/P1014908_5a27f79b.webp'; // wide factory floor
+const IMG_BANNER  = '/manus-storage/banner_8f991ec1.png';
+const IMG_FACTORY = '/manus-storage/P1014908_5a27f79b.webp';
 
 // ─── Scroll-reveal hook ───────────────────────────────────────────────────────
 function useReveal(threshold = 0.12) {
@@ -33,33 +37,33 @@ const STATS = [
 
 const MISSIONS = [
   {
-    letter: 'V', word: 'Value',       color: '#00B4D8',
+    letter: 'V', word: 'Value',       color: CYAN,
     icon: <Star size={18} />,
     text: 'Memberikan produk dan layanan terbaik dengan kualitas yang mampu memenuhi kebutuhan masyarakat modern.',
   },
   {
-    letter: 'O', word: 'Opportunity', color: '#22d3ee',
+    letter: 'O', word: 'Opportunity', color: '#38bdf8',
     icon: <TrendingUp size={18} />,
     text: 'Membuka peluang pertumbuhan bersama bagi pelanggan, distributor, dan seluruh mitra VOXA di Indonesia.',
   },
   {
-    letter: 'X', word: 'eXcellence',  color: '#a3e635',
+    letter: 'X', word: 'eXcellence',  color: '#7dd3fc',
     icon: <Cpu size={18} />,
     text: 'Berkomitmen menghadirkan inovasi, performa, dan pelayanan terbaik dalam setiap produk yang kami kembangkan.',
   },
   {
-    letter: 'A', word: 'Advancement', color: '#4ade80',
+    letter: 'A', word: 'Advancement', color: '#bae6fd',
     icon: <Globe size={18} />,
     text: 'Terus berkembang melalui teknologi dan inovasi kendaraan listrik untuk mendukung masa depan yang lebih hijau dan berkelanjutan.',
   },
 ];
 
 const WHY_ITEMS = [
-  { icon: <Star size={20} />,    color: '#00B4D8', title: 'Desain Modern & Stylish',           desc: 'Produk VOXA dirancang untuk tampil percaya diri di jalanan Indonesia.' },
+  { icon: <Star size={20} />,    color: CYAN,      title: 'Desain Modern & Stylish',           desc: 'Produk VOXA dirancang untuk tampil percaya diri di jalanan Indonesia.' },
   { icon: <Leaf size={20} />,    color: '#4ade80', title: 'Ramah Lingkungan & Hemat Biaya',     desc: 'Zero emisi langsung — hemat biaya operasional dan baik untuk bumi.' },
-  { icon: <Factory size={20} />, color: '#a3e635', title: 'Produksi Lokal Indonesia',           desc: 'Pabrik perakitan di Balaraja, Tangerang dengan standar kualitas tinggi.' },
-  { icon: <Shield size={20} />,  color: '#22d3ee', title: 'Kualitas & After Sales Terpercaya',  desc: 'Garansi produk dan ketersediaan suku cadang untuk ketenangan pikiran.' },
-  { icon: <Zap size={20} />,     color: '#f59e0b', title: 'Mendukung Ekosistem EV Nasional',    desc: 'Mendukung program kendaraan listrik nasional dan masa depan mobilitas.' },
+  { icon: <Factory size={20} />, color: '#38bdf8', title: 'Produksi Lokal Indonesia',           desc: 'Pabrik perakitan di Balaraja, Tangerang dengan standar kualitas tinggi.' },
+  { icon: <Shield size={20} />,  color: '#7dd3fc', title: 'Kualitas & After Sales Terpercaya',  desc: 'Garansi produk dan ketersediaan suku cadang untuk ketenangan pikiran.' },
+  { icon: <Zap size={20} />,     color: '#a5f3fc', title: 'Mendukung Ekosistem EV Nasional',    desc: 'Mendukung program kendaraan listrik nasional dan masa depan mobilitas.' },
 ];
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
@@ -77,7 +81,7 @@ export default function Tentang() {
       <div className="bg-gray-50 border-b border-gray-100">
         <div className="container py-3">
           <div className="flex items-center gap-2 text-sm text-gray-500">
-            <Link href="/" className="hover:text-[#00B4D8] transition-colors">Beranda</Link>
+            <Link href="/" className="hover:text-[#50B1D4] transition-colors">Beranda</Link>
             <ChevronRight size={14} />
             <span className="text-gray-900 font-medium">Tentang VOXA</span>
           </div>
@@ -85,7 +89,7 @@ export default function Tentang() {
       </div>
 
       {/* ══════════════════════════════════════════════════════════
-          1. HERO — banner image as cinematic centerpiece
+          1. HERO — banner image, lighter overlay
       ══════════════════════════════════════════════════════════ */}
       <section className="relative min-h-[80vh] flex flex-col items-center justify-center overflow-hidden">
         {/* Banner image */}
@@ -95,21 +99,21 @@ export default function Tentang() {
             alt="VOXA Assembly & Warehouse"
             className="w-full h-full object-cover object-center"
           />
-          {/* Gradient overlay for readability */}
+          {/* Lighter overlay — reduced from 0.72/0.82 to 0.45/0.55 */}
           <div
             className="absolute inset-0"
             style={{
               background:
-                'linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.55) 40%, rgba(0,0,0,0.82) 100%)',
+                'linear-gradient(to bottom, rgba(7,28,36,0.55) 0%, rgba(7,28,36,0.35) 40%, rgba(7,28,36,0.65) 100%)',
             }}
           />
         </div>
 
-        {/* Subtle ambient glow */}
+        {/* Soft cyan ambient glow — replaces green */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
-            className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[300px] rounded-full opacity-10 blur-3xl"
-            style={{ background: 'radial-gradient(ellipse, #00B4D8 0%, transparent 70%)' }}
+            className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] rounded-full opacity-18 blur-3xl"
+            style={{ background: `radial-gradient(ellipse, ${CYAN} 0%, transparent 70%)` }}
           />
         </div>
 
@@ -122,41 +126,67 @@ export default function Tentang() {
         >
           {/* Brand pill */}
           <div
-            className="inline-flex items-center gap-2 border border-[#00B4D8]/50 text-[#00B4D8] text-xs font-bold px-5 py-2 rounded-full mb-8 tracking-widest backdrop-blur-sm"
-            style={{ background: 'rgba(0,180,216,0.08)' }}
+            className="inline-flex items-center gap-2 border text-xs font-bold px-5 py-2 rounded-full mb-8 tracking-widest backdrop-blur-sm"
+            style={{
+              borderColor: `${CYAN_GLOW}0.5)`,
+              color: CYAN,
+              background: `${CYAN_GLOW}0.1)`,
+            }}
           >
             <Zap size={11} /> PT. VOXA INDO NUSA
           </div>
 
           <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white leading-tight mb-6 tracking-wide"
-            style={{ textShadow: '0 2px 40px rgba(0,0,0,0.6)' }}
+            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-6 tracking-wide"
+            style={{ color: '#F5F7FA', textShadow: '0 2px 20px rgba(0,0,0,0.3)' }}
           >
             Tentang PT.<br />
             <span
               style={{
-                color: '#00B4D8',
-                textShadow: '0 0 50px rgba(0,180,216,0.7), 0 0 100px rgba(0,180,216,0.3)',
+                color: CYAN,
+                textShadow: `0 0 40px ${CYAN_GLOW}0.8), 0 0 80px ${CYAN_GLOW}0.4)`,
               }}
             >
               Voxa Indo Nusa
             </span>
           </h1>
 
-          <p className="text-gray-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-200 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-12">
             Mobilitas modern, efisien, dan ramah lingkungan untuk masa depan Indonesia.
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            {/* Primary CTA — cyan gradient */}
+            <Link
+              href="/catalog/sepeda-listrik"
+              className="inline-flex items-center gap-2 font-bold px-8 py-4 rounded-full text-sm text-white transition-all hover:scale-105 hover:brightness-110"
+              style={{
+                background: `linear-gradient(135deg, ${CYAN}, #38bdf8)`,
+                boxShadow: `0 0 28px ${CYAN_GLOW}0.45)`,
+              }}
+            >
+              Lihat Produk <ArrowRight size={16} />
+            </Link>
+            {/* Secondary CTA — glassmorphism with cyan border */}
+            <Link
+              href="/showroom"
+              className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-sm text-white transition-all hover:bg-white/10 backdrop-blur-sm"
+              style={{ border: `1.5px solid ${CYAN_GLOW}0.5)` }}
+            >
+              Kunjungi Showroom
+            </Link>
+          </div>
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/40 animate-bounce">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/50 animate-bounce">
           <span className="text-[10px] tracking-widest uppercase">Scroll</span>
           <ChevronDown size={18} />
         </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          2. COMPANY STORY — editorial split
+          2. COMPANY STORY — editorial split, white bg
       ══════════════════════════════════════════════════════════ */}
       <section className="bg-white py-24">
         <div
@@ -166,9 +196,9 @@ export default function Tentang() {
           }`}
         >
           <div className="flex flex-col lg:flex-row gap-16 items-start">
-            {/* Left: label + factory image */}
+            {/* Left: factory image + stats */}
             <div className="lg:w-5/12 shrink-0">
-              <p className="text-xs font-bold tracking-widest uppercase mb-5" style={{ color: '#00B4D8' }}>
+              <p className="text-xs font-bold tracking-widest uppercase mb-5" style={{ color: CYAN }}>
                 Tentang Kami
               </p>
               <div className="relative overflow-hidden rounded-3xl shadow-xl">
@@ -178,12 +208,17 @@ export default function Tentang() {
                   className="w-full object-cover object-center hover:scale-105 transition-transform duration-700"
                   style={{ maxHeight: '420px' }}
                 />
+                {/* Lighter overlay on factory image */}
+                <div
+                  className="absolute inset-0 rounded-3xl"
+                  style={{ background: 'linear-gradient(to top, rgba(7,28,36,0.5) 0%, transparent 50%)' }}
+                />
                 {/* Location badge */}
                 <div
                   className="absolute bottom-5 left-5 rounded-2xl px-4 py-3 border"
                   style={{
-                    background: 'rgba(0,0,0,0.65)',
-                    borderColor: 'rgba(255,255,255,0.15)',
+                    background: 'rgba(7,28,36,0.7)',
+                    borderColor: `${CYAN_GLOW}0.3)`,
                     backdropFilter: 'blur(12px)',
                   }}
                 >
@@ -192,17 +227,30 @@ export default function Tentang() {
                 </div>
               </div>
 
-              {/* Stats row */}
+              {/* Stats grid */}
               <div className="grid grid-cols-2 gap-3 mt-6">
                 {STATS.map((s) => (
                   <div
                     key={s.label}
-                    className="rounded-2xl px-5 py-4 border border-gray-100 bg-gray-50 text-center hover:border-[#00B4D8]/30 hover:bg-[#00B4D8]/5 transition-colors duration-300"
+                    className="rounded-2xl px-5 py-4 border text-center transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                    style={{
+                      borderColor: `${CYAN_GLOW}0.2)`,
+                      background: `${CYAN_GLOW}0.04)`,
+                    }}
+                    onMouseEnter={e => {
+                      const el = e.currentTarget as HTMLDivElement;
+                      el.style.borderColor = `${CYAN_GLOW}0.5)`;
+                      el.style.background = `${CYAN_GLOW}0.08)`;
+                      el.style.boxShadow = `0 4px 20px ${CYAN_GLOW}0.15)`;
+                    }}
+                    onMouseLeave={e => {
+                      const el = e.currentTarget as HTMLDivElement;
+                      el.style.borderColor = `${CYAN_GLOW}0.2)`;
+                      el.style.background = `${CYAN_GLOW}0.04)`;
+                      el.style.boxShadow = '';
+                    }}
                   >
-                    <p
-                      className="font-display text-2xl font-bold mb-1"
-                      style={{ color: '#00B4D8' }}
-                    >
+                    <p className="font-display text-2xl font-bold mb-1" style={{ color: CYAN }}>
                       {s.value}
                     </p>
                     <p className="text-gray-500 text-xs tracking-wide">{s.label}</p>
@@ -215,7 +263,7 @@ export default function Tentang() {
             <div className="lg:w-7/12">
               <h2 className="font-display text-3xl md:text-4xl text-gray-900 tracking-wide leading-tight mb-8">
                 Kendaraan Listrik<br />
-                <span style={{ color: '#00B4D8' }}>Buatan Indonesia</span>
+                <span style={{ color: CYAN }}>Buatan Indonesia</span>
               </h2>
 
               <div className="space-y-5 text-gray-600 text-base leading-relaxed">
@@ -231,7 +279,10 @@ export default function Tentang() {
                 <p>
                   Hingga saat ini, VOXA telah menghadirkan berbagai model sepeda listrik yang dirancang untuk kebutuhan harian, bisnis, maupun gaya hidup modern, seperti Liberty, Liberty City, Liberty 07, Liberty Xtreme, Eiffel Rider, Eiffel Stylish, dan Eiffel Fantasy.
                 </p>
-                <p className="font-medium text-gray-800 border-l-4 border-[#00B4D8] pl-5 py-1">
+                <p
+                  className="font-medium text-gray-800 pl-5 py-2"
+                  style={{ borderLeft: `4px solid ${CYAN}` }}
+                >
                   Kami percaya kendaraan listrik bukan hanya tentang teknologi, tetapi juga tentang menciptakan masa depan yang lebih hemat energi, lebih efisien, dan lebih baik untuk lingkungan.
                 </p>
               </div>
@@ -241,14 +292,28 @@ export default function Tentang() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          3. VISI & MISI — glassmorphism cards on dark bg
+          3. VISI & MISI — deep cyan-blue gradient bg
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-gray-950 relative overflow-hidden">
-        {/* Ambient glow */}
+      <section
+        className="py-24 relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(160deg, #071C24 0%, #0B2D3A 40%, #103848 75%, #0B2D3A 100%)',
+        }}
+      >
+        {/* Ambient cyan glow behind title */}
         <div className="absolute inset-0 pointer-events-none">
           <div
-            className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] opacity-8 blur-3xl"
-            style={{ background: 'radial-gradient(ellipse, #00B4D8 0%, transparent 70%)' }}
+            className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] opacity-15 blur-3xl"
+            style={{ background: `radial-gradient(ellipse, ${CYAN} 0%, transparent 70%)` }}
+          />
+          {/* Subtle grid lines */}
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(80,177,212,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(80,177,212,0.6) 1px, transparent 1px)',
+              backgroundSize: '60px 60px',
+            }}
           />
         </div>
 
@@ -259,10 +324,13 @@ export default function Tentang() {
           }`}
         >
           <div className="text-center mb-16">
-            <p className="text-xs font-bold tracking-widest mb-3 uppercase" style={{ color: '#00B4D8' }}>
+            <p className="text-xs font-bold tracking-widest mb-3 uppercase" style={{ color: CYAN }}>
               Visi & Misi
             </p>
-            <h2 className="font-display text-3xl md:text-5xl text-white tracking-wide mb-10">
+            <h2
+              className="font-display text-3xl md:text-5xl tracking-wide mb-10"
+              style={{ color: '#F5F7FA' }}
+            >
               Visi & Misi VOXA
             </h2>
 
@@ -270,21 +338,21 @@ export default function Tentang() {
             <div
               className="max-w-3xl mx-auto rounded-2xl px-8 py-7 border mb-14"
               style={{
-                background: 'rgba(0,180,216,0.06)',
-                borderColor: 'rgba(0,180,216,0.25)',
+                background: `${CYAN_GLOW}0.08)`,
+                borderColor: `${CYAN_GLOW}0.3)`,
                 backdropFilter: 'blur(16px)',
-                boxShadow: '0 0 40px rgba(0,180,216,0.08)',
+                boxShadow: `0 0 40px ${CYAN_GLOW}0.1)`,
               }}
             >
-              <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: '#00B4D8' }}>
+              <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: CYAN }}>
                 Visi
               </p>
-              <p className="text-gray-200 text-base md:text-lg leading-relaxed">
+              <p className="text-gray-100 text-base md:text-lg leading-relaxed">
                 Menjadi brand kendaraan listrik terpercaya di Indonesia yang menghadirkan mobilitas modern, ramah lingkungan, dan dapat diakses oleh semua kalangan.
               </p>
             </div>
 
-            <p className="text-xs font-bold tracking-widest uppercase mb-8" style={{ color: '#a3e635' }}>
+            <p className="text-xs font-bold tracking-widest uppercase mb-8" style={{ color: '#7dd3fc' }}>
               Misi
             </p>
           </div>
@@ -296,27 +364,27 @@ export default function Tentang() {
                 key={m.word}
                 className="group relative rounded-2xl p-6 border transition-all duration-300 hover:-translate-y-2 cursor-default"
                 style={{
-                  background: 'rgba(255,255,255,0.03)',
-                  borderColor: 'rgba(255,255,255,0.07)',
+                  background: 'rgba(255,255,255,0.05)',
+                  borderColor: `${CYAN_GLOW}0.15)`,
                   backdropFilter: 'blur(12px)',
                   transitionDelay: `${i * 80}ms`,
                 }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLDivElement;
-                  el.style.boxShadow = `0 0 40px ${m.color}33`;
-                  el.style.borderColor = m.color + '44';
-                  el.style.background = m.color + '0a';
+                  el.style.boxShadow = `0 0 40px ${CYAN_GLOW}0.25)`;
+                  el.style.borderColor = `${CYAN_GLOW}0.5)`;
+                  el.style.background = `${CYAN_GLOW}0.1)`;
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLDivElement;
                   el.style.boxShadow = '';
-                  el.style.borderColor = 'rgba(255,255,255,0.07)';
-                  el.style.background = 'rgba(255,255,255,0.03)';
+                  el.style.borderColor = `${CYAN_GLOW}0.15)`;
+                  el.style.background = 'rgba(255,255,255,0.05)';
                 }}
               >
-                {/* Big letter watermark */}
+                {/* Big letter watermark — reduced opacity */}
                 <div
-                  className="font-display text-7xl font-bold leading-none mb-4 opacity-15 group-hover:opacity-25 transition-opacity duration-300 select-none"
+                  className="font-display text-7xl font-bold leading-none mb-4 opacity-10 group-hover:opacity-20 transition-opacity duration-300 select-none"
                   style={{ color: m.color }}
                 >
                   {m.letter}
@@ -324,12 +392,12 @@ export default function Tentang() {
                 {/* Icon */}
                 <div
                   className="w-10 h-10 rounded-xl flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: m.color + '18', color: m.color }}
+                  style={{ background: `${CYAN_GLOW}0.15)`, color: m.color }}
                 >
                   {m.icon}
                 </div>
                 <h3 className="font-bold text-white mb-3 text-base">{m.word}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{m.text}</p>
+                <p className="text-gray-300 text-sm leading-relaxed">{m.text}</p>
               </div>
             ))}
           </div>
@@ -337,7 +405,7 @@ export default function Tentang() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          4. MENGAPA VOXA — clean trust grid
+          4. MENGAPA VOXA — clean trust grid, white bg
       ══════════════════════════════════════════════════════════ */}
       <section className="py-24 bg-white relative overflow-hidden">
         {/* Subtle dot grid */}
@@ -356,7 +424,7 @@ export default function Tentang() {
           }`}
         >
           <div className="text-center mb-16">
-            <p className="text-xs font-bold tracking-widest mb-3 uppercase" style={{ color: '#00B4D8' }}>
+            <p className="text-xs font-bold tracking-widest mb-3 uppercase" style={{ color: CYAN }}>
               Keunggulan
             </p>
             <h2 className="font-display text-3xl md:text-5xl text-gray-900 tracking-wide">
@@ -368,13 +436,13 @@ export default function Tentang() {
             {WHY_ITEMS.map((item, i) => (
               <div
                 key={item.title}
-                className="group flex gap-5 rounded-2xl p-6 border border-gray-100 bg-gray-50 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                className="group flex gap-5 rounded-2xl p-6 border border-gray-100 bg-gray-50 transition-all duration-300 hover:-translate-y-1"
                 style={{ transitionDelay: `${i * 60}ms` }}
                 onMouseEnter={e => {
                   const el = e.currentTarget as HTMLDivElement;
-                  el.style.borderColor = item.color + '40';
-                  el.style.background = item.color + '08';
-                  el.style.boxShadow = `0 8px 30px ${item.color}18`;
+                  el.style.borderColor = `${CYAN_GLOW}0.35)`;
+                  el.style.background = `${CYAN_GLOW}0.05)`;
+                  el.style.boxShadow = `0 8px 30px ${CYAN_GLOW}0.12)`;
                 }}
                 onMouseLeave={e => {
                   const el = e.currentTarget as HTMLDivElement;
@@ -385,7 +453,7 @@ export default function Tentang() {
               >
                 <div
                   className="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                  style={{ background: item.color + '18', color: item.color }}
+                  style={{ background: `${CYAN_GLOW}0.12)`, color: item.color }}
                 >
                   {item.icon}
                 </div>
@@ -400,30 +468,34 @@ export default function Tentang() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════
-          5. CINEMATIC CLOSING — dark, emotional, minimal
+          5. CINEMATIC CLOSING — deep cyan-blue, minimal
       ══════════════════════════════════════════════════════════ */}
-      <section className="relative py-40 overflow-hidden bg-gray-950">
+      <section
+        className="relative py-40 overflow-hidden"
+        style={{
+          background: 'linear-gradient(160deg, #071C24 0%, #0B2D3A 50%, #071C24 100%)',
+        }}
+      >
         {/* Ambient glows */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] opacity-12 blur-3xl"
-            style={{ background: 'radial-gradient(ellipse, #00B4D8 0%, transparent 70%)' }}
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[400px] opacity-15 blur-3xl"
+            style={{ background: `radial-gradient(ellipse, ${CYAN} 0%, transparent 70%)` }}
           />
           <div
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] opacity-10 blur-3xl animate-pulse"
-            style={{ background: 'radial-gradient(ellipse, #a3e635 0%, transparent 70%)' }}
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[250px] opacity-10 blur-3xl animate-pulse"
+            style={{ background: `radial-gradient(ellipse, ${CYAN} 0%, transparent 70%)` }}
+          />
+          {/* Grid lines */}
+          <div
+            className="absolute inset-0 opacity-[0.03]"
+            style={{
+              backgroundImage:
+                'linear-gradient(rgba(80,177,212,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(80,177,212,0.6) 1px, transparent 1px)',
+              backgroundSize: '80px 80px',
+            }}
           />
         </div>
-
-        {/* Subtle grid lines */}
-        <div
-          className="absolute inset-0 opacity-[0.025] pointer-events-none"
-          style={{
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
-            backgroundSize: '80px 80px',
-          }}
-        />
 
         <div
           ref={ctaReveal.ref}
@@ -432,31 +504,35 @@ export default function Tentang() {
           }`}
         >
           <div
-            className="inline-flex items-center gap-2 border border-[#a3e635]/40 text-[#a3e635] text-xs font-bold px-5 py-2 rounded-full mb-8 tracking-widest"
-            style={{ background: 'rgba(163,230,53,0.06)' }}
+            className="inline-flex items-center gap-2 border text-xs font-bold px-5 py-2 rounded-full mb-8 tracking-widest"
+            style={{
+              borderColor: `${CYAN_GLOW}0.4)`,
+              color: CYAN,
+              background: `${CYAN_GLOW}0.08)`,
+            }}
           >
             <Leaf size={11} /> Mobilitas Berkelanjutan
           </div>
 
-          <p className="text-gray-300 text-base md:text-xl max-w-2xl mx-auto leading-relaxed mb-12">
+          <p className="text-gray-200 text-base md:text-xl max-w-2xl mx-auto leading-relaxed mb-12">
             VOXA hadir untuk menjadi bagian dari perubahan menuju masa depan mobilitas Indonesia yang lebih modern dan berkelanjutan.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Link
               href="/catalog/sepeda-listrik"
-              className="inline-flex items-center gap-2 font-bold px-8 py-4 rounded-full text-sm transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 font-bold px-8 py-4 rounded-full text-sm text-white transition-all hover:scale-105 hover:brightness-110"
               style={{
-                background: 'linear-gradient(135deg, #00B4D8, #22d3ee)',
-                color: '#fff',
-                boxShadow: '0 0 30px rgba(0,180,216,0.4)',
+                background: `linear-gradient(135deg, ${CYAN}, #38bdf8)`,
+                boxShadow: `0 0 28px ${CYAN_GLOW}0.4)`,
               }}
             >
               Jelajahi Produk VOXA <ArrowRight size={16} />
             </Link>
             <Link
               href="/showroom"
-              className="inline-flex items-center gap-2 border border-white/20 text-white font-semibold px-8 py-4 rounded-full text-sm hover:border-white/50 hover:bg-white/5 transition-all"
+              className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-sm text-white transition-all hover:bg-white/10 backdrop-blur-sm"
+              style={{ border: `1.5px solid ${CYAN_GLOW}0.45)` }}
             >
               Kunjungi Showroom
             </Link>
