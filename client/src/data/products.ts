@@ -552,6 +552,81 @@ export const products: Product[] = [
   },
 
   // ═══════════════════════════════════════════════════════════════
+  // SEPEDA LISTRIK — VOXA SERIES
+  // ═══════════════════════════════════════════════════════════════
+  {
+    id: 'voxa-g3',
+    name: 'Voxa G3',
+    category: 'sepeda-listrik',
+    series: 'Voxa Series',
+    price: 'Hubungi Kami',
+    priceNum: 0,
+    description: 'VOXA-G3 dirancang untuk keperluan logistik dengan kapasitas angkut lebih besar. Ditenagai motor 500W dan dilengkapi rem tromol, kendaraan ini cocok untuk penggunaan stabil dan aman.',
+    shortDesc: 'Kendaraan logistik bertenaga 500W, kapasitas angkut 180 kg',
+    image: '/manus-storage/1voxag3-spesifikasi_ec08957f.jpg',
+    specs: {
+      motor: '500 watt',
+      kecepatan: '20–23 km/jam',
+      jarakTempuh: '35–40 km',
+      pengereman: 'Rem Tromol (depan & belakang)',
+      baterai: 'Lithium 48V 21A',
+      dayaAngkut: '180 kg (BOX)',
+    },
+    features: [
+      'Motor 500 Watt',
+      'Kontroler 12 Pengontrol Tabung',
+      'Rem Tromol Depan & Belakang',
+      'Baterai Lithium 48V 21A',
+      'Kapasitas Angkut BOX 180 kg',
+      'Jarak Tempuh 35–40 km',
+      'Kecepatan 20–23 km/jam',
+    ],
+    useCases: ['Logistik dan pengiriman barang', 'Angkut barang volume besar', 'Operasional bisnis harian'],
+    faqs: [
+      { q: 'Berapa kapasitas angkut VOXA G3?', a: 'VOXA G3 mampu mengangkut beban BOX hingga 180 kg.' },
+      { q: 'Apa jenis rem yang digunakan?', a: 'VOXA G3 menggunakan rem tromol di depan dan belakang untuk pengereman yang stabil.' },
+      { q: 'Berapa jarak tempuh VOXA G3?', a: 'VOXA G3 dapat menempuh 35–40 km dengan baterai Lithium 48V 21A.' },
+    ],
+    badge: 'Logistik',
+  },
+  {
+    id: 'voxa-kurir',
+    name: 'Voxa Kurir',
+    category: 'sepeda-listrik',
+    series: 'Voxa Series',
+    price: 'Hubungi Kami',
+    priceNum: 0,
+    description: 'VOXA-KURIR adalah solusi praktis untuk kebutuhan pengiriman harian Anda. Dengan desain ramping dan tenaga motor 600W, VOXA-KURIR mampu melaju hingga kecepatan maksimal 45 km/jam.',
+    shortDesc: 'Solusi pengiriman harian, motor 600W, kecepatan hingga 45 km/jam',
+    image: '/manus-storage/1voxakurir-spesifikasi_f33c1acb.jpg',
+    specs: {
+      motor: '600 watt',
+      kecepatan: '43–45 km/jam',
+      jarakTempuh: '35–40 km',
+      pengereman: 'Rem Cakram (depan & belakang)',
+      baterai: 'Lithium 48V 21A',
+      dayaAngkut: '120 kg (BOX)',
+    },
+    features: [
+      'Motor 600 Watt',
+      'Kontroler 12 Pengontrol Tabung',
+      'Rem Cakram Depan & Belakang',
+      'Baterai Lithium 48V 21A',
+      'Kapasitas Angkut BOX 120 kg',
+      'Kecepatan Maksimum 43–45 km/jam',
+      'Jarak Tempuh 35–40 km',
+      '3 Mode Kecepatan: 25 / 35 / 45 km/jam',
+    ],
+    useCases: ['Pengiriman harian cepat', 'Kurir last-mile delivery', 'Operasional bisnis efisien'],
+    faqs: [
+      { q: 'Berapa kecepatan maksimal VOXA Kurir?', a: 'VOXA Kurir dapat melaju hingga 43–45 km/jam.' },
+      { q: 'Berapa mode kecepatan yang tersedia?', a: 'VOXA Kurir memiliki 3 mode kecepatan: 25 km/jam, 35 km/jam, dan 45 km/jam.' },
+      { q: 'Apa jenis rem yang digunakan?', a: 'VOXA Kurir menggunakan rem cakram di depan dan belakang untuk pengereman presisi.' },
+    ],
+    badge: 'Kurir',
+  },
+
+  // ═══════════════════════════════════════════════════════════════
   // BATRE — GREENLIFE SERIES
   // ═══════════════════════════════════════════════════════════════
   {

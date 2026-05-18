@@ -130,6 +130,30 @@ export const productGalleries: Record<string, string[]> = {
     "/manus-storage/eliteriders-1-spec_1576e098.jpg",
   ],
   // ══════════════════════════════════════════════════════════════════════════════
+  // VOXA SERIES GALLERIES
+  // ══════════════════════════════════════════════════════════════════════════════
+
+  // ── Voxa G3 ──────────────────────────────────────────────────────────────────────
+  "voxa-g3": [
+    "/manus-storage/1voxag3-spesifikasi_ec08957f.jpg",
+    "/manus-storage/2voxag3-free_178dc8af.jpg",
+    "/manus-storage/5voxag3-fiturunggulan(1)_6c9fec40.jpg",
+    "/manus-storage/5voxag3-fiturunggulan(2)_b48f6d5c.jpg",
+    "/manus-storage/5voxag3-fiturunggulan3(1)_60eaf24e.jpg",
+    "/manus-storage/5voxag3-fiturunggulan3(2)_0515ca68.jpg",
+  ],
+
+  // ── Voxa Kurir ───────────────────────────────────────────────────────────────────
+  "voxa-kurir": [
+    "/manus-storage/1voxakurir-spesifikasi_f33c1acb.jpg",
+    "/manus-storage/2voxakurir-free_1df1c727.jpg",
+    "/manus-storage/5voxakurir-fiturunggulan(1)_c513b621.jpg",
+    "/manus-storage/5voxakurir-fiturunggulan(2)_b00c22a5.jpg",
+    "/manus-storage/5voxakurir-fiturunggulan(3)_bfdaa0db.jpg",
+    "/manus-storage/5voxakurir-fiturunggulan(4)_7c145f5d.jpg",
+  ],
+
+  // ══════════════════════════════════════════════════════════════════════════════
   // BATRE GALLERIES
   // ══════════════════════════════════════════════════════════════════════════════
 
