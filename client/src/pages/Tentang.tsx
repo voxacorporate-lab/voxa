@@ -89,100 +89,15 @@ export default function Tentang() {
       </div>
 
       {/* ══════════════════════════════════════════════════════════
-          1. HERO — banner image, lighter overlay
+          1. HERO — clean banner image, no overlay, no text
       ══════════════════════════════════════════════════════════ */}
-      <section className="relative min-h-[80vh] flex flex-col items-center justify-center overflow-hidden">
-        {/* Banner image */}
-        <div className="absolute inset-0">
-          <img
-            src={IMG_BANNER}
-            alt="VOXA Assembly & Warehouse"
-            className="w-full h-full object-cover object-center"
-          />
-          {/* Lighter overlay — reduced from 0.72/0.82 to 0.45/0.55 */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                'linear-gradient(to bottom, rgba(7,28,36,0.55) 0%, rgba(7,28,36,0.35) 40%, rgba(7,28,36,0.65) 100%)',
-            }}
-          />
-        </div>
-
-        {/* Soft cyan ambient glow — replaces green */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div
-            className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[350px] rounded-full opacity-18 blur-3xl"
-            style={{ background: `radial-gradient(ellipse, ${CYAN} 0%, transparent 70%)` }}
-          />
-        </div>
-
-        {/* Content */}
-        <div
-          ref={heroReveal.ref}
-          className={`relative container text-center py-28 transition-all duration-1000 ease-out ${
-            heroReveal.visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          {/* Brand pill */}
-          <div
-            className="inline-flex items-center gap-2 border text-xs font-bold px-5 py-2 rounded-full mb-8 tracking-widest backdrop-blur-sm"
-            style={{
-              borderColor: `${CYAN_GLOW}0.5)`,
-              color: CYAN,
-              background: `${CYAN_GLOW}0.1)`,
-            }}
-          >
-            <Zap size={11} /> PT. VOXA INDO NUSA
-          </div>
-
-          <h1
-            className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight mb-6 tracking-wide"
-            style={{ color: '#F5F7FA', textShadow: '0 2px 20px rgba(0,0,0,0.3)' }}
-          >
-            Tentang PT.<br />
-            <span
-              style={{
-                color: CYAN,
-                textShadow: `0 0 40px ${CYAN_GLOW}0.8), 0 0 80px ${CYAN_GLOW}0.4)`,
-              }}
-            >
-              Voxa Indo Nusa
-            </span>
-          </h1>
-
-          <p className="text-gray-200 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-12">
-            Mobilitas modern, efisien, dan ramah lingkungan untuk masa depan Indonesia.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {/* Primary CTA — cyan gradient */}
-            <Link
-              href="/catalog/sepeda-listrik"
-              className="inline-flex items-center gap-2 font-bold px-8 py-4 rounded-full text-sm text-white transition-all hover:scale-105 hover:brightness-110"
-              style={{
-                background: `linear-gradient(135deg, ${CYAN}, #38bdf8)`,
-                boxShadow: `0 0 28px ${CYAN_GLOW}0.45)`,
-              }}
-            >
-              Lihat Produk <ArrowRight size={16} />
-            </Link>
-            {/* Secondary CTA — glassmorphism with cyan border */}
-            <Link
-              href="/showroom"
-              className="inline-flex items-center gap-2 font-semibold px-8 py-4 rounded-full text-sm text-white transition-all hover:bg-white/10 backdrop-blur-sm"
-              style={{ border: `1.5px solid ${CYAN_GLOW}0.5)` }}
-            >
-              Kunjungi Showroom
-            </Link>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/50 animate-bounce">
-          <span className="text-[10px] tracking-widest uppercase">Scroll</span>
-          <ChevronDown size={18} />
-        </div>
+      <section className="w-full">
+        <img
+          src={IMG_BANNER}
+          alt="VOXA Assembly & Warehouse"
+          className="w-full block"
+          style={{ display: 'block', maxHeight: '600px', objectFit: 'cover', objectPosition: 'center' }}
+        />
       </section>
 
       {/* ══════════════════════════════════════════════════════════
