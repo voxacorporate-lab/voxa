@@ -1,6 +1,4 @@
 import { Link, useParams } from 'wouter';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { articles, getRegularArticles } from '../data/articles';
 
 function formatDate(dateStr: string): string {
@@ -17,7 +15,6 @@ export default function ArtikelDetail() {
   if (!article) {
     return (
       <div className="min-h-screen bg-white flex flex-col">
-        <Navbar />
         <div className="flex-1 flex flex-col items-center justify-center py-32 px-4">
           <div
             className="w-20 h-20 rounded-full flex items-center justify-center mb-6"
@@ -38,7 +35,6 @@ export default function ArtikelDetail() {
             </span>
           </Link>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -49,8 +45,6 @@ export default function ArtikelDetail() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <Navbar />
-
       {/* ── Hero image ───────────────────────────────────────────────────── */}
       <div className="relative w-full overflow-hidden" style={{ maxHeight: '520px' }}>
         <img
@@ -184,7 +178,6 @@ export default function ArtikelDetail() {
         </section>
       )}
 
-      <Footer />
     </div>
   );
 }

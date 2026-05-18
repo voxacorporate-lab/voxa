@@ -1,7 +1,5 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'wouter';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import {
   articles,
   categories,
@@ -87,8 +85,6 @@ export default function Bisnis() {
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      <Navbar />
-
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section
         className="relative py-24 px-4 overflow-hidden"
@@ -316,7 +312,6 @@ export default function Bisnis() {
         )}
       </main>
 
-      <Footer />
     </div>
   );
 }

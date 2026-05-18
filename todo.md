@@ -137,7 +137,7 @@
 - [x] Each card: real name, full address, WhatsApp link (wa.me/62...), Lihat di Maps link, CDN image
 
 ## Artikel Page (replacing Untuk Bisnis)
-- [ ] Create article data file with 7 sample articles across 6 categories
-- [ ] Rewrite Bisnis.tsx as Artikel page with hero, featured article, category filter, search, article grid
-- [ ] Create ArticleDetail.tsx page for individual article view
-- [ ] Update Navbar, Footer, and App.tsx routing to rename Untuk Bisnis → Artikel
+- [x] Create article data file with 7 sample articles across 6 categories
+- [x] Rewrite Bisnis.tsx as Artikel page with hero, featured article, category filter, search, article grid
+- [x] Create ArticleDetail.tsx page for individual article view
+- [x] Update Navbar, Footer, and App.tsx routing to rename Untuk Bisnis → Artikel
