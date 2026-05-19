@@ -115,23 +115,92 @@ export default function Bantuan() {
 
       {/* Warranty */}
       <section className="py-16 bg-gray-50">
-        <div className="container max-w-3xl">
+        <div className="container max-w-5xl">
           <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm">
-            <div className="flex items-start gap-5">
+            <div className="flex items-center gap-4 mb-6">
               <div className="w-14 h-14 bg-[#00B4D8]/10 rounded-2xl flex items-center justify-center text-[#00B4D8] shrink-0">
                 <Shield size={28} />
               </div>
-              <div>
-                <h3 className="font-display text-2xl text-gray-900 tracking-wide mb-3">GARANSI RESMI VOXA</h3>
-                <div className="space-y-2 text-sm text-gray-600">
-                  <p>• <strong>Rangka & Motor:</strong> Garansi 2 tahun dari tanggal pembelian</p>
-                  <p>• <strong>Baterai:</strong> Garansi 1 tahun atau 300 siklus pengisian</p>
-                  <p>• <strong>Komponen Elektronik:</strong> Garansi 1 tahun</p>
-                  <p>• <strong>Suku Cadang Aus:</strong> Tidak termasuk garansi (ban, rem, rantai)</p>
-                </div>
-                <p className="text-gray-400 text-xs mt-4">*Garansi berlaku untuk kerusakan akibat cacat produksi, tidak berlaku untuk kerusakan akibat kelalaian pengguna.</p>
-              </div>
+              <h3 className="font-display text-2xl text-gray-900 tracking-wide">GARANSI RESMI VOXA</h3>
             </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm border-collapse">
+                <thead>
+                  <tr className="bg-gray-900 text-white">
+                    <th className="px-4 py-3 text-left font-semibold rounded-tl-xl w-8">NO.</th>
+                    <th className="px-4 py-3 text-left font-semibold">NAMA SPAREPART</th>
+                    <th className="px-4 py-3 text-left font-semibold">GARANSI</th>
+                    <th className="px-4 py-3 text-left font-semibold">TIDAK ADA GARANSI</th>
+                    <th className="px-4 py-3 text-left font-semibold">JANGKA WAKTU</th>
+                    <th className="px-4 py-3 text-left font-semibold rounded-tr-xl">REMARK</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    {
+                      no: 1,
+                      part: 'Motor power assy',
+                      garansi: 'Magnetize motor dan dinamo tidak berfungsi dari pabrikan',
+                      tidakGaransi: 'Masuk air, kabel putus akibat pemakaian',
+                      jangka: '6 bulan',
+                      remark: 'Penggantian dalam 6 bulan',
+                    },
+                    {
+                      no: 2,
+                      part: 'Frame',
+                      garansi: 'Patah, welding lepas',
+                      tidakGaransi: 'Rusak akibat kelebihan muatan',
+                      jangka: '5 tahun',
+                      remark: 'Ganti',
+                    },
+                    {
+                      no: 3,
+                      part: 'Controller',
+                      garansi: 'Controller tidak berfungsi, suara kipas exhaust bising',
+                      tidakGaransi: 'Masuk air, kabel putus, permukaan rusak/pecah',
+                      jangka: '3 bulan',
+                      remark: 'Ganti',
+                    },
+                    {
+                      no: 4,
+                      part: 'Charger',
+                      garansi: 'Tidak berfungsi',
+                      tidakGaransi: 'Masuk air, kabel putus, permukaan rusak/pecah',
+                      jangka: '3 bulan',
+                      remark: 'Ganti',
+                    },
+                    {
+                      no: 5,
+                      part: 'Spedometer',
+                      garansi: 'Tidak berfungsi',
+                      tidakGaransi: 'Masuk air, kabel putus, permukaan luar rusak/pecah, sikering putus',
+                      jangka: '3 bulan',
+                      remark: 'Ganti',
+                    },
+                    {
+                      no: 6,
+                      part: 'Aki / battery',
+                      garansi: 'Bocoran dan tidak berfungsi',
+                      tidakGaransi: 'Kerusakan bagian luar dan kerusakan oleh kelalaian pengguna, battery menggelembung akibat over charger',
+                      jangka: '3 bulan',
+                      remark: 'Ganti',
+                    },
+                  ].map((row, i) => (
+                    <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td className="px-4 py-3 text-gray-500 align-top">{row.no}.</td>
+                      <td className="px-4 py-3 font-medium text-gray-800 align-top">{row.part}</td>
+                      <td className="px-4 py-3 text-gray-600 align-top">{row.garansi}</td>
+                      <td className="px-4 py-3 text-gray-600 align-top">{row.tidakGaransi}</td>
+                      <td className="px-4 py-3 text-gray-800 font-semibold align-top whitespace-nowrap">{row.jangka}</td>
+                      <td className="px-4 py-3 text-gray-600 align-top">{row.remark}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-gray-400 text-xs mt-5 italic">
+              <strong>Catatan:</strong> Masa garansi ini mengacu pada kerusakan suku cadang yang disebabkan oleh proses produksi. Kerusakan yang disebabkan oleh pelanggan atau faktor lain tidak tercakup dalam garansi.
+            </p>
           </div>
         </div>
       </section>
