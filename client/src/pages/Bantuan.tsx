@@ -37,7 +37,7 @@ export default function Bantuan() {
       </div>
 
       <section
-        className="relative py-14 px-4 overflow-hidden"
+        className="relative py-5 px-4 overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #EAF9FF 0%, #ffffff 40%, #EAF9FF 100%)' }}
       >
         <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: '#37C5FF' }} />
