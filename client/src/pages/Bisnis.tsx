@@ -87,7 +87,7 @@ export default function Bisnis() {
     <div className="min-h-screen bg-white flex flex-col">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section
-        className="relative py-24 px-4 overflow-hidden"
+        className="relative pt-10 pb-20 px-4 overflow-hidden"
         style={{
           background: 'linear-gradient(135deg, #EAF9FF 0%, #ffffff 40%, #EAF9FF 100%)',
         }}
