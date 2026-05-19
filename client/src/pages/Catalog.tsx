@@ -59,7 +59,7 @@ export default function Catalog() {
       {/* Breadcrumb */}
       <div className="bg-gray-50 border-b border-gray-100">
         <div className="container py-3">
-          <div className="flex items-center gap-2 text-sm text-gray-500 flex-wrap">
+          <div className="flex items-center gap-2 text-sm text-gray-500 overflow-x-auto whitespace-nowrap scrollbar-none">
             <Link href="/" className="hover:text-[#00B4D8]">Beranda</Link>
             <ChevronRight size={14} />
             <span className="text-gray-900 font-medium">{config.title}</span>
