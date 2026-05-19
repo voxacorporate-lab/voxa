@@ -162,36 +162,35 @@ export default function Sparepart() {
 
       {/* Header */}
       <section
-        className="relative py-14 px-4 overflow-hidden"
+        className="relative py-4 md:py-14 px-4 overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #EAF9FF 0%, #ffffff 40%, #EAF9FF 100%)' }}
       >
         <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: '#37C5FF' }} />
         <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full opacity-15 blur-3xl pointer-events-none" style={{ background: '#0A4A63' }} />
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#37C5FF 1px, transparent 1px), linear-gradient(90deg, #37C5FF 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         <div className="relative max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 border" style={{ color: '#37C5FF', borderColor: '#37C5FF', background: 'rgba(55,197,255,0.08)' }}>
+          <div className="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 border" style={{ color: '#37C5FF', borderColor: '#37C5FF', background: 'rgba(55,197,255,0.08)' }}>
             <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: '#37C5FF' }} />
             KATALOG PRODUK
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-5 tracking-tight">
+          <h1 className="text-2xl md:text-6xl font-black text-gray-900 mb-2 md:mb-5 tracking-tight">
             <span className="text-gray-900">SPARE</span><span style={{ color: '#37C5FF' }}>PART</span>
           </h1>
-          <p className="text-gray-500 text-lg leading-relaxed max-w-2xl mx-auto">Temukan sparepart VOXA untuk perawatan dan upgrade kendaraan Anda</p>
+          <p className="hidden md:block text-gray-500 text-lg leading-relaxed max-w-2xl mx-auto">Temukan sparepart VOXA untuk perawatan dan upgrade kendaraan Anda</p>
         </div>
       </section>
 
       {/* Filters */}
       <div className="sticky top-16 z-30 bg-white border-b border-gray-100 shadow-sm">
         <div className="container py-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            {/* Series Filter */}
-            <div className="flex items-center gap-2 flex-wrap">
-              <SlidersHorizontal size={16} className="text-gray-400 shrink-0" />
+          <div className="flex items-center gap-2">
+            <SlidersHorizontal size={16} className="text-gray-400 shrink-0" />
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-none flex-1 min-w-0 pb-0.5">
               {SERIES_FILTERS.map(s => (
                 <button
                   key={s}
                   onClick={() => setSelectedSeries(s)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${
+                  className={`px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all whitespace-nowrap shrink-0 ${
                     selectedSeries === s
                       ? 'bg-[#00B4D8] text-white'
                       : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -201,17 +200,16 @@ export default function Sparepart() {
                 </button>
               ))}
             </div>
-            {/* Sort */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 shrink-0">
               <Filter size={14} className="text-gray-400" />
               <select
                 value={sortBy}
                 onChange={e => setSortBy(e.target.value)}
-                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:border-[#00B4D8]"
+                className="text-xs md:text-sm border border-gray-200 rounded-lg px-2 py-1.5 text-gray-700 focus:outline-none focus:border-[#00B4D8]"
               >
-                {SORT_OPTIONS.map(o => (
-                  <option key={o.value} value={o.value}>{o.label}</option>
-                ))}
+                <option value="default">Default</option>
+                <option value="price-asc">Terendah</option>
+                <option value="price-desc">Tertinggi</option>
               </select>
             </div>
           </div>

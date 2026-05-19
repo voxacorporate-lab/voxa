@@ -69,7 +69,7 @@ export default function Catalog() {
 
       {/* Header */}
       <section
-        className="relative py-14 px-4 overflow-hidden"
+        className="relative py-4 md:py-14 px-4 overflow-hidden"
         style={{ background: 'linear-gradient(135deg, #EAF9FF 0%, #ffffff 40%, #EAF9FF 100%)' }}
       >
         {/* Ambient glow orbs */}
@@ -78,48 +78,48 @@ export default function Catalog() {
         {/* Subtle grid texture */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#37C5FF 1px, transparent 1px), linear-gradient(90deg, #37C5FF 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         <div className="relative max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 border" style={{ color: '#37C5FF', borderColor: '#37C5FF', background: 'rgba(55,197,255,0.08)' }}>
+          <div className="hidden md:inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 border" style={{ color: '#37C5FF', borderColor: '#37C5FF', background: 'rgba(55,197,255,0.08)' }}>
             <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: '#37C5FF' }} />
             KATALOG PRODUK
           </div>
-          <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-5 tracking-tight">
+          <h1 className="text-2xl md:text-6xl font-black text-gray-900 mb-2 md:mb-5 tracking-tight">
             {config.title.split(' ').map((word: string, i: number) => i === config.title.split(' ').length - 1
               ? <span key={i} style={{ color: '#37C5FF' }}>{(i > 0 ? ' ' : '') + word}</span>
               : <span key={i}>{(i > 0 ? ' ' : '') + word}</span>
             )}
           </h1>
-          <p className="text-gray-500 text-lg leading-relaxed max-w-2xl mx-auto">{config.subtitle}</p>
+          <p className="hidden md:block text-gray-500 text-lg leading-relaxed max-w-2xl mx-auto">{config.subtitle}</p>
         </div>
       </section>
 
       {/* Filters */}
       <div className="sticky top-16 z-30 bg-white border-b border-gray-100 shadow-sm">
         <div className="container py-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            {/* Series Filter */}
-            <div className="flex items-center gap-2 flex-wrap">
-              <SlidersHorizontal size={16} className="text-gray-400 shrink-0" />
+          <div className="flex items-center gap-2">
+            {/* Series Filter — horizontally scrollable on mobile */}
+            <SlidersHorizontal size={16} className="text-gray-400 shrink-0" />
+            <div className="flex items-center gap-2 overflow-x-auto scrollbar-none flex-1 min-w-0 pb-0.5">
               {config.series.map(s => (
                 <button
                   key={s}
                   onClick={() => setSelectedSeries(s)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-semibold transition-all ${selectedSeries === s ? 'bg-[#00B4D8] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
+                  className={`px-3 py-1.5 rounded-full text-xs md:text-sm font-semibold transition-all whitespace-nowrap shrink-0 ${selectedSeries === s ? 'bg-[#00B4D8] text-white' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}
                 >
                   {s}
                 </button>
               ))}
             </div>
-            {/* Sort */}
-            <div className="flex items-center gap-2">
+            {/* Sort — inline, always visible */}
+            <div className="flex items-center gap-1 shrink-0">
               <Filter size={14} className="text-gray-400" />
               <select
                 value={sortBy}
                 onChange={e => setSortBy(e.target.value)}
-                className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 text-gray-700 focus:outline-none focus:border-[#00B4D8]"
+                className="text-xs md:text-sm border border-gray-200 rounded-lg px-2 py-1.5 text-gray-700 focus:outline-none focus:border-[#00B4D8]"
               >
-                <option value="default">Urutkan: Default</option>
-                <option value="price-asc">Harga: Terendah</option>
-                <option value="price-desc">Harga: Tertinggi</option>
+                <option value="default">Default</option>
+                <option value="price-asc">Terendah</option>
+                <option value="price-desc">Tertinggi</option>
               </select>
             </div>
           </div>
