@@ -9,18 +9,21 @@ const categoryConfig = {
     subtitle: 'Temukan sepeda listrik VOXA yang sempurna untuk Anda',
     products: sepedaListrik,
     series: ['Semua', 'Liberty Series', 'Eiffel Series', 'Elite Series', 'Voxa Series'],
+    headerBg: '/manus-storage/P1015067_6aacd27c.webp',
   },
   'batre': {
-    title: 'BATERAI',
-    subtitle: 'Pilihan baterai berkualitas untuk sepeda listrik Anda',
+    title: 'BATRE',
+    subtitle: 'Temukan batre VOXA yang sesuai untuk kendaraan Anda',
     products: batre,
     series: ['Semua', 'Greenlife Series', 'Tianneng Series', 'Chilwee Series', 'Lithium Series'],
+    headerBg: '/manus-storage/P1015047_606cad4f.webp',
   },
   'sparepart': {
     title: 'SPAREPART',
-    subtitle: 'Suku cadang original VOXA tersedia lengkap',
+    subtitle: 'Temukan sparepart VOXA untuk perawatan dan upgrade kendaraan Anda',
     products: [],
     series: ['Semua', 'Motor Listrik', 'Controller', 'Charger', 'Rem & Komponen', 'Ban & Velg'],
+    headerBg: '/manus-storage/P1015079_0389577d.webp',
   },
 };
 
@@ -65,8 +68,12 @@ export default function Catalog() {
       </div>
 
       {/* Header */}
-      <div className="bg-gray-950 text-white py-10">
-        <div className="container">
+      <div className="relative bg-gray-950 text-white py-10 overflow-hidden">
+        {config.headerBg && (
+          <img src={config.headerBg} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover object-center" />
+        )}
+        <div className="absolute inset-0 bg-gray-950/75" />
+        <div className="container relative z-10">
           <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-3">KATALOG PRODUK</p>
           <h1 className="font-display text-4xl md:text-5xl tracking-wide mb-4">{config.title}</h1>
           <p className="text-gray-400 text-lg max-w-xl">{config.subtitle}</p>

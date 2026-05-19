@@ -36,8 +36,10 @@ export default function Bantuan() {
         </div>
       </div>
 
-      <div className="bg-gray-950 text-white py-16">
-        <div className="container">
+      <div className="relative bg-gray-950 text-white py-16 overflow-hidden">
+        <img src="/manus-storage/P1015105_831765ce.webp" alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <div className="absolute inset-0 bg-gray-950/75" />
+        <div className="container relative z-10">
           <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-3">PUSAT BANTUAN</p>
           <h1 className="font-display text-5xl md:text-7xl tracking-wide mb-4">BANTUAN</h1>
           <p className="text-gray-400 text-lg max-w-xl">Temukan jawaban untuk pertanyaan Anda atau hubungi tim kami.</p>
