@@ -189,9 +189,16 @@ export default function Distributor() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gray-950/60 hidden lg:block" />
           </div>
-          {/* Right: text */}
-          <div className="lg:w-1/2 flex items-center px-8 py-16 lg:px-16">
-            <div className="max-w-lg">
+          {/* Right: text — warehouse image background with dark overlay */}
+          <div className="lg:w-1/2 flex items-center px-8 py-16 lg:px-16 relative overflow-hidden">
+            <img
+              src="/manus-storage/P1014963_3bf46146.webp"
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-gray-950/75" />
+            <div className="max-w-lg relative z-10">
               <p className="text-[#00B4D8] text-xs font-bold tracking-widest mb-4 uppercase">Produksi Lokal</p>
               <h2 className="font-display text-3xl md:text-4xl text-white tracking-wide leading-tight mb-6">
                 Produksi Lokal untuk Masa Depan Mobilitas Indonesia
