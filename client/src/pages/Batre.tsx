@@ -36,13 +36,24 @@ export default function Batre() {
       </div>
 
       {/* Header */}
-      <div className="bg-gray-950 text-white py-10">
-        <div className="container">
-          <p className="text-[#00B4D8] text-sm font-bold tracking-widest mb-3">KATALOG PRODUK</p>
-          <h1 className="font-display text-4xl md:text-5xl tracking-wide mb-4">BATRE</h1>
-          <p className="text-gray-400 text-lg max-w-xl">Temukan batre VOXA yang sesuai untuk kendaraan Anda</p>
+      <section
+        className="relative py-14 px-4 overflow-hidden"
+        style={{ background: 'linear-gradient(135deg, #EAF9FF 0%, #ffffff 40%, #EAF9FF 100%)' }}
+      >
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full opacity-20 blur-3xl pointer-events-none" style={{ background: '#37C5FF' }} />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 rounded-full opacity-15 blur-3xl pointer-events-none" style={{ background: '#0A4A63' }} />
+        <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'linear-gradient(#37C5FF 1px, transparent 1px), linear-gradient(90deg, #37C5FF 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        <div className="relative max-w-4xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold mb-6 border" style={{ color: '#37C5FF', borderColor: '#37C5FF', background: 'rgba(55,197,255,0.08)' }}>
+            <span className="w-1.5 h-1.5 rounded-full inline-block" style={{ background: '#37C5FF' }} />
+            KATALOG PRODUK
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-5 tracking-tight">
+            <span className="text-gray-900">BATRE</span>
+          </h1>
+          <p className="text-gray-500 text-lg leading-relaxed max-w-2xl mx-auto">Temukan batre VOXA yang sesuai untuk kendaraan Anda</p>
         </div>
-      </div>
+      </section>
 
       {/* Filters */}
       <div className="sticky top-16 z-30 bg-white border-b border-gray-100 shadow-sm">
