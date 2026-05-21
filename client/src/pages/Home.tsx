@@ -57,6 +57,33 @@ const LIFE4 = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q
 const LIFE5 = 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&q=80';
 const LIFE6 = 'https://images.unsplash.com/photo-1620714223084-8fcacc2dbe4d?w=600&q=80';
 
+// Community / customer photos
+const COMMUNITY_PHOTOS: string[] = [
+  '/manus-storage/p1_ea197215.jpeg',
+  '/manus-storage/p2_1d043544.jpeg',
+  '/manus-storage/p3_7d54d5c7.jpeg',
+  '/manus-storage/p4_a39a5f06.webp',
+  '/manus-storage/p5_e82e8225.webp',
+  '/manus-storage/p6_d73b34de.jpeg',
+  '/manus-storage/p7_77ff902f.jpeg',
+  '/manus-storage/p8_e3bb9c56.jpeg',
+  '/manus-storage/p9_a21a0dde.jpeg',
+  '/manus-storage/p10_bece9069.jpeg',
+  '/manus-storage/p11_c9441a58.jpeg',
+  '/manus-storage/p12_591a9764.jpeg',
+  '/manus-storage/p13_ae54b341.jpeg',
+  '/manus-storage/p14_9e05130d.jpeg',
+  '/manus-storage/p15_3fc672ab.webp',
+  '/manus-storage/p16_767380d5.jpeg',
+  '/manus-storage/p17_461886b0.jpeg',
+  '/manus-storage/p18_6f004696.webp',
+  '/manus-storage/p19_ebdd7cfd.jpeg',
+  '/manus-storage/p20_8168671d.webp',
+  '/manus-storage/p21_57182216.jpeg',
+  '/manus-storage/p23_41a4bd78.jpeg',
+  '/manus-storage/p24_c2b9880d.jpeg',
+];
+
 // ─── Product Card ───────────────────────────────────────────────────────────────────
 function ProductCard({ product, cardWidth }: { product: (typeof sepedaListrik)[0]; cardWidth: string }) {
   const [wishlisted, setWishlisted] = useState(false);
@@ -519,56 +546,31 @@ export default function Home() {
 
 
       {/* ═══════════════════════════════════════════════════════════════
-          SECTION 5B: SECOND CAMPAIGN BANNER — B2G / Pemerintah
-      ═══════════════════════════════════════════════════════════════ */}
-      <CampaignBanner
-        img1={BANNER2A}
-        img2={BANNER2B}
-        img3={BANNER2C}
-        headline="SOLUSI ARMADA PEMERINTAH"
-        subtext="Kendaraan listrik ramah lingkungan untuk instansi dan program pemerintah daerah."
-        ctaLabel="Pelajari Program B2G"
-        ctaHref="/pemerintah"
-      />
-
-      {/* ═══════════════════════════════════════════════════════════════
-          SECTION 9: LIFESTYLE / COMMUNITY COLLAGE
+          SECTION 9: KOMUNITAS VOXA — horizontal scrollable photo strip
       ═══════════════════════════════════════════════════════════════ */}
       <section className="py-16 bg-white border-t border-gray-100">
         <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 2rem' }}>
           <div className="flex items-center justify-between mb-8">
             <h2 className="font-display text-2xl md:text-3xl text-gray-900 tracking-wide">KOMUNITAS VOXA</h2>
-            <Link href="/guide" className="text-sm font-semibold text-gray-900 underline underline-offset-4 hover:text-[#00B4D8] transition-colors flex items-center gap-1">
-              Lihat Semua <ArrowRight size={14} />
-            </Link>
           </div>
-          {/* Asymmetric collage grid */}
-          <div className="grid grid-cols-3 grid-rows-2 gap-2" style={{ height: 'clamp(300px, 50vh, 560px)' }}>
-            {/* Large left tile */}
-            <div className="col-span-1 row-span-2 overflow-hidden bg-gray-100">
-              <img src={LIFE1} alt="VOXA Community" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
-            </div>
-            {/* Top middle */}
-            <div className="col-span-1 row-span-1 overflow-hidden bg-gray-100">
-              <img src={LIFE2} alt="VOXA Lifestyle" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
-            </div>
-            {/* Top right */}
-            <div className="col-span-1 row-span-1 overflow-hidden bg-gray-100">
-              <img src={LIFE3} alt="VOXA Riders" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
-            </div>
-            {/* Bottom middle */}
-            <div className="col-span-1 row-span-1 overflow-hidden bg-gray-100">
-              <img src={LIFE4} alt="VOXA Urban" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
-            </div>
-            {/* Bottom right — split into 2 */}
-            <div className="col-span-1 row-span-1 grid grid-cols-2 gap-2">
-              <div className="overflow-hidden bg-gray-100">
-                <img src={LIFE5} alt="VOXA Daily" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
+          {/* Horizontal scrollable strip */}
+          <div
+            className="flex gap-3 overflow-x-auto pb-4"
+            style={{ scrollbarWidth: 'thin', scrollbarColor: '#00B4D8 #e5e7eb' }}
+          >
+            {COMMUNITY_PHOTOS.map((src, i) => (
+              <div
+                key={i}
+                className="flex-none overflow-hidden bg-gray-100"
+                style={{ width: '260px', height: '320px', borderRadius: '4px' }}
+              >
+                <img
+                  src={src}
+                  alt={`VOXA Customer ${i + 1}`}
+                  className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
+                />
               </div>
-              <div className="overflow-hidden bg-gray-100">
-                <img src={LIFE6} alt="VOXA Green" className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500" />
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
