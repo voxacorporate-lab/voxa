@@ -54,7 +54,7 @@ const IMG_EIFFEL_CITY = '/manus-storage/eiffel-city_11fd4551.jpg';
 const IMG_EIFFEL_RIDER = '/manus-storage/eiffel-rider_2ae22867.jpg';
 const IMG_ELITE_FANTASY = '/manus-storage/elite-fantasy_5f812d48.jpg';
 const IMG_ELITE_CITY = '/manus-storage/elite-city_addc04e8.jpg';
-const IMG_ELITE_FANTASY_S = '/manus-storage/elite-fantasy-s_7e20f5a4.png';
+const IMG_ELITE_FANTASY_S = '/manus-storage/elite-fantasy-s-v2_bcdfe4fe.jpg';
 const IMG_ELITE_RIDER = '/manus-storage/elite-rider_1e29b460.jpg';
 const IMG_ELITE_RIDER_S = '/manus-storage/elite-rider-s_cc77fadc.jpg';
 
