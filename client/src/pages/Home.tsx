@@ -44,11 +44,16 @@ const BANNER2A = 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w
 const BANNER2B = 'https://images.unsplash.com/photo-1620714223084-8fcacc2dbe4d?w=800&q=80';
 const BANNER2C = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80';
 
-// Popular / lifestyle images
-const POP_IMG_1 = 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=600&q=80';
-const POP_IMG_2 = 'https://images.unsplash.com/photo-1593764592116-bfb2a97c642a?w=600&q=80';
-const POP_IMG_3 = 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&q=80';
-const POP_IMG_4 = 'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&q=80';
+// Popular series images
+const POP_IMG_LIBERTY = '/manus-storage/popular-liberty_6fcc442b.png';
+const POP_IMG_EIFFEL  = '/manus-storage/popular-eiffel_7013e82b.png';
+const POP_IMG_ELITE   = '/manus-storage/popular-elite_f051405c.png';
+const POP_IMG_VOXA    = '/manus-storage/popular-voxa_c4653a81.png';
+// Legacy aliases used by useTiles
+const POP_IMG_1 = POP_IMG_LIBERTY;
+const POP_IMG_2 = POP_IMG_EIFFEL;
+const POP_IMG_3 = POP_IMG_ELITE;
+const POP_IMG_4 = POP_IMG_VOXA;
 
 // Lifestyle collage images
 const LIFE1 = 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80';
@@ -370,20 +375,12 @@ function CampaignBanner({
 }
 
 // ─── Popular Grid ─────────────────────────────────────────────────────────────
-const popularItemsByTab: Record<'HARIAN' | 'BISNIS', typeof useTiles> = {
-  HARIAN: [
-    { label: 'LIBERTY SERIES', img: POP_IMG_1, href: '/catalog/sepeda-listrik' },
-    { label: 'EIFFEL SERIES', img: POP_IMG_2, href: '/catalog/sepeda-listrik' },
-    { label: 'ELITE SERIES', img: POP_IMG_3, href: '/catalog/sepeda-listrik' },
-    { label: 'VOXA G3', img: POP_IMG_4, href: '/catalog/sepeda-listrik' },
-  ],
-  BISNIS: [
-    { label: 'VOXA KURIR', img: POP_IMG_2, href: '/bisnis' },
-    { label: 'FLEET SOLUTION', img: POP_IMG_3, href: '/pemerintah' },
-    { label: 'BATRE GREENLIFE', img: POP_IMG_4, href: '/catalog/batre' },
-    { label: 'SPAREPART', img: POP_IMG_1, href: '/catalog/sparepart' },
-  ],
-};
+const popularItems = [
+  { label: 'LIBERTY SERIES', img: POP_IMG_LIBERTY, href: '/catalog/sepeda-listrik?series=liberty' },
+  { label: 'EIFFEL SERIES',  img: POP_IMG_EIFFEL,  href: '/catalog/sepeda-listrik?series=eiffel' },
+  { label: 'ELITE SERIES',   img: POP_IMG_ELITE,   href: '/catalog/sepeda-listrik?series=elite' },
+  { label: 'VOXA SERIES',    img: POP_IMG_VOXA,    href: '/catalog/voxa-g3' },
+];
 
 // ─── Lifestyle use tiles ──────────────────────────────────────────────────────
 const useTiles = [
@@ -410,7 +407,6 @@ const useTilesByTab: Record<'HARIAN' | 'BISNIS', typeof useTiles> = {
 
 // ─── Main Component ───────────────────────────────────────────────────────────
 export default function Home() {
-  const [popularTab, setPopularTab] = useState<'HARIAN' | 'BISNIS'>('HARIAN');
   const [useTab, setUseTab] = useState<'HARIAN' | 'BISNIS'>('HARIAN');
 
   return (
@@ -590,27 +586,10 @@ export default function Home() {
       <section className="py-16 bg-white border-t border-gray-100">
         <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 2rem' }}>
           <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-6">
-              <h2 className="font-display text-2xl md:text-3xl text-gray-900 tracking-wide">POPULER SEKARANG</h2>
-              <div className="flex gap-1 border-b border-gray-200">
-                {(['HARIAN', 'BISNIS'] as const).map(tab => (
-                  <button
-                    key={tab}
-                    onClick={() => setPopularTab(tab)}
-                    className={`px-4 py-2 text-xs font-bold tracking-wider transition-colors border-b-2 -mb-px ${
-                      popularTab === tab
-                        ? 'border-gray-900 text-gray-900'
-                        : 'border-transparent text-gray-400 hover:text-gray-600'
-                    }`}
-                  >
-                    {tab}
-                  </button>
-                ))}
-              </div>
-            </div>
+            <h2 className="font-display text-2xl md:text-3xl text-gray-900 tracking-wide">POPULER SEKARANG</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {popularItemsByTab[popularTab].map(item => (
+            {popularItems.map(item => (
               <Link key={item.label} href={item.href}>
                 <div className="group relative overflow-hidden aspect-[3/4] bg-gray-100">
                   <img
