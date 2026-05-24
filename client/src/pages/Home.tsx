@@ -32,7 +32,7 @@ const sepedaListrikTerbaru = (() => {
 
 // ─── Image constants ──────────────────────────────────────────────────────────
 const HERO_BG = '/manus-storage/hero-banner-v2_0bbd7a2c.png';
-const HERO_BG_MOBILE = '/manus-storage/hero-mobile-v2_bc4d430d.png';
+const HERO_BG_MOBILE = '/manus-storage/hero-mobile-v3_de725c00.png';
 
 // Campaign banner images (3-panel mosaic)
 const BANNER1 = '/manus-storage/campaign1_3919f523.png';
