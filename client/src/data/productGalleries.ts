@@ -140,15 +140,16 @@ export const productGalleries: Record<string, string[]> = {
 
   // ── Elite Rider S ──────────────────────────────────────────────────────────
   "elite-rider-s": [
-    "/manus-storage/eliteriders-1-spec_1576e098.jpg",
-    "/manus-storage/eliterider-2-free_b87b4e45.jpg",
-    "/manus-storage/eliterider-3-color_3e1beb80.jpg",
-    "/manus-storage/eliterider-4-velg_b952b6e6.jpg",
-    "/manus-storage/eliterider-5-bagasi_db2644a2.jpg",
-    "/manus-storage/eliterider-6-speed_f21b9e3d.jpg",
-    "/manus-storage/eliterider-7-lamp_fafb10fe.jpg",
-    "/manus-storage/eliterider-8-mcb_1058522e.jpg",
-    "/manus-storage/eliterider-9-strip_9f64d083.jpg",
+    "/manus-storage/eliteriders-1-spec_21abdae9.jpg",
+    "/manus-storage/eliteriders-2-free_a90dbe05.jpg",
+    "/manus-storage/eliteriders-3-color_09c534c6.jpg",
+    "/manus-storage/eliteriders-4-lamp_7a6a4c7e.jpg",
+    "/manus-storage/eliteriders-5-lamprem_8f9e4799.jpg",
+    "/manus-storage/eliteriders-6-mcb_eefe4e6c.jpg",
+    "/manus-storage/eliteriders-7-strip_f043022b.jpg",
+    "/manus-storage/eliteriders-8-velg_dca025f9.jpg",
+    "/manus-storage/eliteriders-9-bagasi_af2ded01.jpg",
+    "/manus-storage/eliteriders-10-speed_4b39a5d3.jpg",
   ],
   // ══════════════════════════════════════════════════════════════════════════════
   // VOXA SERIES GALLERIES
