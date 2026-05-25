@@ -277,13 +277,13 @@ const pendingProducts: SparepartItem[] = [
   },
   {
     id: 'sp-keranjang',
-    name: 'Keranjang Serbaguna VOXA',
+    name: 'Keranjang VOXA',
     series: 'Jok & Aksesori',
     price: 'Hubungi Kami',
     priceNum: 0,
     shortDesc: 'Keranjang PP universal 29×30×25 cm, ringan, tahan benturan, dan waterproof',
     description:
-      'Keranjang Serbaguna VOXA cocok untuk berbagai tipe sepeda listrik. Terbuat dari material PP (Polypropylene) berkualitas tinggi yang dikenal ringan, kuat, dan tahan cuaca, sehingga ideal untuk penggunaan harian maupun perjalanan jarak jauh. Tahan benturan, tidak mudah patah, dan tidak menyerap air. Dilengkapi bracket dan baut pemasangan untuk instalasi yang mudah.',
+      'Keranjang VOXA cocok untuk berbagai tipe sepeda listrik. Terbuat dari material PP (Polypropylene) berkualitas tinggi yang dikenal ringan, kuat, dan tahan cuaca, sehingga ideal untuk penggunaan harian maupun perjalanan jarak jauh. Tahan benturan, tidak mudah patah, dan tidak menyerap air. Dilengkapi bracket dan baut pemasangan untuk instalasi yang mudah.',
     specs: [
       { label: 'Material', value: 'Plastik PP (Polypropylene)' },
       { label: 'Ukuran', value: '29 × 30 × 25 cm' },
