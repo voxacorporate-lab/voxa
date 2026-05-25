@@ -557,9 +557,9 @@ export default function Home() {
         img1={BANNER1}
         img2={BANNER2}
         img3={BANNER3}
-        headline="SEPEDA LISTRIK UNTUK BISNIS ANDA"
-        subtext="Armada kendaraan listrik yang handal untuk kurir dan operasional bisnis sehari-hari."
-        ctaLabel="Lihat Solusi Bisnis"
+        headline=""
+        subtext=""
+        ctaLabel=""
         ctaHref="/bisnis"
       />
 
