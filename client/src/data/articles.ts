@@ -41,7 +41,7 @@ Ke depan, VOXA berkomitmen untuk terus berinovasi dalam teknologi baterai, desai
     publishDate: '2025-05-10',
     readTime: 5,
     featured: true,
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
+    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663445867947/4sqHUsbGrVj8sgaCaL4hAC/article-ev-future-indonesia-5knyenbbbvFGYPTANVcLFZ.webp',
     author: 'Tim Redaksi VOXA',
   },
   {
@@ -76,7 +76,7 @@ Kunjungi showroom VOXA terdekat setiap 6 bulan untuk pemeriksaan kondisi baterai
     publishDate: '2025-05-05',
     readTime: 4,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80',
+    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663445867947/4sqHUsbGrVj8sgaCaL4hAC/article-battery-care-tips-YtM33P4MqukLwtHh2vQMSN.webp',
     author: 'Tim Teknis VOXA',
   },
   {
@@ -105,7 +105,7 @@ VOXA Elite Rider S adalah pilihan tepat bagi mereka yang menginginkan sepeda lis
     publishDate: '2025-04-28',
     readTime: 6,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=800&q=80',
+    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663445867947/4sqHUsbGrVj8sgaCaL4hAC/article-elite-rider-review-gqFr2dRnVZBhPqQZPgrfwn.webp',
     author: 'Tim Redaksi VOXA',
   },
   {
@@ -131,7 +131,7 @@ VOXA menawarkan program khusus untuk bisnis dengan pembelian armada. Manfaat yan
     publishDate: '2025-04-20',
     readTime: 5,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=800&q=80',
+    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663445867947/4sqHUsbGrVj8sgaCaL4hAC/article-delivery-business-5iLzQAyn2TQ6XgQkMEUAjX.webp',
     author: 'Tim Bisnis VOXA',
   },
   {
@@ -157,7 +157,7 @@ VOXA terus berinvestasi dalam penelitian dan pengembangan teknologi baterai untu
     publishDate: '2025-04-15',
     readTime: 7,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1620714223084-8fcacc2dfd4d?w=800&q=80',
+    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663445867947/4sqHUsbGrVj8sgaCaL4hAC/article-battery-technology-iXawyMLh53CkDRmuPbGjHx.webp',
     author: 'Tim R&D VOXA',
   },
   {
@@ -185,7 +185,7 @@ Kunjungi showroom VOXA terdekat Anda dan rasakan sendiri pengalaman berkendara l
     publishDate: '2025-04-08',
     readTime: 3,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&q=80',
+    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663445867947/4sqHUsbGrVj8sgaCaL4hAC/article-showroom-opening-7jcMPjt3XrL8TF72e9rc7u.webp',
     author: 'Tim Komunikasi VOXA',
   },
   {
@@ -214,7 +214,7 @@ VOXA berkomitmen untuk memastikan semua produknya mematuhi regulasi yang berlaku
     publishDate: '2025-03-30',
     readTime: 6,
     featured: false,
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
+    image: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663445867947/4sqHUsbGrVj8sgaCaL4hAC/article-ev-regulations-Z9KSU9oCQPTzVxHdKVce7o.webp',
     author: 'Tim Legal VOXA',
   },
 ];
@@ -228,16 +228,10 @@ export const categories: ArticleCategory[] = [
   'Inovasi',
 ];
 
-export function getArticleBySlug(slug: string): Article | undefined {
-  return articles.find((a) => a.slug === slug);
-}
+// ─── Helper Functions ────────────────────────────────────────────────────────
 
-export function getArticlesByCategory(category: ArticleCategory): Article[] {
-  return articles.filter((a) => a.category === category);
-}
-
-export function getFeaturedArticle(): Article {
-  return articles.find((a) => a.featured) ?? articles[0];
+export function getFeaturedArticle(): Article | undefined {
+  return articles.find((a) => a.featured);
 }
 
 export function getRegularArticles(): Article[] {

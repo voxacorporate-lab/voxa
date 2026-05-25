@@ -192,7 +192,7 @@ export default function Bisnis() {
 
       <main className="flex-1 max-w-6xl mx-auto w-full px-4 py-12">
         {/* ── Featured Article ─────────────────────────────────────────── */}
-        {activeCategory === 'Semua' && !searchQuery && (
+        {activeCategory === 'Semua' && !searchQuery && featured && (
           <section className="mb-14">
             <div className="flex items-center gap-3 mb-6">
               <span
