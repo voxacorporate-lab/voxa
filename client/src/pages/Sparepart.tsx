@@ -208,7 +208,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-JokBelakang(1)_161e252d.jpg',
+      '/manus-storage/VOXASparepart-JokBelakang(2)_3ba8dcb5.jpg',
+      '/manus-storage/VOXASparepart-JokBelakang(3)_d4da7455.jpg',
+    ],
   },
   {
     id: 'sp-jok-depan',
@@ -225,7 +229,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-JokDepan(1)_c51d6d2c.jpg',
+      '/manus-storage/VOXASparepart-JokDepan(2)_5a3cb4de.jpg',
+      '/manus-storage/VOXASparepart-JokDepan(3)_394e6e68.jpg',
+    ],
   },
   {
     id: 'sp-kabel-motor-350w',
@@ -241,7 +249,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Kompatibel', value: 'Motor 350W' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-KabelMotor350w(1)_505911f3.jpg',
+      '/manus-storage/VOXASparepart-KabelMotor350w(2)_f8a79ca7.jpg',
+      '/manus-storage/VOXASparepart-KabelMotor350w(3)_04288a08.jpg',
+    ],
   },
   {
     id: 'sp-kabel-motor-500w',
@@ -257,7 +269,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Kompatibel', value: 'Motor 500W' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-KabelMotor500w(1)_8935830b.jpg',
+      '/manus-storage/VOXASparepart-KabelMotor500w(2)_b1200453.jpg',
+      '/manus-storage/VOXASparepart-KabelMotor500w(3)_f67b4fe6.jpg',
+    ],
   },
   {
     id: 'sp-keranjang',
@@ -275,7 +291,13 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Fitur', value: 'Durable, waterproof, universal fit' },
       { label: 'Isi Paket', value: 'Keranjang + bracket & baut pemasangan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-Keranjang#2(1)_83b462b4.jpg',
+      '/manus-storage/VOXASparepart-Keranjang#2(2)_679db472.jpg',
+      '/manus-storage/VOXASparepart-Keranjang#2(3)_ec0529dd.jpg',
+      '/manus-storage/VOXASparepart-Keranjang#2(4)_62ff0362.jpg',
+      '/manus-storage/VOXASparepart-Keranjang#2(5)_9fa040bd.jpg',
+    ],
     badge: 'Universal',
   },
   {
@@ -294,7 +316,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-Klakson(1)_2f0339d3.jpg',
+      '/manus-storage/VOXASparepart-Klakson(2)_dee6743e.jpg',
+      '/manus-storage/VOXASparepart-Klakson(3)_77dd0a2a.jpg',
+    ],
   },
   {
     id: 'sp-kunci-kontak',
@@ -311,7 +337,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-Kunci(1)_e8ec3c4e.jpg',
+      '/manus-storage/VOXASparepart-Kunci(2)_2c0e0285.jpg',
+      '/manus-storage/VOXASparepart-Kunci(3)_853adc0d.jpg',
+    ],
   },
   {
     id: 'sp-lampu-depan',
@@ -328,7 +358,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-LampuDepan(1)_d61d6d8a.jpg',
+      '/manus-storage/VOXASparepart-LampuDepan(2)_726438a8.jpg',
+      '/manus-storage/VOXASparepart-LampuDepan(3)_2d404854.jpg',
+    ],
   },
   {
     id: 'sp-lampu-sein-depan',
@@ -345,7 +379,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Dimensi', value: 'P 32 cm × L 3 cm × T 3 cm' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-LampuSeinDepan(1)_27a3d96c.jpg',
+      '/manus-storage/VOXASparepart-LampuSeinDepan(2)_1a5209ce.jpg',
+      '/manus-storage/VOXASparepart-LampuSeinDepan(3)_acfe53b9.jpg',
+    ],
   },
   {
     id: 'sp-motor-350w',
@@ -365,7 +403,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-Motor350W(1)_24ca88ea.jpg',
+      '/manus-storage/VOXASparepart-Motor350W(2)_9b749e87.jpg',
+      '/manus-storage/VOXASparepart-Motor350W(3)_d723c717.jpg',
+    ],
   },
   {
     id: 'sp-motor-500w',
@@ -385,7 +427,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-Motor500W(1)_1573047d.jpg',
+      '/manus-storage/VOXASparepart-Motor500W(2)_d89b9d2d.jpg',
+      '/manus-storage/VOXASparepart-Motor500W(3)_50a8da2d.jpg',
+    ],
     badge: 'Populer',
   },
   {
@@ -405,7 +451,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-PedalSet(1)_9bd95084.jpg',
+      '/manus-storage/VOXASparepart-PedalSet(2)_3353a498.jpg',
+      '/manus-storage/VOXASparepart-PedalSet(3)_ad60b219.jpg',
+    ],
   },
   {
     id: 'sp-pijakan-kaki-depan',
@@ -423,7 +473,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-PijakanKakiDepan(1)_a17f554e.jpg',
+      '/manus-storage/VOXASparepart-PijakanKakiDepan(2)_299a04c6.jpg',
+      '/manus-storage/VOXASparepart-PijakanKakiDepan(3)_910ace38.jpg',
+    ],
   },
   {
     id: 'sp-rem-tromol-belakang',
@@ -442,7 +496,12 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-RemTromolBelakang(1)_5078495b.jpg',
+      '/manus-storage/VOXASparepart-RemTromolBelakang(2)_9051e354.jpg',
+      '/manus-storage/VOXASparepart-RemTromolBelakang(3)_ab3fc8e9.jpg',
+      '/manus-storage/VOXASparepart-RemTromolBelakang(4)_b04bc838.jpg',
+    ],
   },
   {
     id: 'sp-rem-tromol-depan',
@@ -461,7 +520,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-RemTromolDepan(1)_158bee59.jpg',
+      '/manus-storage/VOXASparepart-RemTromolDepan(2)_79d6f0da.jpg',
+      '/manus-storage/VOXASparepart-RemTromolDepan(3)_f3ee7923.jpg',
+    ],
   },
   {
     id: 'sp-set-grip',
@@ -478,7 +541,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Dimensi', value: 'P 60 cm × L 7 cm × T 5 cm' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-SetGrip(1)_1488754f.jpg',
+      '/manus-storage/VOXASparepart-SetGrip(2)_06fb6b00.jpg',
+      '/manus-storage/VOXASparepart-SetGrip(3)_5da8df29.jpg',
+    ],
   },
   {
     id: 'sp-set-kabel-utama',
@@ -496,7 +563,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-SetKabelUtama(1)_c4eb5e25.jpg',
+      '/manus-storage/VOXASparepart-SetKabelUtama(2)_1e099e8f.jpg',
+      '/manus-storage/VOXASparepart-SetKabelUtama(3)_be422f71.jpg',
+    ],
   },
   {
     id: 'sp-set-tuas-rem',
@@ -513,7 +584,13 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Panjang', value: '111 cm' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-SetTuasRem(1)_5bd92ac0.jpg',
+      '/manus-storage/VOXASparepart-SetTuasRem(2)_5cb10f76.jpg',
+      '/manus-storage/VOXASparepart-SetTuasRem(3)_4463ebbf.jpg',
+      '/manus-storage/VOXASparepart-SetTuasRem(4)_ef3ad842.jpg',
+      '/manus-storage/VOXASparepart-SetTuasRem(5)_37dda703.jpg',
+    ],
   },
   {
     id: 'sp-setang',
@@ -532,7 +609,13 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-Setang(1)_f3c54404.jpg',
+      '/manus-storage/VOXASparepart-Setang(2)_8fbff559.jpg',
+      '/manus-storage/VOXASparepart-Setang(3)_47c34f15.jpg',
+      '/manus-storage/VOXASparepart-Setang(4)_ace812c2.jpg',
+      '/manus-storage/VOXASparepart-Setang(5)_7f01d1a4.jpg',
+    ],
   },
   {
     id: 'sp-shockbreaker',
@@ -551,7 +634,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-Shockbreaker(1)_e6ea17ac.jpg',
+      '/manus-storage/VOXASparepart-Shockbreaker(2)_df7ddaa3.jpg',
+      '/manus-storage/VOXASparepart-Shockbreaker(3)_b2f82d8d.jpg',
+    ],
   },
   {
     id: 'sp-speedometer',
@@ -568,7 +655,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Dimensi', value: 'P 4 cm × L 3 cm × T 4 cm' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-Speedometer(1)_b3939226.jpg',
+      '/manus-storage/VOXASparepart-Speedometer(2)_48471a6a.jpg',
+      '/manus-storage/VOXASparepart-Speedometer(3)_4f2af83d.jpg',
+    ],
   },
   {
     id: 'sp-spion',
@@ -588,7 +679,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Warna', value: 'Hitam' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-Spion(1)_5d2ee517.jpg',
+      '/manus-storage/VOXASparepart-Spion(2)_25c2ccb0.jpg',
+      '/manus-storage/VOXASparepart-Spion(3)_d492b301.jpg',
+    ],
   },
   {
     id: 'sp-standar-samping',
@@ -606,7 +701,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Bahan', value: 'Stainless Steel' },
       { label: 'Garansi', value: '3 Bulan' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-StandarSamping(1)_e8a404af.jpg',
+      '/manus-storage/VOXASparepart-StandarSamping(2)_a807578f.jpg',
+      '/manus-storage/VOXASparepart-StandarSamping(3)_31764da1.jpg',
+    ],
   },
   {
     id: 'sp-standar-tengah',
@@ -623,7 +722,11 @@ const pendingProducts: SparepartItem[] = [
       { label: 'Kompatibel', value: 'Sepeda listrik, skuter listrik' },
       { label: 'Isi Paket', value: '1× Standar 2 kaki belakang' },
     ],
-    images: [PLACEHOLDER],
+    images: [
+      '/manus-storage/VOXASparepart-StandarTengah(1)_afb7871c.jpg',
+      '/manus-storage/VOXASparepart-StandarTengah(2)_4062eb1f.jpg',
+      '/manus-storage/VOXASparepart-StandarTengah(3)_a55dc648.jpg',
+    ],
   },
 ];
 
