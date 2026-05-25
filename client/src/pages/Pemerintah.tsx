@@ -112,7 +112,9 @@ export default function Distributor() {
                 Menjadi Distributor <ArrowRight size={16} />
               </a>
               <a
-                href="#kontak-distributor"
+                href="https://wa.me/6281218677207?text=Halo%2C%20saya%20mengunjungi%20website%20VOXA%20dan%20tertarik%20untuk%20menjadi%20distributor%20resmi%20VOXA.%20Mohon%20informasi%20lebih%20lanjut%20mengenai%20program%20kemitraan%20distributor%20VOXA.%20Terima%20kasih."
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-white/40 text-white font-semibold px-8 py-4 rounded-full hover:border-white hover:bg-white/10 transition-all text-sm"
               >
                 <MessageCircle size={16} /> Hubungi Kami
