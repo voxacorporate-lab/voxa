@@ -216,57 +216,55 @@ function BatreModal({ product, onClose }: { product: Product; onClose: () => voi
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-3xl w-full max-w-3xl max-h-[90vh] overflow-y-auto shadow-2xl"
+        className="bg-white rounded-3xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl"
         onClick={e => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-5 border-b border-gray-100">
+        <div className="flex items-center justify-between px-5 pt-5 pb-4">
           <span className="text-xs font-semibold text-[#00B4D8] uppercase tracking-wider">{product.series}</span>
           <button onClick={onClose} className="p-1.5 rounded-full hover:bg-gray-100 transition-colors">
             <X size={20} className="text-gray-500" />
           </button>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-0">
-          {/* Image Gallery */}
-          <div className="p-5">
-            <div className="relative bg-gray-50 rounded-2xl overflow-hidden mb-3" style={{ height: 'min(50vw, 320px)' }}>
-              <img
-                src={galleryImages[activeImg]}
-                alt={`${product.name} ${activeImg + 1}`}
-                className="w-full h-full object-contain"
-              />
-              {galleryImages.length > 1 && (
-                <>
-                  <button onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-1.5 rounded-full shadow transition-all">
-                    <ChevronLeft size={18} className="text-gray-700" />
-                  </button>
-                  <button onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-1.5 rounded-full shadow transition-all">
-                    <ChevronRight size={18} className="text-gray-700" />
-                  </button>
-                  <span className="absolute bottom-2 right-3 text-xs text-gray-500 bg-white/80 px-2 py-0.5 rounded-full">
-                    {activeImg + 1}/{galleryImages.length}
-                  </span>
-                </>
-              )}
-            </div>
-            {/* Thumbnails */}
+        <div className="flex flex-col">
+          {/* Image Gallery — full width, no padding, no grey bars */}
+          <div className="relative w-full bg-gray-50 overflow-hidden" style={{ height: '280px' }}>
+            <img
+              src={galleryImages[activeImg]}
+              alt={`${product.name} ${activeImg + 1}`}
+              className="w-full h-full object-cover object-center"
+            />
             {galleryImages.length > 1 && (
-              <div className="flex gap-2 overflow-x-auto scrollbar-none">
-                {galleryImages.map((img, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActiveImg(i)}
-                    className={`shrink-0 w-14 h-14 rounded-xl overflow-hidden border-2 transition-all ${
-                      activeImg === i ? 'border-[#00B4D8]' : 'border-transparent'
-                    }`}
-                  >
-                    <img src={img} alt="" className="w-full h-full object-contain bg-gray-50" />
-                  </button>
-                ))}
-              </div>
+              <>
+                <button onClick={prev} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-1.5 rounded-full shadow transition-all">
+                  <ChevronLeft size={18} className="text-gray-700" />
+                </button>
+                <button onClick={next} className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white p-1.5 rounded-full shadow transition-all">
+                  <ChevronRight size={18} className="text-gray-700" />
+                </button>
+                <span className="absolute bottom-2 right-3 text-xs text-gray-500 bg-white/80 px-2 py-0.5 rounded-full">
+                  {activeImg + 1}/{galleryImages.length}
+                </span>
+              </>
             )}
           </div>
+          {/* Thumbnails */}
+          {galleryImages.length > 1 && (
+            <div className="flex gap-2 overflow-x-auto scrollbar-none px-5 py-3 border-b border-gray-100">
+              {galleryImages.map((img, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveImg(i)}
+                  className={`shrink-0 w-14 h-14 rounded-xl overflow-hidden border-2 transition-all ${
+                    activeImg === i ? 'border-[#00B4D8]' : 'border-gray-200'
+                  }`}
+                >
+                  <img src={img} alt="" className="w-full h-full object-cover bg-gray-50" />
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Info */}
           <div className="p-5 flex flex-col gap-4">

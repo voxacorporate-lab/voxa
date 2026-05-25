@@ -116,18 +116,22 @@ export const productGalleries: Record<string, string[]> = {
     "/manus-storage/elitefantasys-1-spec_ce2a842e.jpg",
     "/manus-storage/elitefantasys-2-free_8c8fc80c.jpg",
     "/manus-storage/elitefantasys-3-lamp_422333bc.jpg",
+    "/manus-storage/elite-fantasy-s-v2_1be18aba.jpg",
+    "/manus-storage/elitefantasys_70376f35.jpg",
   ],
 
   // ── Elite Rider ────────────────────────────────────────────────────────────
-  // Note: Elite Rider detail shots timed out during upload; using spec image only
   "elite-rider": [
     "/manus-storage/eliterider-1-spec_56116ca8.jpg",
+    "/manus-storage/elite-rider_88d4f4ff.jpg",
+    "/manus-storage/eliterider_2e0948bb.jpg",
   ],
 
   // ── Elite Rider S ──────────────────────────────────────────────────────────
-  // Note: Elite Rider S detail shots timed out during upload; using spec image only
   "elite-rider-s": [
     "/manus-storage/eliteriders-1-spec_1576e098.jpg",
+    "/manus-storage/elite-rider-s_4882ce65.jpg",
+    "/manus-storage/eliteriders_0bf14cd1.jpg",
   ],
   // ══════════════════════════════════════════════════════════════════════════════
   // VOXA SERIES GALLERIES
