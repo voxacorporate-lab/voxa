@@ -60,9 +60,9 @@ export default function Bantuan() {
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {[
-              { icon: <MessageCircle size={24} />, title: 'WhatsApp', desc: 'Chat langsung dengan tim kami', action: 'Chat Sekarang', href: 'https://wa.me/6281234567890' },
-              { icon: <Phone size={24} />, title: 'Telepon', desc: '+62 812 3456 7890', action: 'Hubungi Kami', href: 'tel:+6281234567890' },
-              { icon: <Mail size={24} />, title: 'Email', desc: 'info@voxa.co.id', action: 'Kirim Email', href: 'mailto:info@voxa.co.id' },
+              { icon: <MessageCircle size={24} />, title: 'WhatsApp', desc: 'Chat langsung dengan tim kami', action: 'Chat Sekarang', href: 'https://wa.me/628156161071' },
+              { icon: <Phone size={24} />, title: 'Telepon', desc: '+62 815-6161-071', action: 'Hubungi Kami', href: 'tel:+628156161071' },
+              { icon: <Mail size={24} />, title: 'Email', desc: 'voxacorporate@gmail.com', action: 'Kirim Email', href: 'mailto:voxacorporate@gmail.com' },
             ].map(c => (
               <a key={c.title} href={c.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 bg-white/10 hover:bg-white/20 rounded-2xl p-5 transition-all group">
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-white shrink-0">
