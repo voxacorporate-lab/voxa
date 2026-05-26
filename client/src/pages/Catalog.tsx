@@ -54,8 +54,9 @@ export default function Catalog() {
   const [sortBy, setSortBy] = useState('default');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
-  // Re-sync when URL changes (e.g. navigating from Home)
+  // Re-sync series filter + scroll to top when URL changes (e.g. navigating from Home)
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
     const params = new URLSearchParams(search);
     const s = params.get('series');
     if (!s) { setSelectedSeries('Semua'); return; }
