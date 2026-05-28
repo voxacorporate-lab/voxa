@@ -294,6 +294,14 @@ export default function Navbar() {
                           <Heart size={14} className="text-gray-400" />
                           Wishlist Saya
                         </Link>
+                        {user.role === 'admin' && (
+                          <Link href="/admin/articles" className="flex items-center gap-2.5 px-4 py-2.5 text-sm font-semibold hover:bg-[#37C5FF]/10 transition-colors" style={{ color: '#37C5FF' }}>
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.347.347a3.5 3.5 0 01-4.95 0l-.347-.347z" />
+                            </svg>
+                            AI Article Generator
+                          </Link>
+                        )}
                         <button
                           onClick={() => logout()}
                           className="w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors"
@@ -374,6 +382,14 @@ export default function Navbar() {
                       <Heart size={14} className="text-gray-400" />
                       Wishlist Saya
                     </Link>
+                    {user.role === 'admin' && (
+                      <Link href="/admin/articles" className="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold rounded hover:bg-[#37C5FF]/10 transition-colors" style={{ color: '#37C5FF' }}>
+                        <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.347.347a3.5 3.5 0 01-4.95 0l-.347-.347z" />
+                        </svg>
+                        AI Article Generator
+                      </Link>
+                    )}
                     <button onClick={() => logout()} className="w-full flex items-center gap-2 px-3 py-2.5 text-sm text-red-500 hover:bg-red-50 rounded">
                       <LogOut size={14} />
                       Keluar
