@@ -1,12 +1,27 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'wouter';
+import { trpc } from '@/lib/trpc';
 import {
-  articles,
-  categories,
-  getFeaturedArticle,
-  getRegularArticles,
+  articles as staticArticles,
+  categories as staticCategories,
   type ArticleCategory,
 } from '../data/articles';
+
+// ─── Unified Article Type ────────────────────────────────────────────────────
+
+type UnifiedArticle = {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  publishDate: string;
+  readTime: number;
+  featured: boolean;
+  image: string;
+  author: string;
+  tags?: string[];
+};
 
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
@@ -15,9 +30,40 @@ function formatDate(dateStr: string): string {
   return d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+function toUnified(dbRow: {
+  id: number;
+  slug: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  author: string;
+  tags: string[];
+  imageUrl: string | null;
+  readTime: number;
+  featured: 'yes' | 'no';
+  publishedAt: Date | null;
+  createdAt: Date;
+}): UnifiedArticle {
+  return {
+    id: `db-${dbRow.id}`,
+    slug: dbRow.slug,
+    title: dbRow.title,
+    excerpt: dbRow.excerpt,
+    category: dbRow.category,
+    publishDate: (dbRow.publishedAt ?? dbRow.createdAt).toISOString().split('T')[0],
+    readTime: dbRow.readTime,
+    featured: dbRow.featured === 'yes',
+    image:
+      dbRow.imageUrl ??
+      'https://d2xsxph8kpxj0f.cloudfront.net/310519663445867947/4sqHUsbGrVj8sgaCaL4hAC/article-ev-future-indonesia-5knyenbbbvFGYPTANVcLFZ.webp',
+    author: dbRow.author,
+    tags: dbRow.tags,
+  };
+}
+
 // ─── Article Card ────────────────────────────────────────────────────────────
 
-function ArticleCard({ article }: { article: (typeof articles)[0] }) {
+function ArticleCard({ article }: { article: UnifiedArticle }) {
   return (
     <Link href={`/artikel/${article.slug}`}>
       <article className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-[#37C5FF]/40 hover:shadow-xl hover:shadow-[#37C5FF]/10 transition-all duration-300 hover:-translate-y-1">
@@ -60,17 +106,43 @@ function ArticleCard({ article }: { article: (typeof articles)[0] }) {
 // ─── Main Page ───────────────────────────────────────────────────────────────
 
 export default function Bisnis() {
-  const [activeCategory, setActiveCategory] = useState<ArticleCategory | 'Semua'>('Semua');
+  const [activeCategory, setActiveCategory] = useState<string>('Semua');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const featured = getFeaturedArticle();
-  const regular = getRegularArticles();
+  // Fetch published DB articles
+  const { data: dbData } = trpc.articles.list.useQuery({
+    status: 'published',
+    limit: 50,
+    offset: 0,
+  });
+
+  // Merge DB articles (prepended, newer first) with static articles
+  const allArticles = useMemo<UnifiedArticle[]>(() => {
+    const dbArticles = (dbData?.articles ?? []).map((a) =>
+      toUnified(a as Parameters<typeof toUnified>[0])
+    );
+    // Avoid duplicates by slug
+    const dbSlugs = new Set(dbArticles.map((a) => a.slug));
+    const staticFiltered = staticArticles.filter((a) => !dbSlugs.has(a.slug));
+    return [...dbArticles, ...staticFiltered];
+  }, [dbData]);
+
+  // Collect all unique categories
+  const allCategories = useMemo<string[]>(() => {
+    const dbCats = (dbData?.articles ?? []).map((a) => a.category);
+    const seen = new Set<string>();
+    const combined: string[] = [];
+    for (const c of [...staticCategories, ...dbCats]) {
+      if (!seen.has(c)) { seen.add(c); combined.push(c); }
+    }
+    return combined;
+  }, [dbData]);
+
+  const featured = useMemo(() => allArticles.find((a) => a.featured), [allArticles]);
+  const regular = useMemo(() => allArticles.filter((a) => !a.featured), [allArticles]);
 
   const filteredArticles = useMemo(() => {
-    let list =
-      activeCategory === 'Semua'
-        ? regular
-        : regular.filter((a) => a.category === activeCategory);
+    let list = activeCategory === 'Semua' ? regular : regular.filter((a) => a.category === activeCategory);
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       list = list.filter(
@@ -167,10 +239,10 @@ export default function Bisnis() {
           </div>
           {/* Category pills */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 w-full">
-            {(['Semua', ...categories] as const).map((cat) => (
+            {(['Semua', ...allCategories] as const).map((cat) => (
               <button
                 key={cat}
-                onClick={() => setActiveCategory(cat as ArticleCategory | 'Semua')}
+                onClick={() => setActiveCategory(cat)}
                 className="shrink-0 px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 border"
                 style={
                   activeCategory === cat
@@ -298,20 +370,7 @@ export default function Bisnis() {
             </div>
           )}
         </section>
-
-        {/* ── Load More ────────────────────────────────────────────────── */}
-        {filteredArticles.length > 0 && (
-          <div className="mt-12 text-center">
-            <button
-              className="px-8 py-3 rounded-full text-sm font-semibold border-2 transition-all duration-200 hover:shadow-lg"
-              style={{ borderColor: '#37C5FF', color: '#37C5FF' }}
-            >
-              Muat Lebih Banyak
-            </button>
-          </div>
-        )}
       </main>
-
     </div>
   );
 }

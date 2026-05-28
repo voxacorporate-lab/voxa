@@ -1,0 +1,20 @@
+CREATE TABLE `articles` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`slug` varchar(256) NOT NULL,
+	`title` text NOT NULL,
+	`excerpt` text NOT NULL,
+	`content` text NOT NULL,
+	`category` varchar(64) NOT NULL DEFAULT 'Berita VOXA',
+	`author` varchar(128) NOT NULL DEFAULT 'Tim Redaksi VOXA',
+	`tags` text,
+	`imageUrl` text,
+	`readTime` int NOT NULL DEFAULT 5,
+	`featured` enum('yes','no') NOT NULL DEFAULT 'no',
+	`status` enum('draft','published') NOT NULL DEFAULT 'draft',
+	`seoKeywords` text,
+	`createdAt` timestamp NOT NULL DEFAULT (now()),
+	`updatedAt` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	`publishedAt` timestamp,
+	CONSTRAINT `articles_id` PRIMARY KEY(`id`),
+	CONSTRAINT `articles_slug_unique` UNIQUE(`slug`)
+);

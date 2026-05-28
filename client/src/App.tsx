@@ -20,6 +20,7 @@ import Tentang from "./pages/Tentang";
 import Bantuan from "./pages/Bantuan";
 import Guide from "./pages/Guide";
 import Wishlist from "./pages/Wishlist";
+import AdminArticles from "./pages/AdminArticles";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import CartSidebar from "./components/CartSidebar";
@@ -55,6 +56,7 @@ function Router() {
       <Route path="/bantuan" component={Bantuan} />
       <Route path="/guide" component={Guide} />
       <Route path="/wishlist" component={Wishlist} />
+      <Route path="/admin/articles" component={AdminArticles} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

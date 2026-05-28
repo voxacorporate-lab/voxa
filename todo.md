@@ -141,3 +141,23 @@
 - [x] Rewrite Bisnis.tsx as Artikel page with hero, featured article, category filter, search, article grid
 - [x] Create ArticleDetail.tsx page for individual article view
 - [x] Update Navbar, Footer, and App.tsx routing to rename Untuk Bisnis → Artikel
+
+## AI Article Generator (Admin)
+- [x] Create articles table in DB (drizzle/schema.ts)
+- [x] Write server/routers/articles.ts with generate, list, getBySlug, update, publish, unpublish, delete
+- [x] Wire articlesRouter into server/routers.ts
+- [x] Build AdminArticles.tsx admin page (topic input, type selector, generate, preview, publish/draft/delete)
+- [x] Add /admin/articles route in App.tsx
+- [x] Update Bisnis.tsx to merge DB published articles with static articles
+- [x] Update ArtikelDetail.tsx to try DB lookup first, fall back to static data
+- [x] Write vitest tests for articles router
+
+## AI Article Generator (Admin)
+- [x] Create articles table in DB (drizzle/schema.ts)
+- [x] Write server/routers/articles.ts with generate, list, getBySlug, update, publish, unpublish, delete
+- [x] Wire articlesRouter into server/routers.ts
+- [x] Build AdminArticles.tsx admin page (topic input, type selector, generate, preview, publish/draft/delete)
+- [x] Add /admin/articles route in App.tsx
+- [x] Update Bisnis.tsx to merge DB published articles with static articles
+- [x] Update ArtikelDetail.tsx to try DB lookup first, fall back to static data
+- [x] Write vitest tests for articles router

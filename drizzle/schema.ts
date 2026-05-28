@@ -49,3 +49,25 @@ export const cartItems = mysqlTable('cartItems', {
 
 export type CartItem = typeof cartItems.$inferSelect;
 export type InsertCartItem = typeof cartItems.$inferInsert;
+
+// Articles: AI-generated and manually created articles for the Artikel section
+export const articlesTable = mysqlTable('articles', {
+  id: int('id').autoincrement().primaryKey(),
+  slug: varchar('slug', { length: 256 }).notNull().unique(),
+  title: text('title').notNull(),
+  excerpt: text('excerpt').notNull(),
+  content: text('content').notNull(),
+  category: varchar('category', { length: 64 }).notNull().default('Berita VOXA'),
+  author: varchar('author', { length: 128 }).notNull().default('Tim Redaksi VOXA'),
+  tags: text('tags'), // JSON array stored as string
+  imageUrl: text('imageUrl'),
+  readTime: int('readTime').notNull().default(5),
+  featured: mysqlEnum('featured', ['yes', 'no']).notNull().default('no'),
+  status: mysqlEnum('status', ['draft', 'published']).notNull().default('draft'),
+  seoKeywords: text('seoKeywords'), // comma-separated keywords
+  createdAt: timestamp('createdAt').defaultNow().notNull(),
+  updatedAt: timestamp('updatedAt').defaultNow().onUpdateNow().notNull(),
+  publishedAt: timestamp('publishedAt'),
+});
+export type ArticleRow = typeof articlesTable.$inferSelect;
+export type InsertArticle = typeof articlesTable.$inferInsert;
