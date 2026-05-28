@@ -110,11 +110,10 @@ export default function Bisnis() {
   const [searchQuery, setSearchQuery] = useState('');
 
   // Fetch published DB articles
-  const { data: dbData } = trpc.articles.list.useQuery({
-    status: 'published',
-    limit: 50,
-    offset: 0,
-  });
+  const { data: dbData } = trpc.articles.list.useQuery(
+    { status: 'published', limit: 50, offset: 0 },
+    { staleTime: 60_000, retry: 1 }
+  );
 
   // Merge DB articles (prepended, newer first) with static articles
   const allArticles = useMemo<UnifiedArticle[]>(() => {
