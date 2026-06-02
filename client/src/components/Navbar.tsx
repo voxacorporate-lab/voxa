@@ -152,7 +152,15 @@ export default function Navbar() {
       >
         <div className="flex items-center h-16 px-4 xl:px-8 border-b border-gray-100 flex-nowrap gap-0">
 
-          {/* LEFT: Nav links */}
+          {/* LEFT: Logo */}
+          <div className="flex-shrink-0 mr-4">
+            <Link href="/" className="flex items-center gap-2">
+              <img src={LOGO_URL} alt="VOXA" className="h-8 w-8 object-contain" />
+              <span className="font-display text-xl tracking-[0.25em] text-gray-900">VOXA</span>
+            </Link>
+          </div>
+
+          {/* NAV: Links (logo left, then nav links) */}
           <nav className="hidden xl:flex items-center gap-0 flex-1 flex-nowrap min-w-0 overflow-visible">
             {/* Produk Kami — hover trigger */}
             <div
@@ -231,14 +239,6 @@ export default function Navbar() {
               </Link>
             ))}
           </nav>
-
-          {/* CENTER: Logo */}
-          <div className="flex-1 xl:flex-none flex justify-center xl:absolute xl:left-1/2 xl:-translate-x-1/2 flex-shrink-0">
-            <Link href="/" className="flex items-center gap-2">
-              <img src={LOGO_URL} alt="VOXA" className="h-8 w-8 object-contain" />
-              <span className="font-display text-xl tracking-[0.25em] text-gray-900">VOXA</span>
-            </Link>
-          </div>
 
           {/* RIGHT: Icons + CTA */}
           <div className="flex items-center gap-0.5 flex-shrink-0 justify-end">

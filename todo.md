@@ -169,3 +169,41 @@
 - [x] Update AdminArticles.tsx: Topic Suggester panel with clickable suggestions that fill the topic input
 - [x] Update AdminArticles.tsx: Keyword Suggester panel with clickable chips that fill the keywords input
 - [x] Update AdminArticles.tsx: "Buat Gambar" button on each draft card that calls generateHeroImage and shows the result
+
+## Xendit Payment Gateway
+
+### Phase 1 — Schema & Secrets
+- [ ] Add XENDIT_SECRET_KEY, XENDIT_CALLBACK_TOKEN, XENDIT_PUBLIC_KEY secrets
+- [ ] Add orders table to drizzle/schema.ts
+- [ ] Add order_items table to drizzle/schema.ts
+- [ ] Add payments table to drizzle/schema.ts
+- [ ] Add webhook_logs table to drizzle/schema.ts
+- [ ] Run migration via webdev_execute_sql
+
+### Phase 2 — Backend
+- [ ] Create server/xendit.ts service (create invoice, QRIS, e-wallet, VA, card)
+- [ ] Create server/routers/orders.ts tRPC router (createOrder, getOrder, listOrders, updateStatus)
+- [ ] Add POST /api/payments/create REST endpoint
+- [ ] Add GET /api/payments/status/:orderId REST endpoint
+- [ ] Add POST /api/payments/retry REST endpoint
+- [ ] Add POST /api/webhooks/xendit REST endpoint with token verification
+
+### Phase 3 — Checkout UI
+- [ ] /cart page (cart review with item list, quantity, totals)
+- [ ] /checkout multi-step page (customer info → shipping → payment method)
+- [ ] /payment/:orderId page (QRIS display, VA instructions, e-wallet redirect, card form, expiry timer, status auto-refresh)
+
+### Phase 4 — Result & Order Pages
+- [ ] /payment/success page
+- [ ] /payment/pending page
+- [ ] /payment/failed page
+- [ ] /account/orders page (order list)
+- [ ] /account/orders/:orderId page (order detail)
+
+### Phase 5 — Admin
+- [ ] /admin/orders page (all orders, filters, ship action, Xendit ref)
+
+### Phase 6 — Tests & Docs
+- [ ] Vitest tests for orders router
+- [ ] .env.example file
+- [ ] XENDIT_SETUP.md (setup + testing guide + production checklist)
