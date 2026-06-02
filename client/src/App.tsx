@@ -74,6 +74,9 @@ const WA_MESSAGE = encodeURIComponent(
 // Product pages where the button stays bottom-right
 const PRODUCT_PATHS = ['/sepeda-listrik', '/batre', '/sparepart', '/catalog', '/products'];
 
+// Pages where the button is hidden entirely
+const HIDDEN_PATHS = ['/wishlist'];
+
 function FloatingWhatsApp() {
   const [location] = useLocation();
   const { mobileOpen, accountOpen } = useNavbar();
@@ -81,6 +84,9 @@ function FloatingWhatsApp() {
 
   // Hide when any overlay is open
   if (mobileOpen || accountOpen || cartOpen) return null;
+
+  // Hide entirely on specific pages
+  if (HIDDEN_PATHS.some((p) => location === p || location.startsWith(p + '/'))) return null;
 
   const isProductPage = PRODUCT_PATHS.some((p) => location.startsWith(p));
 
