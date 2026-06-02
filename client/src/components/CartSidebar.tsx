@@ -3,10 +3,12 @@ import { useCart } from '@/contexts/CartContext';
 import { getProductById } from '@/data/products';
 import { useAuth } from '@/_core/hooks/useAuth';
 import { getLoginUrl } from '@/const';
+import { useLocation } from 'wouter';
 
 export default function CartSidebar() {
   const { items, isOpen, closeCart, updateQuantity, removeItem, clearCart } = useCart();
   const { isAuthenticated } = useAuth();
+  const [, navigate] = useLocation();
 
   const enriched = items.map((item) => ({
     ...item,
@@ -54,7 +56,7 @@ export default function CartSidebar() {
               <ShoppingBag size={40} className="text-gray-200" />
               <p className="text-gray-400 text-sm">Keranjang Anda masih kosong.</p>
               <button
-                onClick={closeCart}
+                onClick={() => { closeCart(); navigate('/sepeda-listrik'); }}
                 className="px-5 py-2.5 bg-[#00B4D8] text-white text-sm font-semibold rounded-lg hover:bg-[#0099bb] transition-colors"
               >
                 Mulai Belanja

@@ -1,11 +1,14 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch } from "wouter";
+import { Route, Switch, useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { WishlistProvider } from "./contexts/WishlistContext";
 import { CartProvider } from "./contexts/CartContext";
+import { NavbarProvider } from "./contexts/NavbarContext";
+import { useNavbar } from "./contexts/NavbarContext";
+import { useCart } from "./contexts/CartContext";
 import Home from "./pages/Home";
 import Catalog from "./pages/Catalog";
 import Batre from "./pages/Batre";
@@ -68,15 +71,32 @@ const WA_MESSAGE = encodeURIComponent(
   "Halo, saya mengunjungi website VOXA dan ingin mengetahui lebih lanjut mengenai produk-produk VOXA. Terima kasih."
 );
 
+// Product pages where the button stays bottom-right
+const PRODUCT_PATHS = ['/sepeda-listrik', '/batre', '/sparepart', '/catalog', '/products'];
+
 function FloatingWhatsApp() {
+  const [location] = useLocation();
+  const { mobileOpen, accountOpen } = useNavbar();
+  const { isOpen: cartOpen } = useCart();
+
+  // Hide when any overlay is open
+  if (mobileOpen || accountOpen || cartOpen) return null;
+
+  const isProductPage = PRODUCT_PATHS.some((p) => location.startsWith(p));
+
+  // Position: bottom-right on product pages, top-right on all others
+  const positionClass = isProductPage
+    ? 'bottom-6 right-6'
+    : 'top-20 right-4';
+
   return (
     <a
       href={`https://wa.me/${WA_NUMBER}?text=${WA_MESSAGE}`}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Hubungi Kami via WhatsApp"
-      className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95"
-      style={{ backgroundColor: "#25D366" }}
+      className={`fixed ${positionClass} z-50 flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95`}
+      style={{ backgroundColor: '#25D366' }}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -100,18 +120,20 @@ function App() {
       <ThemeProvider defaultTheme="light">
         <WishlistProvider>
           <CartProvider>
-            <TooltipProvider>
-              <Toaster />
-              <div className="flex flex-col min-h-screen">
-                <Navbar />
-                <main className="flex-1">
-                  <Router />
-                </main>
-                <Footer />
-              </div>
-              <CartSidebar />
-              <FloatingWhatsApp />
-            </TooltipProvider>
+            <NavbarProvider>
+              <TooltipProvider>
+                <Toaster />
+                <div className="flex flex-col min-h-screen">
+                  <Navbar />
+                  <main className="flex-1">
+                    <Router />
+                  </main>
+                  <Footer />
+                </div>
+                <CartSidebar />
+                <FloatingWhatsApp />
+              </TooltipProvider>
+            </NavbarProvider>
           </CartProvider>
         </WishlistProvider>
       </ThemeProvider>

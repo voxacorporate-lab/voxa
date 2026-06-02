@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavbar } from '@/contexts/NavbarContext';
 import { Link, useLocation } from 'wouter';
 import { Menu, X, Search, Heart, User, ShoppingBag, ChevronDown, ChevronRight, LogOut, Package, BookOpen } from 'lucide-react';
 import { useAuth } from '@/_core/hooks/useAuth';
@@ -78,10 +79,9 @@ const navLinks = [
 export default function Navbar() {
   const [megaOpen, setMegaOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(0);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const { mobileOpen, setMobileOpen, accountOpen, setAccountOpen } = useNavbar();
   const [scrolled, setScrolled] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [accountOpen, setAccountOpen] = useState(false);
   const [location, navigate] = useLocation();
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const accountRef = useRef<HTMLDivElement>(null);
